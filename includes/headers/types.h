@@ -31,6 +31,7 @@ typedef struct s_token
 
 typedef struct s_lexer
 {
+    char    **envp;
     int     index;
     char    c;
     char    *source;
