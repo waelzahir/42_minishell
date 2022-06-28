@@ -13,4 +13,27 @@
 #ifndef TYPES_H
 # define TYPES_H
 
+typedef enum s_to
+{
+    COMMAND,
+    ARG,
+    PIPE,
+    DOLLAR,ß
+    REDIRECTION,
+    D_REDIRECTION,
+} t_to;
+
+typedef struct s_token
+{
+    t_to tok;
+    char    *val;
+} t_token;
+
+typedef struct s_lexer
+{
+    int     index;
+    char    c;
+    char    *source;
+}   t_lexer;
+
 #endif
