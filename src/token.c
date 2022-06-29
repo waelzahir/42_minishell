@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 18:55:45 by ozahir            #+#    #+#             */
-/*   Updated: 2022/06/28 19:05:22 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/06/29 19:18:55 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,4 @@ t_token *get_token(int type, char   *value)
     token->tok = type;
     token->val = value;
     return  (token);
-}ß
+}
