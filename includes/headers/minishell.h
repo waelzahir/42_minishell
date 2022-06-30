@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:02:50 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/06/29 20:00:15 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/06/30 19:33:01 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef enum s_to
     ARG,
     PIPE,
     DOLLAR,
+    QUOTE,
+    DQUOTE,
     REDIRECTION,
     D_REDIRECTION,
 } t_to;
