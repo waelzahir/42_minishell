@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:30:21 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/01 17:51:21 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/01 21:50:00 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,11 +157,25 @@ t_token *lexer_get_token(t_lexer *lexer)
 {
     char    *str;
     str = NULL;
+     if (lexer->c == '\0')
+        return (NULL);
     if (lexer->c == ' ')
         return (lex_white_spaces(lexer), get_token(SPAC, get_char(' ')));
-    
-    if (lexer->c == '\0')
-        return (NULL);
+    if (lexer->c == '.')
+    {
+        str = get_char(lexer->c);
+        increment_lex(lexer);
+        while (lexer->c == '.' || lexer->c == '/')
+        {
+            str = str_append(str, lexer->c);
+            increment_lex(lexer);
+        }
+        return (get_token(PATH, str));
+    }
+    if (lexer->c == '<')
+        return (increment_lex(lexer), get_token(IN, get_char('<')));
+    if (lexer->c == '>')
+        return (increment_lex(lexer), get_token(OUT, get_char('>')));
     if (lexer->c == 124)
         {
             increment_lex(lexer);

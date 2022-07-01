@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:02:50 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/07/01 17:13:34 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/01 21:47:38 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@ char    *lexer_get_string(t_lexer *lexer, char  d);
 */
 typedef enum s_to
 {
+    PATH,
     ARG,
     PIPE,
     DOLLAR,
     QUOTE,
     DQUOTE,
     VAR,
-    REDIRECTION,
-    D_REDIRECTION,
+    IN,
+    OUT,
     SPAC,
 } t_to;
 
