@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:30:21 by ozahir            #+#    #+#             */
-/*   Updated: 2022/06/30 19:33:17 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/01 17:51:21 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,15 @@ char    *get_var(t_lexer *lexer)
     char    *str;
 
     increment_lex(lexer);
-    if (lexer->c == ' ' || lexer->c == '\0')
+    if (lexer->c == '$')
+        return (increment_lex(lexer), get_char('1'));
+    if (is_token(lexer->c) || lexer->c == ' ' || lexer->c == '\0')
         return (get_char('$'));
     if (lexer->c == '?')
         return (var_pointer("exit", lexer->envp));
     str = get_char(lexer->c);
     increment_lex(lexer);
-    while (lexer->c !=  34 || lexer->c != ' '||  lexer->c != '\0')
+    while (!is_token(lexer->c) && lexer->c !=  34 && lexer->c != ' ' &&  lexer->c != '\0')
     {
         str = str_append(str, lexer->c);
         increment_lex(lexer);
@@ -122,7 +124,7 @@ char    *var_pointer(char   *str, char  **envp)
             return (envp[i] + len + 1);
         i++;
     }
-    return (NULL);
+    return (get_char(' '));
 }
 char    *lexer_get_string(t_lexer *lexer, char  d)
 {
@@ -136,6 +138,12 @@ char    *lexer_get_string(t_lexer *lexer, char  d)
          increment_lex(lexer);
     while (lexer->c != d && lexer->c != '\0')
     {
+        if (d == 34 && lexer->c == '$')
+            {
+                str = ft_strjoin(str, get_var(lexer));
+                increment_lex(lexer);
+            }
+            
         str = str_append(str, lexer->c);
         increment_lex(lexer);
     }
@@ -149,7 +157,8 @@ t_token *lexer_get_token(t_lexer *lexer)
 {
     char    *str;
     str = NULL;
-    lex_white_spaces(lexer);
+    if (lexer->c == ' ')
+        return (lex_white_spaces(lexer), get_token(SPAC, get_char(' ')));
     
     if (lexer->c == '\0')
         return (NULL);
@@ -159,13 +168,15 @@ t_token *lexer_get_token(t_lexer *lexer)
             return (get_token(PIPE, get_char('|')));
         }
     if (lexer->c == 34)
-        return (get_token(QUOTE, lexer_get_string(lexer, 34)));
+        return (get_token(DQUOTE, lexer_get_string(lexer, 34)));
     if (lexer->c == 39)
-        return (get_token(DQUOTE, lexer_get_string(lexer, 39)));
+        return (get_token(QUOTE, lexer_get_string(lexer, 39)));
+    if(lexer->c == '$')
+         return (get_token(VAR, ft_strdup(get_var(lexer))));
     if (lexer->c == '\0')
         return (NULL);
     str = get_char(lexer->c);
-     increment_lex(lexer);
+    increment_lex(lexer);
     while (lexer->c != '\0' && !is_token(lexer->c) && lexer->c != ' ')
     {
         str = str_append(str, lexer->c);

@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:02:50 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/06/30 19:33:01 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/01 17:13:34 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ typedef enum s_to
     DOLLAR,
     QUOTE,
     DQUOTE,
+    VAR,
     REDIRECTION,
     D_REDIRECTION,
+    SPAC,
 } t_to;
 
 typedef struct s_token
