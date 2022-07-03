@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:02:26 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/07/02 19:13:53 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/07/03 00:40:50 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	main(void)
 	{
 		cmd = readline("Minishell $ ");
 	}
-	free_all((void *) cmd);
+	free_all_pointers((void *) cmd);
 	return (0);
 }
