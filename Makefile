@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 16:59:09 by sel-kham          #+#    #+#              #
-#    Updated: 2022/07/03 00:44:35 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/07/03 14:54:02 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,12 +67,12 @@ $(NAME):  $(MAIN) $(LIBFT) $(HEADERS) $(OBJ)
 
 $(OBJ_DIR)/%.o: $(INIT_DIR)/%.c
 	@mkdir -p obj
-	@echo "$(GREEN)Making $(WHITE)Mini-Shell's object files..."
+	@echo "$(GREEN)Making $(WHITE)ini object files..."
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(HELPERS_DIR)/%.c
 	@mkdir -p obj
-	@echo "$(GREEN)Making $(WHITE)Mini-Shell's object files..."
+	@echo "$(GREEN)Making $(WHITE)helpers object files..."
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 	
 $(LIBFT): $(shell find $(LIBFT_DIR) -name "*.c" -type f)
