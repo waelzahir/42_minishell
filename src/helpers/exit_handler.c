@@ -6,13 +6,13 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 19:12:06 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/07/02 19:12:57 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/07/03 00:40:31 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/headers/minishell.h"
 
-void	free_all(void *ptr)
+void	free_all_pointers(void *ptr)
 {
 	if (ptr)
 		free(ptr);
