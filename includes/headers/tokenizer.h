@@ -6,10 +6,12 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 19:16:44 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/07/03 01:43:57 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/07/03 17:19:56 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef TOKENIZER_H
+# define TOKENIZER_H
 typedef struct s_token
 {
 	enum {
@@ -31,3 +33,7 @@ typedef struct s_token
 	}	e_type;
 	char	*content;
 }	t_token;
+
+t_token	*init_token(int type, char *content)
+
+#endif
