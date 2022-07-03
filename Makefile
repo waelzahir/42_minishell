@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 16:59:09 by sel-kham          #+#    #+#              #
-#    Updated: 2022/07/02 19:10:09 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/07/03 00:44:35 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,22 @@ HEADERS_DIR := $(INCLUDES_DIR)/headers
 LIBFT_DIR := $(INCLUDES_DIR)/libft
 
 ## SRC Sub-directories
-INIT_DIR := $(SRC_DIR)/ini
+INIT_DIR := $(SRC_DIR)/init
 APP_DIR := $(SRC_DIR)/app
 HELPERS_DIR := $(SRC_DIR)/helpers
 
 ## Compounents
 LIBFT := $(LIBFT_DIR)/libft.a
-HEADERS := minishell.h types.h
+HEADERS := minishell.h types.h tokenizer.h
 HEADERS := $(addprefix $(HEADERS_DIR)/, $(HEADERS))
+
+INIT := constructors.c
+INIT := $(addprefix $(INIT_DIR)/, $(INIT))
+HELPERS := exit_handler.c
+HELPERS :=  $(addprefix $(HELPERS_DIR)/, $(HELPERS))
+
+SRC := $(HELPERS) $(INIT) 
+OBJ := $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
 MAIN := $(SRC_DIR)/main.c
 
@@ -48,15 +56,24 @@ REMOVE := rm -rf
 
 NAME := minishell
 
-SRC := test.c
-
 .PHONY: all clean fclean re
 
 all: $(NAME)
 	@echo "$(BLUE)\n        :::   :::   ::::::::::: ::::    ::: ::::::::::: ::::::::  :::    ::: :::::::::: :::        :::  \n      :+:+: :+:+:      :+:     :+:+:   :+:     :+:    :+:    :+: :+:    :+: :+:        :+:        :+:   \n    +:+ +:+:+ +:+     +:+     :+:+:+  +:+     +:+    +:+        +:+    +:+ +:+        +:+        +:+    \n   +#+  +:+  +#+     +#+     +#+ +:+ +#+     +#+    +#++:++#++ +#++:++#++ +#++:++#   +#+        +#+     \n  +#+       +#+     +#+     +#+  +#+#+#     +#+           +#+ +#+    +#+ +#+        +#+        +#+      \n #+#       #+#     #+#     #+#   #+#+#     #+#    #+#    #+# #+#    #+# #+#        #+#        #+#       \n###       ### ########### ###    #### ########### ########  ###    ### ########## ########## ##########$(WHITE)\n\n\t\t$(RED)By$(WHITE):\n\t\t\t$(GREEN)Soufiane El-khamlich $(WHITE)($(RED)MGS$(WHITE)) : $(BLUE)https://github.com/MGS15$(WHITE)\n\t\t\t$(GREEN)Ouail Zahir\t\t   $(WHITE): $(BLUE)https://github.com/weazah$(WHITE)\n"
 
-$(NAME): $(MAIN) $(LIBFT)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(IFLAGS) $(MAIN) $(LIBFT) -o $@
+$(NAME):  $(MAIN) $(LIBFT) $(HEADERS) $(OBJ)
+	@echo "$(GREEN)Making $(WHITE)Mini-Shell's executable..."
+	@$(CC) $(CFLAGS) $(LFLAGS) $(IFLAGS) $(MAIN) $(LIBFT) $(OBJ) -o $@
+
+$(OBJ_DIR)/%.o: $(INIT_DIR)/%.c
+	@mkdir -p obj
+	@echo "$(GREEN)Making $(WHITE)Mini-Shell's object files..."
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(HELPERS_DIR)/%.c
+	@mkdir -p obj
+	@echo "$(GREEN)Making $(WHITE)Mini-Shell's object files..."
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 	
 $(LIBFT): $(shell find $(LIBFT_DIR) -name "*.c" -type f)
 	@echo "$(GREEN)Making $(WHITE)libft files..."
