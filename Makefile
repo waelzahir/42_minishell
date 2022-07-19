@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 16:59:09 by sel-kham          #+#    #+#              #
-#    Updated: 2022/07/03 14:54:02 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/07/19 16:10:33 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ HEADERS := $(addprefix $(HEADERS_DIR)/, $(HEADERS))
 
 INIT := constructors.c
 INIT := $(addprefix $(INIT_DIR)/, $(INIT))
-HELPERS := exit_handler.c
+HELPERS := exit_handler.c str_handler.c
 HELPERS :=  $(addprefix $(HELPERS_DIR)/, $(HELPERS))
 
 SRC := $(HELPERS) $(INIT) 

@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   str_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/24 17:02:50 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/07/19 16:08:36 by sel-kham         ###   ########.fr       */
+/*   Created: 2022/07/19 16:04:37 by sel-kham          #+#    #+#             */
+/*   Updated: 2022/07/19 16:21:25 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../includes/headers/minishell.h"
 
-# include<stdio.h>
-# include<stdlib.h>
-# include<stdbool.h>
-# include<unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "tokenizer.h"
-# include "helpers.h"
+int	ft_strchrstr(char *sub, char *str)
+{
+	char	*pstr;
 
-void	free_all_pointers(void *ptr);
-
-#endif
+	if (sub && str)
+	{
+		pstr = str;
+		while (*sub)
+		{
+			str = pstr;
+			while (*str)
+			{
+				if (*str == *sub)
+					return (1);
+				str++;
+			}
+			sub++;
+		}
+	}
+	return (0);
+}
