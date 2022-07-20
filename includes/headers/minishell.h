@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:02:50 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/07/19 16:08:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/07/20 18:02:48 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <readline/history.h>
 # include "tokenizer.h"
 # include "helpers.h"
+
+# define WHITE_SPACES " \t"
+# define SYMBOLS "()|><\"'&$"
 
 void	free_all_pointers(void *ptr);
 
