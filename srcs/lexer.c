@@ -91,7 +91,7 @@ char    *get_quoted_arg(t_lexer *lexer)
     advance(lexer);
     str = char_to_str(lexer->c);
     if (lexer->c == 39)
-        return (free(str),char_to_str(' '));
+        return (advance(lexer), free(str),char_to_str(' '));
     advance(lexer);
     while (lexer->c != 39)
     {
@@ -100,6 +100,7 @@ char    *get_quoted_arg(t_lexer *lexer)
         str  = char_append_str(str, lexer->c);
         advance(lexer);
     }
+    advance(lexer);
     return (str);
 }
 char    *get_dquoted_arg(t_lexer *lexer)
@@ -110,12 +111,12 @@ char    *get_dquoted_arg(t_lexer *lexer)
     advance(lexer);
     str = char_to_str(lexer->c);
     if (str[0] == 34)
-        return (free(str), char_to_str(' '));
+        return (advance(lexer), free(str), char_to_str(' '));
     advance(lexer);
-    while ( lexer->c != 34)
+    while (lexer->c != 34)
     {
-        // if (lexer->c == '\0')
-        //     ft_strjoin(str, q_prompt("dquote>", 34));
+        if (lexer->c == '\0')
+            ft_strjoin(str, q_prompt("dquote>", 34));
         if (lexer->c == '$')
             {
                 ft_strjoin(str, var_expand(lexer));
@@ -123,6 +124,7 @@ char    *get_dquoted_arg(t_lexer *lexer)
         str = char_append_str(str, lexer->c);
         advance(lexer);
     }
+    advance(lexer);
     return (str);
 }
 
@@ -193,7 +195,7 @@ char    *q_prompt(char  *prompt, int quote)
         return (str);
     while (1)
     {
-        ft_strjoin(str, readline(prompt));
+        str = ft_strjoin(str, readline(prompt));
         if (exist_one(str, quote) == 1)
             break ;
     }

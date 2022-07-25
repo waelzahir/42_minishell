@@ -13,6 +13,7 @@
 #ifndef DTYPES_H
 # define DTYPES_H
 #include "minishell.h"
+
 typedef enum s_tok
 {
     ARG,

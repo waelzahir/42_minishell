@@ -13,7 +13,7 @@
 NAME= minishell
 CC= gcc
 MAIN= main.c
-FLAGS= -Wall -Wextra -Werror
+FLAGS= -Wall -Wextra -Werror -g
 READLINE= -L /goinfre/$(USER)/homebrew/opt/readline/lib -lreadline \
 	-L /goinfre/$(USER)/homebrew/opt/readline/lib -lhistory \
 	-I /goinfre/$(USER)/homebrew/opt/readline/include
@@ -44,4 +44,4 @@ fclean: clean
 	rm -rf $(NAME)
 	make fclean -C libft/
 
-	
+re: fclean all

@@ -25,6 +25,7 @@
 char    **set_env(char    **envp);
 char    *get_prompt(void);
 void    shell_loop(char *prompt, char   **env);
+char    *closing_check(char *str);
 
 
 # endif

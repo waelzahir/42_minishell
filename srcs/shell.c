@@ -15,15 +15,18 @@
 void    shell_loop(char *prompt, char   **env)
 {
     char    *cmd;
-    printf("%s\n", env[0]);
     while (1)
     {
         cmd = readline(prompt);
-        if (cmd)
-            {
-                parser(cmd, env);
-                free(cmd);
-            }
+        cmd =  closing_check(cmd);
+        if (env)
+        printf("str (%s)\n", cmd);
+        // add_history(cmd);
+        // if (cmd)
+        //     {
+        //         parser(cmd, env);
+        //         free(cmd);
+        //     }
         
     }
 }
