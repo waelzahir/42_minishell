@@ -24,7 +24,7 @@ char    *get_quoted_arg(t_lexer *lexer);
 char    *get_dquoted_arg(t_lexer *lexer);
 char    *var_expand(t_lexer *lexer);
 char    *get_var_pointer(char    *key, char  **env);
-char    *q_prompt(char  *prompt, int quote);
+char    *q_prompt(int quote);
 t_token *tokenizer(t_lexer *lexer);
 
 

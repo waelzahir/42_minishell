@@ -25,7 +25,7 @@ char    *closing_check(char *str)
         if ((str[i] == 39 || str[i] == 34) && state == 0)
         {
             state = 1;
-            type = str[0];
+            type = str[i];
             i++;
         }
         if (str[i] == type && state == 1)
@@ -34,7 +34,7 @@ char    *closing_check(char *str)
     }
    
     if (state)
-     str = ft_strjoin(str, q_prompt("closing>", type));
+     str = ft_strjoin(str, q_prompt(type));
         
     return str;
 }
@@ -49,4 +49,5 @@ void    parser(char *cmd, char  **env)
         printf("type: %d | content: %s ,\n", token->type, token->content);
         token = tokenizer(lexer);
     }
+    printf("type: %d | content: %s ,\n", token->type, token->content);
 }

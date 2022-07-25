@@ -20,13 +20,12 @@ void    shell_loop(char *prompt, char   **env)
         cmd = readline(prompt);
         cmd =  closing_check(cmd);
         if (env)
-        printf("str (%s)\n", cmd);
-        // add_history(cmd);
-        // if (cmd)
-        //     {
-        //         parser(cmd, env);
-        //         free(cmd);
-        //     }
+        add_history(cmd);
+        if (cmd)
+            {
+                parser(cmd, env);
+                free(cmd);
+            }
         
     }
 }
