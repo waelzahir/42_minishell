@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 14:30:08 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/24 15:39:04 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/26 22:21:31 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ void    parser(char *cmd, char  **env)
     while (token->type != 5)
     {
         printf("type: %d | content: %s ,\n", token->type, token->content);
+        if (token->content)
+        free(token->content);
+        free(token);
         token = tokenizer(lexer);
     }
     printf("type: %d | content: %s ,\n", token->type, token->content);
+    free(token);
 }
