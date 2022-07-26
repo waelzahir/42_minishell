@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:53:08 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/24 15:43:03 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/26 21:08:36 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ char    *get_quoted_arg(t_lexer *lexer)
 char    *get_dquoted_arg(t_lexer *lexer)
 {
     char    *str;
+    
 
     str = NULL;
     advance(lexer);
@@ -114,7 +115,7 @@ char    *get_dquoted_arg(t_lexer *lexer)
     }
     if (lexer->c == 34 && str)
         return (advance(lexer), str);
-    else
+    else if (lexer->c == 34 && !str)
         return (advance(lexer),  char_to_str(' '));
     if (!str)
         str = char_to_str(lexer->c);
@@ -124,6 +125,8 @@ char    *get_dquoted_arg(t_lexer *lexer)
         if (lexer->c == '$')
             {
                 str = ft_strjoin(str, var_expand(lexer));
+                if (lexer->c == 34)
+                    return (advance(lexer), str);
             }
         str = char_append_str(str, lexer->c);
         advance(lexer);
@@ -136,12 +139,15 @@ char    *get_var_pointer(char    *key, char  **env)
 {
     int len;
     int i;
-
+    char    *keye;
     i = 0;
-    len = ft_strlen(key);
+
+    keye = ft_strjoin(key, "=");
+    free(key);
+    len = ft_strlen(keye);
     while (env[i])
     {
-        if (ft_strncmp(key, env[i], len) == 0)
+        if (ft_strncmp(keye, env[i], len) == 0)
             return (env[i] + len);
         i++;
     }
@@ -230,7 +236,7 @@ t_token *tokenizer(t_lexer *lexer)
     if (lexer->c == '<')
         return (advance(lexer), get_token(IN, char_to_str('<')));
     if (lexer->c == '$')
-        return (get_token(ARG, var_expand(lexer)));
+        return (get_token(ARG, ft_strdup(var_expand(lexer))));
     
     return (get_token(ARG,get_simple_arg(lexer)));
 }

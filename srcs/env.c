@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 22:02:50 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/24 14:33:50 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/26 20:46:59 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+
 
 char    **trial_env(void)
 {
@@ -34,6 +36,8 @@ char    **trial_env(void)
     envp[4] = NULL;
     return  (envp);
 }
+
+/* the env need to be duplicated*/
 char    **set_env(char  **envp)
 {
     if (envp[0] == NULL)
@@ -41,6 +45,8 @@ char    **set_env(char  **envp)
     return (envp);
 }
 
+
+//getenv result cant be freed
 char    *get_prompt(void)
 {
     char    *user;
