@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 14:30:08 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/26 22:21:31 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/28 14:24:47 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,18 @@ char    *closing_check(char *str)
         
     return str;
 }
-void    parser(char *cmd, char  **env)
+
+void    print_toks(char *cmd, char **env)
 {
-    t_lexer *lexer;
     t_token *token;
+    t_lexer *lexer;
+
     lexer = init_lex(cmd, env);
-    token = tokenizer(lexer);
-    while (token->type != 5)
+    token = tokenizer(lexer, start);
+    while (token->type != EOL)
     {
-        printf("type: %d | content: %s ,\n", token->type, token->content);
-        if (token->content)
-        free(token->content);
-        free(token);
-        token = tokenizer(lexer);
-    }
-    printf("type: %d | content: %s ,\n", token->type, token->content);
-    free(token);
+        printf("type:   %d content: %s\n",  token->type, token->content);
+        token = tokenizer(lexer, token->type);
+        
+    }   
 }

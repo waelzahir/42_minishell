@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 14:30:08 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/26 22:49:48 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/28 14:24:33 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void    shell_loop(char *prompt, char   **env)
 {
     char    *cmd;
+    sort_env(env);
     while (1)
     {
         cmd = readline(prompt);
         cmd =  closing_check(cmd);
         if (env)
-       // add_history(cmd);
+        add_history(cmd);
         if (cmd)
             {
-                parser(cmd, env);
+                print_toks(cmd , env);
                 free(cmd);
-                system("leaks minishell");
             }
         
     }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ozahir <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/21 23:33:47 by ozahir            #+#    #+#              #
-#    Updated: 2021/11/21 23:40:03 by ozahir           ###   ########.fr        #
+#    Updated: 2022/07/27 18:04:51 by ozahir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isdigit.c ft
 OBJ = ${SRC:.c=.o}
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 HEADER = libft.h
 NAME = libft.a
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:45:16 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/24 15:20:54 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/27 18:46:25 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "dtypes.h"
 
-t_token    *get_token(t_tok type, char    *content);
+t_token    *get_token(t_tok type, char    *content, t_tok prev);
 int is_token(char c);
 
 # endif
