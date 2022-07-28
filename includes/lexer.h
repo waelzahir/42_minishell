@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:53:27 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/27 18:47:12 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/28 18:55:16 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char    *get_dquoted_arg(t_lexer *lexer);
 char    *var_expand(t_lexer *lexer);
 char    *get_var_pointer(char    *key, char  **env);
 char    *q_prompt(int quote);
-t_token *tokenizer(t_lexer *lexer, t_tok prev);
+t_token *tokenizer(t_lexer *lexer, t_token *prev);
 
 
 # endif

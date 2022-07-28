@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:53:08 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/27 18:47:30 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/28 20:23:57 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,25 +110,14 @@ char    *get_dquoted_arg(t_lexer *lexer)
 
     str = NULL;
     advance(lexer);
-    if (lexer->c == '$')
-    {
-        str = var_expand(lexer);
-    }
-    if (lexer->c == 34 && str)
-        return (advance(lexer), str);
-    else if (lexer->c == 34 && !str)
+  
+    if (lexer->c == 34 )
         return (advance(lexer),  char_to_str(' '));
-    if (!str)
-        str = char_to_str(lexer->c);
+
+    str = char_to_str(lexer->c);
     advance(lexer);
     while (lexer->c != 34)
     {
-        if (lexer->c == '$')
-            {
-                str = ft_strjoin(str, var_expand(lexer));
-                if (lexer->c == 34)
-                    return (advance(lexer), str);
-            }
         str = char_append_str(str, lexer->c);
         advance(lexer);
     }
@@ -218,28 +207,61 @@ char    *q_prompt(int quote)
     }
     return (str);
 }
-
-t_token *tokenizer(t_lexer *lexer, t_tok prev)
+t_token *mix_token(t_token *prev, t_token *next)
 {
- 
+    char    *str;
+
+    str = NULL;
+    if (!prev)
+        return (next);
+    if (next->type != prev->type)
+        return next;
+    str = ft_strjoin(prev->content , next->content);
+    free(prev->content);
+    free(next->content);
+    free(next);
+    prev->content = str;
+    return (prev);
+}
+t_token *tokenizer(t_lexer *lexer, t_token *prev)
+{
+    t_token *token;
     if (lexer->index == 0)
         skip(lexer);
     if (lexer->c == '\0')
-        return (get_token(EOL, NULL, prev));
+        return (get_token(EOL, NULL));
     if (lexer->c == ' ')
-        return (skip(lexer), get_token(SPAC, char_to_str(' '), prev));
+        return (skip(lexer), get_token(SPAC, char_to_str(' ')));
     if (lexer->c == 39)
-        return (get_token(ARG, get_quoted_arg(lexer), prev));
+       {
+            token = get_token(ARG_NORM, get_quoted_arg(lexer));
+            return (mix_token(prev, token));
+       }
      if (lexer->c == 34)
-        return (get_token(ARG, get_dquoted_arg(lexer), prev));
+        {
+            token = get_token(ARG_EXPAND, get_dquoted_arg(lexer));
+             return (mix_token(prev, token));
+
+            
+        }
     if (lexer->c == '|')
-        return (advance(lexer), get_token(PIPE, char_to_str('|'), prev));
+        {
+            advance(lexer);
+           token =  get_token(PIPE, char_to_str('|'));
+                        return (mix_token(prev, token));
+        }
     if (lexer->c == '>')
-        return (advance(lexer), get_token(OUT, char_to_str('>'), prev));
+        {
+            advance(lexer);
+            token =  get_token(OUT, char_to_str('>'));
+                        return (mix_token(prev, token));
+        }
     if (lexer->c == '<')
-        return (advance(lexer), get_token(IN, char_to_str('<'), prev));
-    if (lexer->c == '$')
-        return (get_token(ARG, ft_strdup(var_expand(lexer)), prev));
-    
-    return (get_token(ARG,get_simple_arg(lexer), prev));
+        {
+            advance(lexer);
+            token =  get_token(IN, char_to_str('<'));
+            return (mix_token(prev, token));
+        }
+        token = get_token(ARG_EXPAND,get_simple_arg(lexer));
+        return (mix_token(prev, token));
 }

@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:44:23 by ozahir            #+#    #+#             */
-/*   Updated: 2022/07/28 14:23:09 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/07/28 18:42:13 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 
 typedef enum s_tok
 {
-    ARG,
+    CMD,
+    ARG_NORM,
+    ARG_EXPAND,
     PIPE,
     IN,
     OUT,
