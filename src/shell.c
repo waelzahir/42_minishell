@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 14:30:40 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/07 14:45:10 by ozahir           ###   ########.fr       */
+/*   Created: 2022/08/07 21:39:44 by ozahir            #+#    #+#             */
+/*   Updated: 2022/08/07 21:43:09 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
 
-int is_alpha(char   c)
+void    *shell(char *prompt, char   **env)
 {
-    if ((c >= 'a' && c <= 'z' ) || (c >= 'A' && c <= 'Z'))
-        return 1;
-    return 0;
-}
-
-t_token *set_token(int  type, char  *content)
-{
-    t_token *token;
-
-    token = ft_calloc(1, sizeof(t_token));
-    if (!token)
-        return NULL;
-    token->type = type;
-    token->def = content;
-    return token;
+    char    *line;
+    
+    while (1)
+    {
+        line = readline(prompt);
+        if (line)
+        {
+            add_history(line);
+            parser(line,env);
+        }    
+    }
 }

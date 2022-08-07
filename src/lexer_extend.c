@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:08:03 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/03 17:18:26 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/07 21:53:41 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ char    *get_argq(t_lexer   *lexer)
             return (NULL);
         return (advance(lexer), str);
     }
-    str = char_to_str(lexer->c)
+    str = char_to_str(lexer->c);
     if (!str)
         return (NULL);
     advance(lexer);
     while (lexer->c != 39)
     {
-        str = char_append(str, lexer->c)
+        str = char_append(str, lexer->c);
         if (!str)
             return (NULL);
         advance(lexer);
@@ -66,7 +66,7 @@ char    *get_var_extend(t_lexer *lexer)
 {
     char    *str;
     
-    str = NULL
+    str = NULL;
     if (is_token(lexer->c))
     {
          str = char_to_str('$');
@@ -85,58 +85,34 @@ char    *get_var_extend(t_lexer *lexer)
             return (NULL);
         advance(lexer);
     }
-    str = extend_var(str);
+    str = extend_var(str, lexer->env);
     return (str);    
 }
-char    *get_input(t_lexer  *lexer)
+
+
+char    *get_red(t_lexer  *lexer, char   type)
 {
     char    *str;
 
-    str = char_to_str('<');
+    str = char_to_str(type);
     if (!str)
         return (NULL);
     advance(lexer);
-    while (lexer->c == '<')
+    while (lexer->c == type)
     {
-        str = char_append(str, '<');
+        str = char_append(str, type);
         if (!str)
             return (NULL);
         advance(lexer);           
     }
     skip_ws(lexer);
-    while (!is_token(lexer->c))
-    {
-        str = char_append(str, lexer->c);
-        if (!str)
-            return(NULL);
-        advance(lexer);
-    }
-    return (str);
-}
-char    *get_output(t_lexer  *lexer)
-{
-    char    *str;
-
-    str = char_to_str('>');
-    if (!str)
-        return (NULL);
-    advance(lexer);
-    while (lexer->c == '>')
-    {
-        str = char_append(str, '>');
-        if (!str)
-            return (NULL);
-        advance(lexer);           
-    }
-    skip_ws(lexer);
-    while (!is_token(lexer->c))
-    {
-        str = char_append(str, lexer->c);
-        if (!str)
-            return(NULL);
-        advance(lexer);
-    }
-    return (str);
+    if (ft_strlen(str) > 2)
+        return (printf("parse error near: %c\n", type),free(str), NULL);
+    if (lexer->c == 34)
+        return(ft_strjoin(str, get_argd(lexer)));
+    else if (lexer->c == 39)
+       return (ft_strjoin(str, get_argq(lexer)));
+        return  (ft_strjoin(str, get_argn(lexer)));
 }
 
 

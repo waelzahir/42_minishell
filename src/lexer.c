@@ -6,13 +6,13 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:41:12 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/03 15:06:10 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/07 19:57:37 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
 
-t_lexer lexer_init(char *input)
+t_lexer *lexer_init(char *input, char   **env)
 {
     t_lexer *lexer;
 
@@ -21,9 +21,10 @@ t_lexer lexer_init(char *input)
     lexer = malloc(sizeof(t_lexer));
     if (!lexer)
         return (NULL);
-    t_lexer->input = input;
-    t_lexer->index = 0;
-    t_lexer->c = input[0];
+    lexer->env = env;
+    lexer->input = input;
+    lexer->index = 0;
+    lexer->c = input[0];
     return (lexer);
 }
 
@@ -41,7 +42,7 @@ void    skip_ws(t_lexer *lexer)
 
 char    *get_argn(t_lexer *lexer)
 {
-    char    str;
+    char    *str;
 
     str = char_to_str(lexer->c);
     if (!str)
@@ -50,7 +51,7 @@ char    *get_argn(t_lexer *lexer)
     while (!is_token(lexer->c))
     {
         str = char_append(str, lexer->c);
-        if (str = NULL)
+        if (!str)
             return (NULL);
         advance(lexer);
     }
@@ -69,18 +70,19 @@ char    *get_argd(t_lexer *lexer)
             return (NULL);
         return (advance(lexer), str);
     }
-    str = char_to_str(lexer->c)
+    str = char_to_str(lexer->c);
     if (!str)
         return (NULL);
     advance(lexer);
     while (lexer->c != 34)
     {
-        str = char_append(str, lexer->c)
+        str = char_append(str, lexer->c);
         if (!str)
             return (NULL);
         advance(lexer);
     }
     advance(lexer);
+  
     return (str);
 }
 

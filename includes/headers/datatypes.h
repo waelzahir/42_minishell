@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:20:58 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/03 14:44:09 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/07 20:14:01 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct  s_lexer
     char    *input;
     char    c;
     int    index;
+    char    **env;
 } t_lexer;
 
 typedef enum  s_num
@@ -26,8 +27,11 @@ typedef enum  s_num
     qarg,
     darg,
     input,
+    lparent,
+    rparent,
+    andor,
     output,
-    pipe,
+    pip,
     space,
     var,
     end,
@@ -38,5 +42,11 @@ typedef struct s_token
     t_num   type;
     char    *def; 
 } t_token;
+
+typedef struct s_stack
+{
+    int size;
+    void    **stack;
+} t_stack;
 
 #endif

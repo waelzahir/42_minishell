@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:41:58 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/03 20:00:35 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/07 15:09:07 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int is_token(char   c)
 {
-    if (c == 39 || c == 34 || c == '|' || c == '>' || c == '<' || c == '$' || c == ' ' || c == '\0')
+    if (c == 39 || c == 34 || c == '|' || c == '>' || c == '<' || c == '$' || c == '&'|| c == ' '||  c == '(' || c == ')'|| c == '\0')
         return (1);
     return (0);
 }
@@ -41,6 +41,7 @@ char    *char_append(char   *str, char  c)
     app = malloc(len + 2);
     if (!len)
         return (free(str), NULL);
+    ft_memcpy(app, str, len);
     app[len] = c;
     app[len + 1] = '\0';
     free(str);
@@ -64,7 +65,7 @@ char    *extend_var(char    *s, char    **env)
     {
         if (ft_strncmp(env[i], str, len) == 0)
         {
-            if (env[i][len] != '\0');
+            if (env[i][len] != '\0')
                 ret = ft_strdup(env[i] + len);
             else
                 ret = ft_calloc(1,1);
@@ -84,5 +85,6 @@ char    *get_pipe(t_lexer *lexer)
     if (!str)
         return (NULL);
     str[0] = '|';
+    advance(lexer);
     return (str);
 }
