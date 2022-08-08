@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:30:28 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/08 16:11:22 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/08 16:57:34 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,23 @@ t_token *tokenizer(t_lexer  *lexer)
         return (set_token(output, get_red(lexer, '>')));
     return (set_token(arg, get_argn(lexer)));
 }
+void    print_s(t_stack *n)
+{
+    void    *stack;
+    
+    stack = (t_token **) n->stack;
+    int i = 0;
 
+    while (stack[i])
+    {
+        
+        printf("%s\n", n->stack->stack[0]);
+        i++;
+    }
+    
+}
 
-t_ast   *parser(char *str, char  **env)
+void    parser(char *str, char  **env)
 {
     t_stack *cmd_stack;
     t_stack *op_stack;
@@ -42,23 +56,24 @@ t_ast   *parser(char *str, char  **env)
 
     lexer = lexer_init(str, env);
     if (!lexer)
-        return (NULL);
+        return ;
     cmd_stack = init_stack();
     if (!cmd_stack)
     {
         free(lexer);
-        return (NULL);
+        return ;
     }
     op_stack = init_stack();
     if (!op_stack)
     {
         free(cmd_stack);
         free(lexer);
-        return (NULL);
+        return ;
     }
     while (lexer->c != '\0')
     {
         push_stack(cmd_stack, fill_stacks(op_stack, lexer));
     }
-    return (build_ast(cmd_stack, op_stack));
+    print_s(cmd_stack);
 }
+

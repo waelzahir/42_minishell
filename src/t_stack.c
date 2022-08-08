@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 20:12:37 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/08 15:17:58 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/08 17:06:04 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void    *fill_stacks(t_stack    *op, t_lexer    *lexer)
     if (!simple_cmd)
         return NULL;
     token = tokenizer(lexer);
-    while (token && token->type != end )
+    while (token && token->type != end && token->type != pip )
     {
         push_stack(simple_cmd, token);
         token = tokenizer(lexer);
         if (token->type == pip)
-            break
+            break ;
     }
     if (token->type == pip)
         push_stack(op, token);
