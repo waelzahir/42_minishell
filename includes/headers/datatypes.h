@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:20:58 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/07 20:14:01 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/08 15:13:01 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,21 @@ typedef struct s_stack
     int size;
     void    **stack;
 } t_stack;
+
+typedef enum s_atype
+{
+    pipeline,
+    and_op,
+    or_op,
+    simple_comand,
+}   t_atype;
+
+
+typedef struct  s_ast
+{
+    t_atype type;
+    void    *right;
+    void    *left;
+} t_ast;
 
 #endif

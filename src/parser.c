@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:30:28 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/07 21:49:26 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/08 16:11:22 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,31 @@ t_token *tokenizer(t_lexer  *lexer)
 }
 
 
-void    parser(char *str, char  **env)
+t_ast   *parser(char *str, char  **env)
 {
-    t_stack *stack;
-    
+    t_stack *cmd_stack;
+    t_stack *op_stack;
     t_lexer *lexer;
-    t_token **tokens;
 
     lexer = lexer_init(str, env);
-    stack = init_stack();
-    
+    if (!lexer)
+        return (NULL);
+    cmd_stack = init_stack();
+    if (!cmd_stack)
+    {
+        free(lexer);
+        return (NULL);
+    }
+    op_stack = init_stack();
+    if (!op_stack)
+    {
+        free(cmd_stack);
+        free(lexer);
+        return (NULL);
+    }
     while (lexer->c != '\0')
     {
-        push_stack(stack, tokenizer(lexer));
+        push_stack(cmd_stack, fill_stacks(op_stack, lexer));
     }
-    int i = 0;
-    tokens = (t_token **)stack->stack;
-    while (tokens[i])
-    {
-        printf("%s | type %d \n", tokens[i]->def, tokens[i]->type);
-        i++;
-    }
+    return (build_ast(cmd_stack, op_stack));
 }

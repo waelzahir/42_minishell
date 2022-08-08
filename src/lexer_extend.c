@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:08:03 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/07 21:53:41 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/07 21:56:03 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ char    *get_red(t_lexer  *lexer, char   type)
         advance(lexer);           
     }
     skip_ws(lexer);
-    if (ft_strlen(str) > 2)
-        return (printf("parse error near: %c\n", type),free(str), NULL);
     if (lexer->c == 34)
         return(ft_strjoin(str, get_argd(lexer)));
     else if (lexer->c == 39)

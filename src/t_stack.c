@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 20:12:37 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/07 21:43:41 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/08 15:17:58 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,24 @@ void    *pop_stack(t_stack *stack)
     if (stack->size == 0)
         free(stack);
     return (ret);
+}
+void    *fill_stacks(t_stack    *op, t_lexer    *lexer)
+{
+    t_token *token;
+    t_stack *simple_cmd;
+
+    simple_cmd = init_stack();
+    if (!simple_cmd)
+        return NULL;
+    token = tokenizer(lexer);
+    while (token && token->type != end )
+    {
+        push_stack(simple_cmd, token);
+        token = tokenizer(lexer);
+        if (token->type == pip)
+            break
+    }
+    if (token->type == pip)
+        push_stack(op, token);
+    return (simple_cmd);
 }
