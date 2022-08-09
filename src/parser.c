@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:30:28 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/09 21:50:39 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/09 22:03:33 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void    parser(char *str, char  **env)
     {
         push_stack(cmd_stack, fill_stacks(op_stack, lexer));
     }
-    print_s(cmd_stack->stack[1]);
+    // ast = build_ast(t_stack *cmd_stack, t_stack *op_stack);
+    // return (ast);
 }
 
