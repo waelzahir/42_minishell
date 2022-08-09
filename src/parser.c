@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:30:28 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/08 16:57:34 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/09 21:50:39 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,15 @@ t_token *tokenizer(t_lexer  *lexer)
         return (set_token(output, get_red(lexer, '>')));
     return (set_token(arg, get_argn(lexer)));
 }
-void    print_s(t_stack *n)
+void    print_s(t_token **n)
 {
-    void    *stack;
-    
-    stack = (t_token **) n->stack;
+
     int i = 0;
 
-    while (stack[i])
+    while (n[i])
     {
         
-        printf("%s\n", n->stack->stack[0]);
+        printf("%s\n", n[i]->def);
         i++;
     }
     
@@ -74,6 +72,6 @@ void    parser(char *str, char  **env)
     {
         push_stack(cmd_stack, fill_stacks(op_stack, lexer));
     }
-    print_s(cmd_stack);
+    print_s(cmd_stack->stack[1]);
 }
 
