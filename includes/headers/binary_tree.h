@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   binary_tree.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 13:20:02 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/09 23:21:08 by sel-kham         ###   ########.fr       */
+/*   Created: 2022/08/09 23:17:11 by sel-kham          #+#    #+#             */
+/*   Updated: 2022/08/09 23:21:27 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef BINARY_TREE_H
+# define BINARY_TREE_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include "../libft/libft.h"
-#include "datatypes.h"
-#include "lexer.h"
-#include "parser.h"
-#include "t_stack.h"
-#include "shell.h"
-#include "binary_tree.h"
-#include <readline/history.h>
-#include <readline/readline.h>
+#include "minishell.h"
 
+typedef struct  s_binary_tree
+{
+	t_stack	*root;
+	t_stack	*l_child;
+	t_stack	*r_child;
+}	t_btree;
 
-
+t_btree	*binary_tree_new(t_stack *root);
 
 #endif
