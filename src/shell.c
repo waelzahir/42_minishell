@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 21:39:44 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/07 21:43:09 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/10 20:14:42 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void    *shell(char *prompt, char   **env)
 {
     char    *line;
+    t_btree *root;
     
     while (1)
     {
@@ -22,7 +23,9 @@ void    *shell(char *prompt, char   **env)
         if (line)
         {
             add_history(line);
-            parser(line,env);
-        }    
+            root = parser(line,env);
+        }
+        // free_tree();
+        print_tree("", root, 0);
     }
 }
