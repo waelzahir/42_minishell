@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/10 21:56:41 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:12:06 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int		binary_tree_add_r_child(t_btree **root, t_btree *r_child);
 int		binary_tree_add_l_child(t_btree **root, t_btree *l_child);
 t_btree	*binary_tree_create(t_stack *simple_cmd, t_stack *op);
 void	print_tree(const char *prefix, t_btree *root, int is_left);
+void	binary_tree_free(t_btree **root);
 
 #endif

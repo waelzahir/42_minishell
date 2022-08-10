@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 21:39:44 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/10 20:14:42 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:12:43 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    *shell(char *prompt, char   **env)
             add_history(line);
             root = parser(line,env);
         }
-        // free_tree();
-        print_tree("", root, 0);
+        binary_tree_free(&root);
+        // print_tree("", root, 0);
     }
 }
