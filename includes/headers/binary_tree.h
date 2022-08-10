@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binary_tree.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/10 00:46:00 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/10 16:02:09 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 
 #include "minishell.h"
 
+typedef enum	s_type
+{
+	op,
+	cmd,	
+} t_type;
 typedef struct  s_binary_tree
 {
-	t_stack	*content;
-	t_stack	*l_child;
-	t_stack	*r_child;
+	t_tree	type;
+	void	*content;
+	struct  s_binary_tree	*l_child;
+	struct  s_binary_tree	*r_child;
 }	t_btree;
 
 t_btree	*binary_tree_new(t_stack *root);

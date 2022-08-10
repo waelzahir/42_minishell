@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:26:06 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/10 15:47:48 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:57:35 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,13 @@ int	binary_tree_add_l_child(t_btree **root, t_stack *l_child)
 t_btree	*binary_tree_create(t_stack *simple_cmd, t_stack *op)
 {
 	t_btree	*root;
-	if (!simple_cmd)
+	
+	if (simple_cmd->size == 0)
 		return (NULL);
-	if (!op)
+	if (op->size == 0)
 		return (binary_tree_new((t_stack *) pop_stack(simple_cmd)));
-	(*node)->r_child = binary_tree_create(simple_cmd, (t_stack *) pop_stack(op));
-	(*node)->l_child = binary_tree_create((t_stack *) pop_stack(simple_cmd), op);
+	root->r_child = binary_tree_create(simple_cmd, (t_stack *) pop_stack(op));
+	root->l_child = binary_tree_create((t_stack *) pop_stack(simple_cmd), op);
 	return (root);
 }
 
