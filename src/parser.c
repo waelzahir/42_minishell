@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:30:28 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/09 22:03:33 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/10 19:23:41 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,33 +46,34 @@ void    print_s(t_token **n)
     
 }
 
-void    parser(char *str, char  **env)
+t_btree    *parser(char *str, char  **env)
 {
     t_stack *cmd_stack;
     t_stack *op_stack;
     t_lexer *lexer;
+    t_btree *root;
 
     lexer = lexer_init(str, env);
     if (!lexer)
-        return ;
+        return (NULL);
     cmd_stack = init_stack();
     if (!cmd_stack)
     {
         free(lexer);
-        return ;
+        return (NULL);
     }
     op_stack = init_stack();
     if (!op_stack)
     {
         free(cmd_stack);
         free(lexer);
-        return ;
+        return (NULL);
     }
     while (lexer->c != '\0')
     {
         push_stack(cmd_stack, fill_stacks(op_stack, lexer));
     }
-    // ast = build_ast(t_stack *cmd_stack, t_stack *op_stack);
-    // return (ast);
+    root = binary_tree_create(cmd_stack, op_stack);
+    return (root);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:29:14 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/08 16:23:46 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/10 17:09:50 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 t_token *tokenizer(t_lexer *lexer);
 t_token *set_token(int  type, char  *content);
 int is_alpha(char   c);
-void    parser(char *str, char  **env);
+t_btree    *parser(char *str, char  **env);
 
 
 # endif
