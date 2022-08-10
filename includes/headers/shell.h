@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 21:39:41 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/07 21:41:17 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/10 23:22:03 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 # define SHELL_H
 
-void    *shell(char *prompt, char   **env);
+void	*shell(char *prompt, char **env);
 
 #endif

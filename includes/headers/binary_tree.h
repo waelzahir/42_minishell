@@ -6,15 +6,14 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/10 22:12:06 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/10 23:14:18 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BINARY_TREE_H
 # define BINARY_TREE_H
 
-#include "minishell.h"
-
+# include "minishell.h"
 
 t_btree	*binary_tree_new(void *root, int type);
 void	binary_tree_clear(t_btree **root);
