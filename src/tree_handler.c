@@ -6,13 +6,13 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:26:06 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/10 15:47:48 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:23:08 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
 
-t_btree	*binary_tree_new(t_stack *root)
+t_btree	*binary_tree_new(void *root, int type)
 {
 	t_btree	*node;
 
@@ -20,12 +20,13 @@ t_btree	*binary_tree_new(t_stack *root)
 	if (!node)
 		return (NULL);
 	node->content = root;
+	node->e_type = type;
 	node->l_child = NULL;
 	node->r_child = NULL;
 	return (node);
 }
 
-int	binary_tree_add_r_child(t_btree **root, t_stack *r_child)
+int	binary_tree_add_r_child(t_btree **root, t_btree *r_child)
 {
 	if (*root)
 	{
@@ -35,7 +36,7 @@ int	binary_tree_add_r_child(t_btree **root, t_stack *r_child)
 	return (1);
 }
 
-int	binary_tree_add_l_child(t_btree **root, t_stack *l_child)
+int	binary_tree_add_l_child(t_btree **root, t_btree *l_child)
 {
 	if (*root)
 	{
@@ -47,25 +48,46 @@ int	binary_tree_add_l_child(t_btree **root, t_stack *l_child)
 
 t_btree	*binary_tree_create(t_stack *simple_cmd, t_stack *op)
 {
-	t_btree	*root;
-	if (!simple_cmd)
+	t_btree	*node;
+
+	if (!simple_cmd->size)
 		return (NULL);
-	if (!op)
-		return (binary_tree_new((t_stack *) pop_stack(simple_cmd)));
-	(*node)->r_child = binary_tree_create(simple_cmd, (t_stack *) pop_stack(op));
-	(*node)->l_child = binary_tree_create((t_stack *) pop_stack(simple_cmd), op);
-	return (root);
+	if (!op->size)
+		return (binary_tree_new(pop_stack(simple_cmd), CMD));
+	node = binary_tree_new( pop_stack(op), OPERATION);
+	if (!node)
+		return (NULL);
+	node->r_child = binary_tree_create(simple_cmd, op);
+	node->l_child = binary_tree_create(simple_cmd, op);
+	return (node);
 }
 
-void	print_tree(t_btree *root)
+void	print_tree(const char *prefix, t_btree *root, int is_left)
 {
-	static int	tab;
+	char *prefex;
+
 	if (!root)
 		return ;
-	while (tab-- > 0)
-		printf("\t");
-	printf("%s\n", root->content->stack[0]);
-	printf("|__ ");
-	print_tree(root->l_child);
-	print_tree(root->r_child);
+	printf("%s", prefix);
+	if (is_left)
+		printf("|--");
+	else
+		printf("|__");
+	if (!root->e_type)
+		printf("[%s]\n", ((t_token*) root->content)->def);
+	else
+	{
+		int i = -1;
+		t_token **token = root->content;
+		printf("[");
+		while (token[++i])
+			printf("%s", token[i]->def);
+		printf("]\n");
+	}
+	if (is_left)
+		prefex = ft_strjoin(prefix, "|    ");
+	else
+		prefex = ft_strjoin(prefix, "     ");
+	print_tree(prefex, root->l_child, 1);
+	print_tree(prefex, root->r_child, 0);
 }
