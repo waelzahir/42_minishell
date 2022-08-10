@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 14:37:32 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/07 21:44:00 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/10 22:23:35 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int main(int    argc, char **argv, char **envp)
 {
     char    *prompt;
     
-    if (!argc    && !argv)
+    if (!argc && !argv)
         return (0);
     prompt = get_prompt();
     if (!prompt)

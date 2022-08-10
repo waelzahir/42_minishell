@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:26:06 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/10 22:11:44 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:24:59 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_btree	*binary_tree_new(void *root, int type)
 {
 	t_btree	*node;
 
-	node = (t_btree*) malloc(sizeof(t_btree));
+	node = (t_btree *) malloc(sizeof(t_btree));
 	if (!node)
 		return (NULL);
 	node->content = root;
@@ -65,7 +65,7 @@ t_btree	*binary_tree_create(t_stack *simple_cmd, t_stack *op)
 		return (NULL);
 	if (!op->size)
 		return (binary_tree_new(pop_stack(simple_cmd), CMD));
-	node = binary_tree_new( pop_stack(op), OPERATION);
+	node = binary_tree_new(pop_stack(op), OPERATION);
 	if (!node)
 		return (NULL);
 	node->r_child = binary_tree_create(simple_cmd, op);
@@ -73,32 +73,32 @@ t_btree	*binary_tree_create(t_stack *simple_cmd, t_stack *op)
 	return (node);
 }
 
-void	print_tree(const char *prefix, t_btree *root, int is_left)
-{
-	char *prefex;
+// void	print_tree(const char *prefix, t_btree *root, int is_left)
+// {
+// 	char *prefex;
 
-	if (!root)
-		return ;
-	printf("%s", prefix);
-	if (is_left)
-		printf("|--");
-	else
-		printf("|__");
-	if (!root->e_type)
-		printf("[%s]\n", ((t_token*) root->content)->def);
-	else
-	{
-		int i = -1;
-		t_token **token = root->content;
-		printf("[");
-		while (token[++i])
-			printf("%s", token[i]->def);
-		printf("]\n");
-	}
-	if (is_left)
-		prefex = ft_strjoin(prefix, "|    ");
-	else
-		prefex = ft_strjoin(prefix, "     ");
-	print_tree(prefex, root->l_child, 1);
-	print_tree(prefex, root->r_child, 0);
-}
+// 	if (!root)
+// 		return ;
+// 	printf("%s", prefix);
+// 	if (is_left)
+// 		printf("|--");
+// 	else
+// 		printf("|__");
+// 	if (!root->e_type)
+// 		printf("[%s]\n", ((t_token*) root->content)->def);
+// 	else
+// 	{
+// 		int i = -1;
+// 		t_token **token = root->content;
+// 		printf("[");
+// 		while (token[++i])
+// 			printf("%s", token[i]->def);
+// 		printf("]\n");
+// 	}
+// 	if (is_left)
+// 		prefex = ft_strjoin(prefix, "|    ");
+// 	else
+// 		prefex = ft_strjoin(prefix, "     ");
+// 	print_tree(prefex, root->l_child, 1);
+// 	print_tree(prefex, root->r_child, 0);
+// }
