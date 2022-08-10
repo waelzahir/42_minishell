@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   datatypes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:20:58 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/08 17:06:01 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/10 19:20:29 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,16 @@ typedef enum s_atype
 }   t_atype;
 
 
-typedef struct  s_ast
+typedef struct  s_binary_tree
 {
-    t_atype type;
-    void    *right;
-    void    *left;
-} t_ast;
+	void					*content;
+    enum
+    {
+        OPERATION,
+        CMD
+    }   e_type;
+	struct  s_binary_tree	*l_child;
+	struct  s_binary_tree	*r_child;
+}	t_btree;
 
 #endif
