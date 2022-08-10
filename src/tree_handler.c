@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:26:06 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/10 22:24:59 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:43:27 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	binary_tree_free(t_btree **root)
 		return ;
 	if (!*root)
 		return ;
-	binary_tree_free((*root)->l_child);
-	binary_tree_free((*root)->r_child);
+	binary_tree_free(&((*root)->l_child));
+	binary_tree_free(&((*root)->r_child));
 	free(*root);
 }
 
