@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:15:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2021/11/12 01:59:34 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:41:45 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
+
+#include "libft.h"
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*result;
 	size_t	s1_len;
 	size_t	s2_len;
 	size_t	i;
-
+	
+	if (!s1 && s2)
+		return (ft_strdup(s2));
 	if (!s1 || !s2)
 		return (NULL);
 	s1_len = ft_strlen(s1);

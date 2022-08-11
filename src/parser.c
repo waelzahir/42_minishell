@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:30:28 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/10 22:41:56 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:51:38 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_token	*tokenizer(t_lexer *lexer)
 	if (lexer->c == '|')
 		return (set_token(pip, get_pipe(lexer)));
 	if (lexer->c == '<')
-		return (set_token(input, get_red(lexer, '<')));
+		return (set_token(redirec, get_red(lexer, '<')));
 	if (lexer->c == '>')
-		return (set_token(output, get_red(lexer, '>')));
+		return (set_token(redirec, get_red(lexer, '>')));
 	return (set_token(arg, get_argn(lexer)));
 }
 

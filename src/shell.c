@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 21:39:44 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/11 15:50:26 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/11 19:48:47 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	*shell(char *prompt, char **env)
 		{
 			add_history(line);
 			root = parser(line, env);
-			print_tree("", root, 0);
-
+			visitor(root, env);
             binary_tree_free(&root);
 		}
 		

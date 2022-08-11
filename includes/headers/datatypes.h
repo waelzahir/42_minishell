@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   datatypes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:20:58 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/10 23:19:02 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:51:10 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ typedef enum s_num
 	arg,
 	qarg,
 	darg,
-	input,
+	redirec,
 	lparent,
 	rparent,
 	andor,
-	output,
 	pip,
 	space,
 	var,
