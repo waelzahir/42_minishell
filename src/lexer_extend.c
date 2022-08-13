@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:08:03 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/13 17:04:27 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/13 19:10:06 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	*get_red(t_lexer *lexer, char type)
 {
 	char	*str_to;
 	char	*str_f;
+	char	*red;
 
 	str_f  = NULL;
 	str_to = NULL;
@@ -137,6 +138,7 @@ char	*get_red(t_lexer *lexer, char type)
 	skip_ws(lexer);
 	str_f = get_filename(lexer);
 	if (!str_f)
-		return (ft_putstr_fd("parse error near: ", 1), write(1,&lexer->c,1), NULL)	;
-	return str_to;
+		return (ft_putstr_fd("parse error near: ", 1), write(1,&lexer->c,1), NULL);
+	red = ft_strjoin(str_to, str_f);
+	return red;
 }

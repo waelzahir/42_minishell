@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 23:26:06 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/11 15:55:02 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/13 18:35:54 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_btree	*binary_tree_new(void *root, int type)
 	if (!node)
 		return (NULL);
 	node->content = root;
-	node->e_type = type;
+	node->num = type;
 	node->l_child = NULL;
 	node->r_child = NULL;
 	return (node);
@@ -84,7 +84,7 @@ void	print_tree(const char *prefix, t_btree *root, int is_left)
 		printf("|--<");
 	else
 		printf("|__");
-	if (!root->e_type)
+	if (!root->num)
 		printf("[%s]\n", ((t_token*) root->content)->def);
 	else
 	{

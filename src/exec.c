@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:48 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/12 22:12:46 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/13 18:38:38 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    visitor(t_btree *root, char **env)
     return ;
     visitor(root->l_child, env);
     visitor(root->r_child, env);
-    if (root->e_type == CMD)
+    if (root->num == CMD)
     {
         exec_fu(root->content, env);
     }
@@ -68,9 +68,16 @@ char    **get_redirection(t_token    **token)
     rdrec = (char   **)red->stack;
     return (rdrec);
 }
-void    apply_redir()
+void    apply_redir(char    **redir)
 {
-printf("hi\n");
+    int i = 0;
+    if (!redir)
+        return ;
+    while (redir[i])
+    {
+        printf("%s\n", redir[i]);
+        i++;
+    }
 }
 char    *collector(char *s1, char   *s2)
 {
@@ -150,7 +157,7 @@ char   **joining(t_token  **token)
     i = 0;
     while (val[i])
         {
-            printf("%s\n", val[i]);
+            ft_putendl_fd(val[i], 1);
             i++;
         }
     free(clean);
@@ -165,7 +172,7 @@ void    exec_fu(t_token **token, char **env)
     expan_iter(token, env);
     redir = get_redirection(token);
     if (redir)
-        apply_redir();
+        apply_redir(redir);
     cmd = joining(token);
     int i;
     i = 0;
