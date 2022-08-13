@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:20:58 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/11 17:51:10 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/13 14:54:08 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,16 @@ typedef struct s_stack
 	void	**stack;
 }	t_stack;
 
-typedef enum s_atype
+typedef	enum s_type
 {
-	pipeline,
-	and_op,
-	or_op,
-	simple_comand,
-}	t_atype;
+	OPERATION,
+	CMD,
+}	t_type;
 
 typedef struct s_binary_tree
 {
 	void					*content;
-	enum
-	{
-		OPERATION,
-		CMD
-	}	e_type;
+ 	t_type			num;
 	struct s_binary_tree	*l_child;
 	struct s_binary_tree	*r_child;
 }	t_btree;

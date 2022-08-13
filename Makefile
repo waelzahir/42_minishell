@@ -13,9 +13,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 ## Sub-directories
 HEADERS_DIR = $(INCLUDES_DIR)/headers
 LIBFT_DIR = $(INCLUDES_DIR)/libft
-READ=  -L /goinfre/$(USER)/homebrew/opt/readline/lib -lreadline \
-	-L /goinfre/$(USER)/homebrew/opt/readline/lib -lhistory \
-	-I /goinfre/$(USER)/homebrew/opt/readline/include
+READ=  -lreadline
 src= lexer.c lexer_extend.c lexer_utils.c parser.c parser_utils.c shell.c t_stack.c tree_handler.c exec.c ex_lexer.c
 SRC= $(addprefix $(SRC_DIR)/,$(src))
 OBJ := $(SRC:.c=.o)

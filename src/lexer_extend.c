@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_extend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:08:03 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/10 23:05:49 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:04:27 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,55 @@ char	*get_var_extend(t_lexer	*lexer)
 	str = extend_var(str, lexer->env);
 	return (str);
 }
+int filerules(char	c)
+{
+	if (c == '<' || c == '>' || c == '\0' || c == '|' || c == ' ')
+		return (1);
+	return (0); 
+}
+char	*get_filename(t_lexer *lexer)
+{
+	char	*file;
 
+	file = NULL;
+	if(lexer->c == 39)
+		return (get_argq(lexer));
+	else if (lexer->c == 34)
+		return (get_argd(lexer));
+	if (filerules(lexer->c) == 1)
+		return (NULL);
+	file = char_to_str(lexer->c);
+	advance(lexer);
+	while (!filerules(lexer->c))
+	{
+		file = char_append(file, lexer->c);
+		if (!file)
+				return (NULL);
+		advance(lexer);
+	}
+	return (file);
+}
 char	*get_red(t_lexer *lexer, char type)
 {
-	char	*str;
+	char	*str_to;
+	char	*str_f;
 
-	str = char_to_str(type);
-	if (!str)
-		return (NULL);
+	str_f  = NULL;
+	str_to = NULL;
+	str_to = char_to_str(lexer->c);
 	advance(lexer);
 	while (lexer->c == type)
 	{
-		str = char_append(str, type);
-		if (!str)
+		str_to = char_append(str_to, type);
+		if (!str_to)
 			return (NULL);
 		advance(lexer);
 	}
+	if (ft_strlen(str_to) > 2)
+		return (ft_putstr_fd("parse error near: ", 1), write(1,&str_to[2],1), NULL);
 	skip_ws(lexer);
-	if (lexer->c == 34)
-		return (ft_strjoin(str, get_argd(lexer)));
-	else if (lexer->c == 39)
-		return (ft_strjoin(str, get_argq(lexer)));
-	return (ft_strjoin(str, get_argn(lexer)));
+	str_f = get_filename(lexer);
+	if (!str_f)
+		return (ft_putstr_fd("parse error near: ", 1), write(1,&lexer->c,1), NULL)	;
+	return str_to;
 }

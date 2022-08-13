@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_stack.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 20:12:37 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/10 22:34:08 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/13 16:38:13 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,22 @@ void	**fill_stacks(t_stack *op, t_lexer *lexer)
 	if (!simple_cmd)
 		return (NULL);
 	token = tokenizer(lexer);
+	if (token->type == pip)
+		return (printf("pipe error\n"), NULL);
 	while (token && token->type != end && token->type != pip)
 	{
 		push_stack(simple_cmd, token);
 		token = tokenizer(lexer);
+		if (token && token->def == NULL)
+			return (NULL);
 		if (token->type == pip)
 			break ;
 	}
-	if (token->type == pip)
+	if (token->type == pip && lexer->c == '\0')
+		return (printf("pipe error\n"), NULL);
+	else if	(token->type == pip)
 		push_stack(op, token);
+		
 	s_stack = simple_cmd->stack;
 	free(simple_cmd);
 	return (s_stack);

@@ -1,0 +1,10 @@
+Makefile
+dsa
+includes
+main.c
+minishell
+minishell.dSYM
+obj
+red.sh
+src
+testcases.txt

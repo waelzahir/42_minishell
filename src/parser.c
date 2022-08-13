@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:30:28 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/11 17:51:38 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/13 14:59:41 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_btree	*parser(char *str, char **env)
 	t_stack	*op_stack;
 	t_lexer	*lexer;
 	t_btree	*root;
+	void	**psh;
 
 	lexer = lexer_init(str, env);
 	if (!lexer)
@@ -69,7 +70,12 @@ t_btree	*parser(char *str, char **env)
 		return (NULL);
 	}
 	while (lexer->c != '\0')
-		push_stack(cmd_stack, fill_stacks(op_stack, lexer));
+		{
+			psh = fill_stacks(op_stack, lexer);
+			if (!psh)
+				return (NULL);
+			push_stack(cmd_stack, psh);
+		}
 	root = binary_tree_create(cmd_stack, op_stack);
 	return (root);
 }

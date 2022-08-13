@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:48 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/11 23:13:52 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/12 22:12:46 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char    *collector(char *s1, char   *s2)
     {
         ret = ft_strdup(s2);
         free(s2);
-        return (s2);
+        return (ret);
     }
     if (s1 && !s2)
         {
@@ -99,12 +99,37 @@ char    *collector(char *s1, char   *s2)
 }
 char    **join_cmd(t_token  **tokens)
 {
-   
+    char    *join;
+    t_stack *stack;
+    int i;
+
+    i = 0;
+    stack = init_stack();
+    join  = NULL;
+    while (tokens[i])
+    {
+        if (tokens[i]->type == space && join)
+        {
+            push_stack(stack, join);
+            join = NULL;
+        }
+        else if (tokens[i]->type == space && join != NULL)
+        {
+            free(tokens[i]->def);
+            free(tokens[i]);
+        }
+        else
+            join = collector(join, tokens[i]->def);
+        i++;
+    }
+    if (join)
+    push_stack(stack, join);
+
+    return ((char   **)stack->stack);
 }
-t_token    **joining(t_token  **token)
+char   **joining(t_token  **token)
 {
     t_stack *clean;
-     t_token   **ret;
      char   **val;
     int i;
 
@@ -121,14 +146,20 @@ t_token    **joining(t_token  **token)
                 push_stack(clean, token[i]);
         i++;
     }
-    val =   join_cmd(clean->stack);
+    val =  join_cmd((t_token **)clean->stack);
+    i = 0;
+    while (val[i])
+        {
+            printf("%s\n", val[i]);
+            i++;
+        }
     free(clean);
-    return (ret);
+    return (val);
 }
 void    exec_fu(t_token **token, char **env)
 {
     char **redir;
-    t_token    **cmd;
+    char    **cmd;
     //char    *path;
 
     expan_iter(token, env);
