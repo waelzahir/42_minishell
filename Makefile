@@ -8,7 +8,7 @@ BLUE := \033[0;34m
 INCLUDES_DIR := includes
 SRC_DIR = src
 OBJ_DIR = obj
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror -g
 
 ## Sub-directories
 HEADERS_DIR = $(INCLUDES_DIR)/headers
@@ -34,7 +34,7 @@ all: $(NAME)
 	@echo "$(BLUE)\n        :::   :::   ::::::::::: ::::    ::: ::::::::::: ::::::::  :::    ::: :::::::::: :::        :::  \n      :+:+: :+:+:      :+:     :+:+:   :+:     :+:    :+:    :+: :+:    :+: :+:        :+:        :+:   \n    +:+ +:+:+ +:+     +:+     :+:+:+  +:+     +:+    +:+        +:+    +:+ +:+        +:+        +:+    \n   +#+  +:+  +#+     +#+     +#+ +:+ +#+     +#+    +#++:++#++ +#++:++#++ +#++:++#   +#+        +#+     \n  +#+       +#+     +#+     +#+  +#+#+#     +#+           +#+ +#+    +#+ +#+        +#+        +#+      \n #+#       #+#     #+#     #+#   #+#+#     #+#    #+#    #+# #+#    #+# #+#        #+#        #+#       \n###       ### ########### ###    #### ########### ########  ###    ### ########## ########## ##########$(WHITE)\n\n\t\t$(RED)By$(WHITE):\n\t\t\t$(GREEN)Soufiane El-khamlich $(WHITE)($(RED)MGS$(WHITE)) : $(BLUE)https://github.com/MGS15$(WHITE)\n\t\t\t$(GREEN)Ouail Zahir\t\t   $(WHITE): $(BLUE)https://github.com/weazah$(WHITE)\n"
 
 $(NAME): $(LIBFT) $(OBJ) $(MAIN)
-	$(CC) $(CFLAGS) $(READ) $(MAIN) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS)  -lreadline $(MAIN) $(OBJ) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
