@@ -56,5 +56,6 @@ clean:
 
 fclean: clean 
 	rm -rf $(NAME)
+	rm rf $(BUILTINS)
 	make fclean -C $(LIBFT_DIR)
 re: fclean all
