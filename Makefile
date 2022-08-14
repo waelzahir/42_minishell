@@ -8,6 +8,14 @@ BLUE := \033[0;34m
 INCLUDES_DIR := includes
 SRC_DIR = src
 OBJ_DIR = obj
+BUILTINS_DIR := builtins
+
+## BUILTINS SRC
+PWD := $(addprefix $(BUILTINS_DIR)/, pwd)
+PWD_SRC := $(addprefix $(PWD), .c)
+
+BUILTINS := $(PWD)
+
 CFLAGS = -Wall -Wextra -Werror -g
 
 ## Sub-directories
@@ -33,8 +41,11 @@ LIBFT := $(LIBFT_DIR)/libft.a
 all: $(NAME) 
 	@echo "$(BLUE)\n        :::   :::   ::::::::::: ::::    ::: ::::::::::: ::::::::  :::    ::: :::::::::: :::        :::  \n      :+:+: :+:+:      :+:     :+:+:   :+:     :+:    :+:    :+: :+:    :+: :+:        :+:        :+:   \n    +:+ +:+:+ +:+     +:+     :+:+:+  +:+     +:+    +:+        +:+    +:+ +:+        +:+        +:+    \n   +#+  +:+  +#+     +#+     +#+ +:+ +#+     +#+    +#++:++#++ +#++:++#++ +#++:++#   +#+        +#+     \n  +#+       +#+     +#+     +#+  +#+#+#     +#+           +#+ +#+    +#+ +#+        +#+        +#+      \n #+#       #+#     #+#     #+#   #+#+#     #+#    #+#    #+# #+#    #+# #+#        #+#        #+#       \n###       ### ########### ###    #### ########### ########  ###    ### ########## ########## ##########$(WHITE)\n\n\t\t$(RED)By$(WHITE):\n\t\t\t$(GREEN)Soufiane El-khamlich $(WHITE)($(RED)MGS$(WHITE)) : $(BLUE)https://github.com/MGS15$(WHITE)\n\t\t\t$(GREEN)Ouail Zahir\t\t   $(WHITE): $(BLUE)https://github.com/weazah$(WHITE)\n"
 
-$(NAME): $(LIBFT) $(OBJ) $(MAIN)
+$(NAME): $(LIBFT) $(OBJ) $(MAIN) $(BUILTINS)
 	$(CC) $(CFLAGS)  -lreadline $(MAIN) $(OBJ) $(LIBFT) -o $(NAME)
+
+$(PWD): $(LIBFT) $(PWD_SRC)
+	$(CC) $(CFLAGS) $(PWD_SRC) $(LIBFT) -o $(PWD)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
