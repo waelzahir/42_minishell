@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 15:49:25 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/14 21:04:18 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:45:29 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int	main(int argc, char **argv)
 {
 	if (!argc || !argv)
 		return (1);
-	ft_pwd(1024);
+	data.exit_status = ft_pwd(1024);
 	return (0);
 }
