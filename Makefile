@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 01:06:37 by sel-kham          #+#    #+#              #
-#    Updated: 2022/08/16 01:06:38 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/08/16 01:11:51 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ BUILTINS_DIR := builtins
 ## BUILTINS SRC
 PWD := $(addprefix $(BUILTINS_DIR)/, pwd)
 PWD_SRC := $(addprefix $(PWD), .c)
-CD := $(addprefix $(BUILTINS_DIR), cd)
+CD := $(addprefix $(BUILTINS_DIR)/, cd)
 CD_SRC := $(addprefix $(CD), .c)
 
 BUILTINS := $(PWD) $(CD)
@@ -62,7 +62,7 @@ $(PWD): $(LIBFT) $(PWD_SRC)
 	$(CC) $(CFLAGS) $(PWD_SRC) $(LIBFT) -o $(PWD)
 
 $(CD): $(LIBFT) $(CD_SRC)
-	$(CC) $(CFLAGS) $(PWD_SRC) $(LIBFT) -o $(CD)
+	$(CC) $(CFLAGS) $(CD_SRC) $(LIBFT) -o $(CD)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
