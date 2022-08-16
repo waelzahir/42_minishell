@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/08/16 01:06:37 by sel-kham          #+#    #+#              #
+#    Updated: 2022/08/16 01:06:38 by sel-kham         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 RED := \033[0;31m
 WHITE := \033[0;37m
 GREEN := \033[0;32m
@@ -13,8 +25,10 @@ BUILTINS_DIR := builtins
 ## BUILTINS SRC
 PWD := $(addprefix $(BUILTINS_DIR)/, pwd)
 PWD_SRC := $(addprefix $(PWD), .c)
+CD := $(addprefix $(BUILTINS_DIR), cd)
+CD_SRC := $(addprefix $(CD), .c)
 
-BUILTINS := $(PWD)
+BUILTINS := $(PWD) $(CD)
 
 CFLAGS = -Wall -Wextra -Werror -g
 
@@ -46,6 +60,9 @@ $(NAME): $(LIBFT) $(OBJ) $(MAIN) $(BUILTINS)
 
 $(PWD): $(LIBFT) $(PWD_SRC)
 	$(CC) $(CFLAGS) $(PWD_SRC) $(LIBFT) -o $(PWD)
+
+$(CD): $(LIBFT) $(CD_SRC)
+	$(CC) $(CFLAGS) $(PWD_SRC) $(LIBFT) -o $(CD)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
