@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:40 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/16 17:25:22 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:50:53 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_export(char **args, char **env)
 {
 	if (!args[1])
-		ft_print_sorted_args(args);
+		print_sorted_array(args);
 }
 
 int	main(int argc, char **argv, char **env)
