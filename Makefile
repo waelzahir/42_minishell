@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 01:06:37 by sel-kham          #+#    #+#              #
-#    Updated: 2022/08/16 01:11:51 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/08/16 16:02:19 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,10 @@ PWD := $(addprefix $(BUILTINS_DIR)/, pwd)
 PWD_SRC := $(addprefix $(PWD), .c)
 CD := $(addprefix $(BUILTINS_DIR)/, cd)
 CD_SRC := $(addprefix $(CD), .c)
+ENV := $(addprefix $(BUILTINS_DIR)/, env)
+ENV_SRC := $(addprefix $(ENV), .c)
 
-BUILTINS := $(PWD) $(CD)
+BUILTINS := $(PWD) $(CD) $(ENV)
 
 CFLAGS = -Wall -Wextra -Werror -g
 
@@ -63,6 +65,9 @@ $(PWD): $(LIBFT) $(PWD_SRC)
 
 $(CD): $(LIBFT) $(CD_SRC)
 	$(CC) $(CFLAGS) $(CD_SRC) $(LIBFT) -o $(CD)
+
+$(ENV): $(LIBFT) $(ENV_SRC)
+	$(CC) $(CFLAGS) $(ENV_SRC) $(LIBFT) -o $(ENV)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
