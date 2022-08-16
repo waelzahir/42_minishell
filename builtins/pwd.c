@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 15:49:25 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/16 01:09:40 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:52:36 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ int	ft_pwd(int size)
 
 int	main(int argc, char **argv)
 {
-	t_sdata	data;
-
 	if (!argc || !argv)
 		return (1);
-	data.exit_status = ft_pwd(1024);
 	return (0);
 }
