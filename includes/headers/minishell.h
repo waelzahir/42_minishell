@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:20:02 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/17 16:40:02 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/19 15:58:56 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@
 # include "parser.h"
 # include "t_stack.h"
 # include "shell.h"
+# include "builtins.h"
 # include "binary_tree.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 
+
+t_gdata	data;
 void	print_sorted_array(char **argv);
 
 #endif

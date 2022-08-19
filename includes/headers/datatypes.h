@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:20:58 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/10 23:19:02 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/19 15:58:03 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,11 @@ typedef struct s_binary_tree
 	struct s_binary_tree	*l_child;
 	struct s_binary_tree	*r_child;
 }	t_btree;
+
+typedef struct s_global_data
+{
+	char	**env;
+	int		exit_status;
+}	t_gdata;
 
 #endif

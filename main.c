@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 14:37:32 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/10 23:13:01 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/19 16:01:01 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ int	main(int argc, char **argv, char **envp)
 	prompt = get_prompt();
 	if (!prompt)
 		return (0);
+	data.env = envp;
 	shell(prompt, envp);
 }
