@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:57:44 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/19 13:59:26 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/21 03:59:26 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,8 @@
 
 # define EXP_APPEND_MODE 0
 # define EXP_ASSIGN_MODE 1
+
+char	**var_to_hash(char *arg);
+int		check_identefier(char *id);
 
 #endif
