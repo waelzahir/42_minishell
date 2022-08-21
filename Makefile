@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 01:06:37 by sel-kham          #+#    #+#              #
-#    Updated: 2022/08/16 16:02:19 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/08/21 18:13:42 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LIBFT_DIR = $(INCLUDES_DIR)/libft
 READ=  -L /goinfre/$(USER)/homebrew/opt/readline/lib -lreadline \
 	-L /goinfre/$(USER)/homebrew/opt/readline/lib -lhistory \
 	-I /goinfre/$(USER)/homebrew/opt/readline/include
-src= lexer.c lexer_extend.c lexer_utils.c parser.c parser_utils.c shell.c t_stack.c tree_handler.c
+src= lexer.c lexer_extend.c lexer_utils.c parser.c parser_utils.c shell.c t_stack.c tree_handler.c env_handler.c str_handler.c
 SRC= $(addprefix $(SRC_DIR)/,$(src))
 OBJ := $(SRC:.c=.o)
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADERS)

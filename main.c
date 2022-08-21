@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 14:37:32 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/19 16:01:01 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:36:49 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,13 @@ char	*get_prompt(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*prompt;
+	char		*prompt;
+	extern char	**environ;
 
 	if (!argc && !argv)
 		return (0);
 	prompt = get_prompt();
+	environ = init_env();
 	if (!prompt)
 		return (0);
 	data.env = envp;
