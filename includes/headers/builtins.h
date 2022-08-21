@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:57:44 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/21 21:19:09 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/21 23:14:27 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int		ft_cd(char **args);
 // Helpers functions for builtins
 char	**var_to_hash(char *arg);
 int		check_identefier(char *id);
+char	**remove_pointer(char *arg, char **pointer);
+int		size_counter(char **pointer);
 
 #endif

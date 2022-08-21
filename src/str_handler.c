@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:49:46 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/20 19:52:33 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/21 23:24:50 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ static void    print(char *g[], int a)
 		ft_putstr_fd(g[i], 1);
 		write(1, "\n", 1);
 	}
-}
-
-static int	size_counter(char **args)
-{
-	int	i;
-
-	i = -1;
-	if (!args)
-		return (-1);
-	while (args[++i])
-		;
-	return (i);
 }
 
 int	ft_strcmp(char *s1, char *s2)

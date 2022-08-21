@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:40 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/21 21:20:06 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/21 23:25:38 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,44 +51,54 @@ int	check_identefier(char *id)
 	return (0);
 }
 
-char	**dup_env(char *var, char *val)
-{
-	extern char	**environ;
-	char	**env;
-	int	i;
-	
-	i = -1;
-	while (environ[++i])
-		;
-	env = malloc(sizeof(char *) * i + 1);
-	if (!env)
-		exit(EXIT_FAILURE);
-	i = -1;
-	while (environ[++i])
-		env[i] = ft_strdup(environ[i]);
-	env[i] = ft_strjoin(ft_strjoin(var, "="), val);
-	if (!env[i])
-		exit(EXIT_FAILURE);
-	env[i + 1] = NULL;
-	printf("test\n");
-	return (env);
-}
-
 void	exec_export(char **hash, int mode)
 {
 	extern char	**environ;
 
+	if (hash)
+		printf("") ;
 	if (mode == EXP_APPEND_MODE)
 		ft_putstr_fd("Append mode\n", 1);
 	if (mode == EXP_ASSIGN_MODE)
-		environ = dup_env(hash[0], hash[1]);
+		ft_putstr_fd("ASSIGN mode\n", 1);
+}
+
+int	export(char *arg)
+{
+	char	**hash;
+	int		ret;
+
+	hash = NULL;
+	ret = 0;
+	hash = var_to_hash(arg);
+	if (!check_identefier(hash[0]))
+	{
+		ft_putstr_fd("export: Invalid identifier.\n", 2);
+		ret = 1;
+	}
+	else
+	{
+		if (hash[0][ft_strlen(hash[0]) - 1] == '+')
+		{
+			hash[0][ft_strlen(hash[0]) - 1] = 0;
+			exec_export(hash, EXP_APPEND_MODE);
+		}
+		else
+			exec_export(hash, EXP_ASSIGN_MODE);
+	}
+	free(hash[1]);
+	free(hash[2]);
+	free(hash);
+	return (ret);
 }
 
 int	ft_export(char **args)
 {
 	extern char	**environ;
-	char	**hash;
+	int			i;
+	int			ret;
 
+	ret = 0;
 	if (!environ[0])
 	{
 		ft_putstr_fd("export: No such file or directory\n", 2);
@@ -97,20 +107,10 @@ int	ft_export(char **args)
 	if (!args[1])
 	{
 		print_sorted_array(environ);
-		return (0);
+		return (ret);
 	}
-	hash = var_to_hash(args[1]);
-	if (!check_identefier(hash[0]))
-	{
-		ft_putstr_fd("export: Invalid identifier.\n", 2);
-		return (1);
-	}
-	if (hash[0][ft_strlen(hash[0]) - 1] == '+')
-	{
-		hash[0][ft_strlen(hash[0]) - 1] = 0;
-		exec_export(hash, EXP_APPEND_MODE);
-	}
-	else
-		exec_export(hash, EXP_ASSIGN_MODE);
-	return (0);
+	i = 0;
+	while (args[++i])
+		ret = export(args[i]);
+	return (ret);
 }

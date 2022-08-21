@@ -6,13 +6,13 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:56:27 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/21 19:44:50 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/21 23:25:50 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
 
-int	double_size(char **pointer)
+int	size_counter(char **pointer)
 {
 	int	i;
 
@@ -31,7 +31,7 @@ char	**remove_pointer(char *arg, char **pointer)
 	stack = ft_calloc(1, sizeof(t_stack));
 	temp = ft_calloc(1, sizeof(t_stack));
 	stack->stack = (void **) pointer;
-	stack->size = double_size(pointer);
+	stack->size = size_counter(pointer);
 	while (1)
 	{
 		poin = pop_stack(stack);
@@ -76,7 +76,7 @@ int	ft_unset(char **args)
 			unset(args[i]);
 		else
 		{
-			ft_putstr_fd("export: Invalid identifier.\n", 2);
+			ft_putstr_fd("Unset: Invalid identifier.\n", 2);
 			ret = 1;
 		}
 	}
