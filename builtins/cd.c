@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 01:16:48 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/16 15:53:25 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/21 21:09:23 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,4 @@ int	ft_cd(char **args)
 		return (0);
 	perror("Directory: ");
 	return (1);
-}
-
-int	main(int argc, char **argv)
-{
-	if (!argc || !argv)
-		return (1);
-	return (ft_cd(argv));
 }

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:40 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/20 23:20:05 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/21 21:10:27 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,4 @@ int	ft_export(char **args)
 	else
 		exec_export(hash, EXP_ASSIGN_MODE);
 	return (0);
-}
-
-int main(int argc, char **argv)
-{
-	int i;
-
-	i = -1;
-	if (!argc)
-		return 1;
-	ft_export(argv);
-	return 0;
 }
