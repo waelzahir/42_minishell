@@ -6,13 +6,13 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:49:46 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/18 16:29:56 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/20 19:52:33 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
 
-static void    print(char g[], int a)
+static void    print(char *g[], int a)
 {
 	int    i;
 
@@ -20,7 +20,7 @@ static void    print(char g[], int a)
 	while (++i < a)
 	{
 		ft_putstr_fd("declare -x ", 1);
-		ft_putstr(g[i]);
+		ft_putstr_fd(g[i], 1);
 		write(1, "\n", 1);
 	}
 }
@@ -37,6 +37,16 @@ static int	size_counter(char **args)
 	return (i);
 }
 
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
 void	print_sorted_array(char **argv)
 {
 	char	*p;
@@ -49,10 +59,10 @@ void	print_sorted_array(char **argv)
 		return ;
 	i = -1;
 	k = 0;
-	while (++i <= size - 1)
+	while (++i < size - 1)
 	{
 		k = i;
-		while (++k <= size)
+		while (++k < size)
 		{
 			if (ft_strcmp(argv[i], argv[k]) > 0)
 			{
