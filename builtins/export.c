@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:40 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/21 21:10:27 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/21 21:20:06 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ char	**dup_env(char *var, char *val)
 	return (env);
 }
 
-int	ft_export(char **args);
 void	exec_export(char **hash, int mode)
 {
 	extern char	**environ;
@@ -83,7 +82,6 @@ void	exec_export(char **hash, int mode)
 		ft_putstr_fd("Append mode\n", 1);
 	if (mode == EXP_ASSIGN_MODE)
 		environ = dup_env(hash[0], hash[1]);
-	print_sorted_array(environ);
 }
 
 int	ft_export(char **args)

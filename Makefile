@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 01:06:37 by sel-kham          #+#    #+#              #
-#    Updated: 2022/08/21 21:08:38 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/08/21 21:14:44 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ src = lexer.c lexer_extend.c lexer_utils.c parser.c parser_utils.c shell.c t_sta
 BUILTINS := pwd.c cd.c env.c export.c unset.c
 BUILTINS := $(addprefix $(BUILTINS_DIR)/,$(BUILTINS))
 SRC= $(addprefix $(SRC_DIR)/,$(src))
-OBJ := $(SRC:.c=.o) $(BUILTINS:.c=.o)
+OBJ := $(SRC:.c=.o)
 B_OBJ := $(BUILTINS:.c=.o)
 
 
