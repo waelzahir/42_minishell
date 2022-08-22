@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:57:44 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/22 04:00:45 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/22 23:23:00 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define EXP_APPEND_MODE 0
 # define EXP_ASSIGN_MODE 1
+# define FREE 1
+# define ALLOCATE 2
 
 int		ft_unset(char **args);
 void	unset(char *arg);

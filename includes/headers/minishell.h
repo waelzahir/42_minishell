@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:20:02 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/21 17:35:35 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/22 23:54:57 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@
 t_gdata	data;
 void	print_sorted_array(char **argv);
 char	**init_env();
+void	*garbage_collector(int size, int choice);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 14:37:32 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/21 17:36:49 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/22 23:23:13 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,5 @@ int	main(int argc, char **argv, char **envp)
 	environ = init_env();
 	if (!prompt)
 		return (0);
-	data.env = envp;
 	shell(prompt, envp);
 }
