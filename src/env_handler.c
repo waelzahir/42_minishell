@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/22 04:00:22 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:25:59 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ char	**is_env_var(char *arg)
 	{
 		if (!ft_strncmp(arg, environ[i], ft_strlen(arg))
 			&& environ[i][ft_strlen(arg)] == '=')
+			{
 				hash = arg_to_hash(environ[i]);
+				break ;
+			}
 	}
 	return (hash);
 }
@@ -74,17 +77,14 @@ char	**new_env_var(char **var)
 	char		**new_env;
 	int			i;
 
-	i = -1;
-	while (environ[++i])
-		;
+	i = size_counter(environ);
 	new_env = malloc(sizeof(char *) * (i + 1));
 	if (!new_env)
 		exit(EXIT_FAILURE);
 	i = -1;
 	while (environ[++i])
 		new_env[i] = environ[i];
-	new_env[i] = ft_strjoin(ft_strjoin(var[0], "=\""), \
-					ft_strjoin(var[1], "\""));
+	new_env[i] = ft_strjoin(ft_strjoin(var[0], "="), var[1]);
 	if (!new_env[i])
 		exit(EXIT_FAILURE);
 	new_env[i + 1] = NULL;
@@ -105,11 +105,16 @@ char	**edit_env_var(char **var)
 	if (!new_env)
 		exit(EXIT_FAILURE);
 	env_var = is_env_var(var[0]);
-	unset(env_var[0]);
+	if (env_var)
+		unset(env_var[0]);
 	i = -1;
 	while (environ[++i])
 		new_env[i] = environ[i];
-	new_env[i] = ft_strjoin(ft_strjoin(ft_strjoin(env_var[i], "=\""), ft_strjoin(env_var[2], var[2])), "\"");
+	printf("test : %s\n", var[0]);
+	if (env_var)
+		new_env[i] = ft_strjoin(ft_strjoin(env_var[0], "="), ft_strjoin(env_var[1], var[1]));
+	else
+		new_env[i] = ft_strjoin(ft_strjoin(var[0], "="), var[1]);
 	if (!new_env[i])
 		exit(EXIT_FAILURE);
 	new_env[i + 1] = NULL;

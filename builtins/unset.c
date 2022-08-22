@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:56:27 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/21 23:25:50 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:10:58 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	unset(char *arg)
 	int			i;
 	extern char	**environ;
 
-	if (!environ[0])
-		return ;
 	i = -1;
 	while (environ[++i])
 		if (!ft_strncmp(arg, environ[i], ft_strlen(arg)) \
@@ -65,11 +63,17 @@ void	unset(char *arg)
 
 int	ft_unset(char **args)
 {
-	int	i;
-	int	ret;
+	int			i;
+	int			ret;
+	extern char	**environ;
 
 	i = 0;
 	ret = 0;
+	if (!environ[0])
+	{
+		ft_putstr_fd("Unset: Invalid file.\n", 2);
+		return (1);
+	}
 	while (args[++i])
 	{
 		if (check_identefier(args[i]))
@@ -82,3 +86,12 @@ int	ft_unset(char **args)
 	}
 	return (ret);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	if (!argc || !argv[0])
+// 		return (1);
+// 	ft_unset(argv);
+// 	system("export");
+// 	return (0);
+// }
