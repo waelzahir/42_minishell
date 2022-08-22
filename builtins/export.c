@@ -6,31 +6,11 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:40 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/21 23:25:38 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/22 03:59:30 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
-
-char	**var_to_hash(char *arg)
-{
-	int		i;
-	char	**hash;
-	
-	i = -1;
-	hash = (char **) malloc(sizeof(char *) * 3);
-	if (!hash)
-		exit (EXIT_FAILURE);
-	while (arg[++i])
-		if (arg[i] == '=')
-			break ;
-	hash[0] = ft_substr(arg, 0, i);
-	hash[1] = ft_substr(arg, i + 1, ft_strlen(arg));
-	hash[2] = NULL;
-	if (!hash[0] || !hash[1])
-		exit(EXIT_FAILURE);
-	return (hash);
-}
 
 int	check_identefier(char *id)
 {
@@ -65,31 +45,37 @@ void	exec_export(char **hash, int mode)
 
 int	export(char *arg)
 {
-	char	**hash;
-	int		ret;
+	char		**hash;
+	char		**env_hash;
+	extern char	**environ;
 
-	hash = NULL;
-	ret = 0;
-	hash = var_to_hash(arg);
+	hash = arg_to_hash(arg);
 	if (!check_identefier(hash[0]))
 	{
-		ft_putstr_fd("export: Invalid identifier.\n", 2);
-		ret = 1;
+		ft_putstr_fd("export: invalid identifer\n", 2);
+		free_2d_table(hash);
+		return (1);
 	}
-	else
+	env_hash = is_env_var(hash[0]);
+	if (!env_hash)
 	{
-		if (hash[0][ft_strlen(hash[0]) - 1] == '+')
-		{
-			hash[0][ft_strlen(hash[0]) - 1] = 0;
-			exec_export(hash, EXP_APPEND_MODE);
-		}
-		else
-			exec_export(hash, EXP_ASSIGN_MODE);
+		environ = new_env_var(hash);
+		free_2d_table(hash);
+		free_2d_table(env_hash);
+		return (0);
 	}
-	free(hash[1]);
-	free(hash[2]);
-	free(hash);
-	return (ret);
+	if (hash[1][ft_strlen(hash[1]) - 1] == '+')
+	{
+		environ = edit_env_var(hash);
+		free_2d_table(hash);
+		free_2d_table(env_hash);
+		return (0);
+	}
+	unset(env_hash[0]);
+	environ = new_env_var(hash);
+	free_2d_table(hash);
+	free_2d_table(env_hash);
+	return (0);
 }
 
 int	ft_export(char **args)
@@ -107,7 +93,7 @@ int	ft_export(char **args)
 	if (!args[1])
 	{
 		print_sorted_array(environ);
-		return (ret);
+		return (0);
 	}
 	i = 0;
 	while (args[++i])
