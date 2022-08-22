@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:56:27 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/22 19:10:58 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/22 23:17:04 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,3 @@ int	ft_unset(char **args)
 	}
 	return (ret);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	if (!argc || !argv[0])
-// 		return (1);
-// 	ft_unset(argv);
-// 	system("export");
-// 	return (0);
-// }
