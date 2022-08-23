@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/22 19:25:59 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/23 02:14:38 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ char	**init_env()
 	i = -1;
 	while (environ[++i])
 		;
-	new_env = malloc(sizeof(char *) * i);
-	if (!new_env)
-		exit(EXIT_FAILURE);
+	new_env = (char **) garbage_collector(sizeof(char *) * i, ALLOCATE);
+	// new_env = malloc(sizeof(char *) * i);
+	// if (!new_env)
+	// 	exit(EXIT_FAILURE);
 	i = -1;
 	while (environ[++i])
 		new_env[i] = ft_strdup(environ[i]);
@@ -37,9 +38,10 @@ char	**arg_to_hash(char *arg)
 	char	**hash;
 	
 	i = -1;
-	hash = (char **) malloc(sizeof(char *) * 3);
-	if (!hash)
-		exit (EXIT_FAILURE);
+	hash = (char **) garbage_collector(sizeof(char *) * 3, ALLOCATE);
+	// hash = (char **) malloc(sizeof(char *) * 3);
+	// if (!hash)
+	// 	exit (EXIT_FAILURE);
 	while (arg[++i])
 		if (arg[i] == '=')
 			break ;
@@ -78,9 +80,10 @@ char	**new_env_var(char **var)
 	int			i;
 
 	i = size_counter(environ);
-	new_env = malloc(sizeof(char *) * (i + 1));
-	if (!new_env)
-		exit(EXIT_FAILURE);
+	new_env = (char **) garbage_collector(sizeof(char *) * (i + 1), ALLOCATE);
+	// new_env = malloc(sizeof(char *) * (i + 1));
+	// if (!new_env)
+	// 	exit(EXIT_FAILURE);
 	i = -1;
 	while (environ[++i])
 		new_env[i] = environ[i];
@@ -101,9 +104,10 @@ char	**edit_env_var(char **var)
 	i = -1;
 	while (environ[++i])
 		;
-	new_env = malloc(sizeof(char *) * i);
-	if (!new_env)
-		exit(EXIT_FAILURE);
+	new_env = (char **) garbage_collector(sizeof(char *) * i, ALLOCATE);
+	// new_env = malloc(sizeof(char *) * i);
+	// if (!new_env)
+	// 	exit(EXIT_FAILURE);
 	env_var = is_env_var(var[0]);
 	if (env_var)
 		unset(env_var[0]);

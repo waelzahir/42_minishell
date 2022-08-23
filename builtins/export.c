@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:40 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/22 23:16:56 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/23 02:18:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ int	export(char *arg)
 	{
 		hash[0][ft_strlen(hash[0]) - 1] = 0;
 		environ = edit_env_var(hash);
-		free_2d_table(hash);
-		free_2d_table(env_hash);
+		// free_2d_table(hash);
+		// free_2d_table(env_hash);
 		return (0);
 	}
 	if (!env_hash)
 	{
 		environ = new_env_var(hash);
-		free_2d_table(hash);
-		free_2d_table(env_hash);
+		// free_2d_table(hash);
+		// free_2d_table(env_hash);
 		return (0);
 	}
 	unset(env_hash[0]);
 	environ = new_env_var(hash);
-	free_2d_table(hash);
-	free_2d_table(env_hash);
+	// free_2d_table(hash);
+	// free_2d_table(env_hash);
 	return (0);
 }
 
