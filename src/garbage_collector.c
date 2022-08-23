@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 23:18:42 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/22 23:44:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/23 00:01:25 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	*garbage_collector(int size, int choice)
 		if (!pointer)
 			garbage_collector(size, FREE);
 		res = push_stack(stack, pointer);
+		return (pointer);
 	}
 	else if (choice == FREE)
 	{
@@ -37,5 +38,5 @@ void	*garbage_collector(int size, int choice)
 			free(pop_stack(stack));
 		exit(EXIT_FAILURE);
 	}
-	return (pointer);
+	return (NULL);
 }
