@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/28 23:49:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:18:50 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <signal.h>
 # include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 # include "datatypes.h"
 # include "lexer.h"
 # include "parser.h"
@@ -26,11 +27,13 @@
 #include "builtins.h"
 # include <readline/history.h>
 # include <readline/readline.h>
-int	exit_stat;
+int	exit_stat[3];
+
+
 
 char	*get_prompt(void);
 char	**init_env();
-int     shell(char *prompt);
+void     shell(char *prompt);
 void    signals(void);
 void    executor(t_btree *root, int node, int *fd);
 char    *collector(char *s1, char   *s2);
@@ -45,6 +48,9 @@ void    path_included(char **command, char **redirection, int *fd);
 int		ft_fork();
 // Signals handlers
 void	signals_handler();
+
+// Redirections
+char    **get_redirection(t_token **token);
 
 
 #endif
