@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:54:31 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/23 15:24:27 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/28 23:53:42 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/headers/minishell.h"
+#include "../../includes/headers/minishell.h"
 
 int	ft_env()
 {

@@ -6,11 +6,11 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:56:27 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/23 17:46:11 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/28 23:53:57 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/headers/minishell.h"
+#include "../../includes/headers/minishell.h"
 
 int	size_counter(char **pointer)
 {

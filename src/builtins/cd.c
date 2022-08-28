@@ -6,11 +6,11 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 01:16:48 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/23 17:37:19 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/28 23:48:24 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/headers/minishell.h"
+#include "../../includes/headers/minishell.h"
 
 /*
 * Still needs ENV variables

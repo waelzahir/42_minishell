@@ -6,11 +6,11 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 02:21:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/23 03:31:03 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/28 23:53:32 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/headers/minishell.h"
+#include "../../includes/headers/minishell.h"
 
 int	flag_handler(char *arg)
 {

@@ -6,11 +6,11 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 15:49:25 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/23 01:19:50 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/28 23:53:54 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/headers/minishell.h"
+#include "../../includes/headers/minishell.h"
 
 int	ft_pwd(int size)
 {
