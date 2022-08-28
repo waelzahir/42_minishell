@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 22:36:44 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/28 23:55:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
 
-char	*closing_check(char *str, int *fd)
+int	closing_check(char *str, int *fd)
 {
 	int	type;
 	int	i;
