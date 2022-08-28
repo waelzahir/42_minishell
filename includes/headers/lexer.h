@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:54 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/28 23:50:08 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:20:59 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char	*get_argd(t_lexer *lexer);
 char	*get_pipe(t_lexer *lexer);
 t_token	*set_token(int type, char *content);
 t_token	*lexer_get_token(t_lexer *lexer);
+char	*get_red(t_lexer *lexer, char type);
 
 #endif
