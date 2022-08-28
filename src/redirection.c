@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:25:50 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 22:38:46 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/29 00:22:43 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int     here_doc(char   *str, int exp, char	*prompt)
     int     fd[2];
     size_t i;
 
+    prompt = NULL;
+    line = NULL;
     i = ft_strlen(str);
     if (pipe(fd) == -1)
         return (perror("pipe"), 0);
