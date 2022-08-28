@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:45:09 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 21:36:37 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/29 00:24:51 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	free_simple_stack(t_stack	*simple, char	*text)
 	while (simple->size)
 	{
 		token = pop_stack(simple);
-		free(token->content);
+		free(token->def);
 		free(token);
 	}
-	free(stack);
+	// free(stack);
 }
 
 void	free_nsimple_stack(t_stack	*cmd)
@@ -92,7 +92,7 @@ void	free_nsimple_stack(t_stack	*cmd)
 		token = pop_stack(cmd);
 		while (token[i])
 		{
-			free(token->content);
+			free((*token)->def);
 			free(token);
 			i++;
 		}
