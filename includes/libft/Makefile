@@ -16,15 +16,15 @@ OBJ_M := $(SRC_M:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ_M) libft.h
-	ar -rcs ${NAME} ${OBJ_M}
+	@ar -rcs ${NAME} ${OBJ_M}
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $^
+	@$(CC) $(FLAGS) -c $^
 
 clean:
-	rm -rf $(OBJ_M) 
+	@rm -rf $(OBJ_M) 
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
