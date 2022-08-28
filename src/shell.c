@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 23:55:15 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:54:29 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	shell(char *prompt)
 
 	exit_stat[1] = dup(0);
 	exit_stat[2] = dup(1);
-	signals();
+	signals_handler();
 	while (1)
 	{
 		line = readline(prompt);
