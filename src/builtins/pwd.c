@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 15:49:25 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/28 23:53:54 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:40:22 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	ft_pwd(int size)
 {
 	char	*cwd;
 	
-	cwd = (char *) garbage_collector(size, ALLOCATE);
+	// cwd = (char *) garbage_collector(size, ALLOCATE);
+	cwd = (char *) malloc(sizeof(char) * size);
 	if (!getcwd(cwd, size))
 	{
 		if (!cwd[0])
