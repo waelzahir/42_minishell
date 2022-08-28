@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:17:03 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 16:43:05 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/29 00:29:46 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	*get_prompt(void)
 
 int	main(void)
 {
-	char			*prompt;
+	char		*prompt;
+	extern char	**environ;
 
 	prompt = get_prompt();
 	environ = init_env();
