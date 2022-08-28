@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 09:55:33 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 22:47:14 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/29 00:29:10 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include	<stdlib.h>
 # include	<unistd.h>
 # include	<fcntl.h>
+# include "../libft/libft.h"
+
+# define BUFFER_SIZE 1
 
 size_t	ft__strlcpy(char *dst, const char *src, size_t dstsize);
 int		ft__strlen(char const *s);
