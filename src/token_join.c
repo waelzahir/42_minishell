@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_join.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:46:25 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 22:30:30 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/28 23:58:02 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	tokens_free(t_token	**token)
 	i = 0;
 	while (token[i])
 	{
-		free(token[i]->content);
+		free(token[i]->def);
 		free(token[i]);
 		i++;
 	}
@@ -72,7 +72,7 @@ char	**join_cmd(t_token **tokens)
 	}
 	if (join)
 		push_stack(stack, join);
-	cmd = (char **)stack->stack_cmd;
+	cmd = (char **)stack->stack;
 	free(stack);
 	return (cmd);
 }
