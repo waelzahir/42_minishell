@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_join.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:46:25 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 23:58:02 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/29 23:51:37 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**join_cmd(t_token **tokens)
 		else
 		join = collector(join, tokens[i]->def);
 	}
-	if (join)
+	if (join[0] != ' ')
 		push_stack(stack, join);
 	cmd = (char **)stack->stack;
 	free(stack);

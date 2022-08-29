@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 22:40:46 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/29 20:25:49 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ int is_built(char   **cmd, char **redirection, int  *fd)
      return (ret);
 }
 
-void    execute(t_token **token, int node, int *fd, int in)
+int    execute(t_token **token, int node, int *fd, int in)
 {
     char    **command;
     extern char **environ;
     char    *path;
+  int pid;
 
 
     expander(token);
@@ -54,7 +55,8 @@ void    execute(t_token **token, int node, int *fd, int in)
         path = &command[0][0];
     else
         path = get_path(command[0]);
-    if (ft_fork() == 0)
+    pid = ft_fork();
+    if (pid == 0)
     {
         if (node != 0)
         {
@@ -67,16 +69,21 @@ void    execute(t_token **token, int node, int *fd, int in)
             dup2(in, 0);
             close(in);
         }
+        if ( redirect(get_redirection(token)) == 1)
+            exit(127);
         execve(path, command, environ);
+        perror("execve");
         exit(127);
     }
     close(in);
     close(fd[1]);
+     return (pid);
 }
 
 void    executor(t_btree *root, int node, int *fd)
 {
     static int input;
+    int pid;
 
     if (node == ROOT)
         input  = -1;
@@ -88,7 +95,9 @@ void    executor(t_btree *root, int node, int *fd)
     {
         if (root->index != 0)
             pipe(fd);
-        execute(root->content, root->index, fd, input);
+        pid  = execute(root->content, root->index, fd, input);
+        if (root->index == 0)
+            waitpid(pid, &exit_stat[0],0);
         input = fd[0];
         return ;
     }

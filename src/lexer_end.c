@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 21:13:43 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 21:12:39 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/29 23:08:45 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char	*get_red_file(char *str, t_lexer *lexer)
 	}
 	if (ft_strlen(file) <= len)
 		return (filerror(1, str, lexer));
+	if (len == 2 && file[0] == '<')
+		return (here_doc(file));
 	return (file);
 }
 

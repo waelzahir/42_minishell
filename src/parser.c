@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:02:52 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/29 00:21:44 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:35:05 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ int	fill_stacks(t_stack *stack_cmd, t_stack *stack_op, t_lexer *lexer)
 	stack = init_stack();
 	if (!stack)
 		return (0);
-	while (lexer->c != '0')
+	while (lexer->c != '\0')
 	{
 		token = lexer_get_token(lexer);
 		if (!token)
 			return (free_simple_stack(stack, NULL), 1);
 		if (token->type != pip)
-			push_stack(stack_cmd, token);
+			push_stack(stack, token);
 		else if (token->type == pip && stack->size)
 			fill_lesser(stack_op, stack_cmd, token, stack);
 		else

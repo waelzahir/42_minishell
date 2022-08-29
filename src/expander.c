@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:29:15 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 21:59:16 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/29 16:20:26 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*get_var(t_lexer *lexer, char **environ)
 	if (lexer->c == '$')
 		return (lexer_advance(lexer), ft_strdup("you tell me!!"));
 	if (lexer->c == '?')
-		return (lexer_advance(lexer), ft_strdup(ft_itoa(exit_stat[0])));
+		return (lexer_advance(lexer), ft_strdup(ft_itoa(exit_stat[3])));
 	if (lexer->c == '\0')
 		return (char_str('$'));
 	str = char_str(lexer->c);

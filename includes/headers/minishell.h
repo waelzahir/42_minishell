@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/29 00:18:50 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/29 23:03:07 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #include "builtins.h"
 # include <readline/history.h>
 # include <readline/readline.h>
-int	exit_stat[3];
+int	exit_stat[4];
 
 
 
@@ -51,6 +51,14 @@ void	signals_handler();
 
 // Redirections
 char    **get_redirection(t_token **token);
+int redirect(char   **files);
+char    *clean_string(char  *s);
+
+//hered-c
+char	*here_doc(char	*str);
+int	apply_herdoc(char	*file);
+
+
 
 
 #endif

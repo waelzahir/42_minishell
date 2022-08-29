@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/29 01:04:25 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/29 23:24:28 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,13 @@ int	closing_check(char *str, int *fd)
 	return (0);
 }
 
-void	signals(void)
-{
-	return ;
-}
-
 void	waiting(void)
 {
-	int	stat;
 
-	while (wait(&stat) > 0)
+	while (wait(NULL) > 0)
 		;
-	if (WIFEXITED(stat))
-	exit_stat[0] = WEXITSTATUS(stat);
+	if (WIFEXITED(exit_stat[0]))
+		exit_stat[3] = WEXITSTATUS(exit_stat[0]);
 }
 
 void	shell(char *prompt)
@@ -67,11 +61,6 @@ void	shell(char *prompt)
 	while (1)
 	{
 		line = readline(prompt);
-		if (!line)
-        {
-            ft_putstr_fd("\b\b  \b\b", 2);
-            break ;
-        }
 		if (line && line[0] != '\0')
 		{
 			add_history(line);
@@ -81,10 +70,14 @@ void	shell(char *prompt)
 				binary_tree_new(NULL, 0, 1);
 				if (root)
 					executor(root, ROOT, fd);
+				waiting();
 			}
 			free(line);
 		}
-		else
+		else if (!line)
+		{
+			ft_putstr_fd("\b\b  \b\b", 2);
 			break ;
+		}
 	}
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
+#    By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/28 23:13:31 by sel-kham          #+#    #+#              #
-#    Updated: 2022/08/29 00:46:05 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/08/29 22:59:48 by ozahir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INCLUDES_DIR := includes
 SRC_DIR := src
 OBJ_DIR := obj
 GNL_DIR := gnl
-READLINE_DIR := $(shell brew --prefix readline)
+READLINE_DIR := /goinfre/ozahir/homebrew/opt/readline
 
 ## SUB-DIRECTORIES
 HEADERS_DIR := $(INCLUDES_DIR)/headers
@@ -30,7 +30,7 @@ BUILTINS_DIR := $(SRC_DIR)/builtins
 GNL_DIR := $(INCLUDES_DIR)/gnl
 
 # FLAGS
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS :=  -g
 RFLAGS := -lreadline
 LFLAGS := -L $(READLINE_DIR)/lib
 IFLAGS := -I $(READLINE_DIR)/include
@@ -47,7 +47,7 @@ GNL := get_next_line.c get_next_line_utils.c
 GNL := $(addprefix $(GNL_DIR)/, $(GNL))
 
 SRC := binary_tree.c execution.c lexer_advance.c lexer_init.c path.c shell.c token_join.c env_f.c expander.c lexer_end.c parser.c redirection.c stack.c \
-		str_handler.c helpers.c signals_handler.c $(BUILTINS) $(GNL)
+		str_handler.c helpers.c signals_handler.c $(BUILTINS) $(GNL) her_doc.c
 SRC := $(addprefix $(SRC_DIR)/, $(SRC))
 
 OBJ := $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
