@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/29 00:54:29 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/29 01:04:25 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ void	shell(char *prompt)
 	while (1)
 	{
 		line = readline(prompt);
+		if (!line)
+        {
+            ft_putstr_fd("\b\b  \b\b", 2);
+            break ;
+        }
 		if (line && line[0] != '\0')
 		{
 			add_history(line);
