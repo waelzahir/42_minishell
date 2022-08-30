@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/29 23:45:49 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 16:02:40 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ char	*here_doc(char	*str)
 	{
 		ft_putstr_fd("here_doc>", 1);
 		line = get_next_line(0);
-		if (!line)
-			return (free(str), free(brk), NULL);
-		if (ft_strlen(line) - 1 == len && ft_strncmp(line, h_clean(str + 2), len) == 0)
+	
+		if (!line || (ft_strlen(line) - 1 == len && ft_strncmp(line, h_clean(str + 2), len) == 0))
 			break ;
 		line[ft_strlen(line) - 1] = 0;
 		if (str[0] !=  34 && str[0] != 39)
@@ -82,6 +81,8 @@ char	*here_doc(char	*str)
 		ft_putstr_fd("\n", fd);
 		free(line);
 	}
+	if (!line)
+		ft_putstr_fd("\n", 1);
 	close(fd);
 	free(str);
 	return (brk);
