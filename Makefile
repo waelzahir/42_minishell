@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
+#    By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/28 23:13:31 by sel-kham          #+#    #+#              #
-#    Updated: 2022/08/30 04:09:23 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/08/30 15:44:02 by ozahir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INCLUDES_DIR := includes
 SRC_DIR := src
 OBJ_DIR := obj
 GNL_DIR := gnl
-READLINE_DIR := $(shell brew --prefix readline)
+READLINE_DIR := /goinfre/sel-kham/homebrew/opt/readline
 
 ## SUB-DIRECTORIES
 HEADERS_DIR := $(INCLUDES_DIR)/headers
