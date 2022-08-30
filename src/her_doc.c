@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/30 16:02:40 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 20:44:18 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ char	*h_clean(char	*s)
         i++;
     return string;
 }
+
+void	herdoc_sig_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_putstr_fd("\n", 1);
+		exit(0);
+	}
+}
+
 char	*here_doc(char	*str)
 {
 	char	*brk;
@@ -67,22 +77,28 @@ char	*here_doc(char	*str)
 	fd = open(brk, O_CREAT | O_WRONLY, 0777);
 	if (fd < 0)
 		return (free(str),free(brk), NULL);
-	while (1)
+	if (fork() == 0)
 	{
-		ft_putstr_fd("here_doc>", 1);
-		line = get_next_line(0);
-	
-		if (!line || (ft_strlen(line) - 1 == len && ft_strncmp(line, h_clean(str + 2), len) == 0))
-			break ;
-		line[ft_strlen(line) - 1] = 0;
-		if (str[0] !=  34 && str[0] != 39)
-			line = expand(line);
-		ft_putstr_fd(line, fd);
-		ft_putstr_fd("\n", fd);
-		free(line);
+		signal(SIGINT, &herdoc_sig_handler);
+		while (1)
+		{
+			ft_putstr_fd("here_doc>", 1);
+			line = get_next_line(0);
+			if (!line || (ft_strlen(line) - 1 == len && ft_strncmp(line, h_clean(str + 2), len) == 0))
+				break ;
+			line[ft_strlen(line) - 1] = 0;
+			if (str[0] !=  34 && str[0] != 39)
+				line = expand(line);
+			ft_putstr_fd(line, fd);
+			ft_putstr_fd("\n", fd);
+			free(line);
+		}
+		close(fd);
+		if (!line)
+			ft_putstr_fd("\n", 1);
+		exit(0);
 	}
-	if (!line)
-		ft_putstr_fd("\n", 1);
+	wait(NULL);
 	close(fd);
 	free(str);
 	return (brk);
@@ -92,6 +108,7 @@ int	apply_herdoc(char	*file)
 	int	fd;
 
 	fd = open(file, O_RDONLY, 0777);
+
 	if (fd < 0 || dup2(fd, 0) == -1)
     {
             perror("redirection");

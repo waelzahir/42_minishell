@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:29:15 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/29 16:20:26 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 20:27:17 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_var(t_lexer *lexer, char **environ)
 	if (!str)
 		return (NULL);
 	lexer_advance(lexer);
-	while (!is_token(lexer->c))
+	while (!is_token(lexer->c) && lexer->c != '$')
 	{
 		str = char_append(str, lexer->c);
 		if (!str)
