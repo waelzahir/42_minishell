@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_f.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/28 21:41:11 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 04:22:19 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ char	**edit_env_var(char **var)
 	i = -1;
 	while (environ[++i])
 		;
-	// new_env = (char **) garbage_collector(sizeof(char *) * i, ALLOCATE);
 	new_env = malloc(sizeof(char *) * i);
 	if (!new_env)
 		exit(EXIT_FAILURE);
@@ -117,7 +116,6 @@ char	**edit_env_var(char **var)
 	i = -1;
 	while (environ[++i])
 		new_env[i] = environ[i];
-	printf("test : %s\n", var[0]);
 	if (env_var)
 		new_env[i] = ft_strjoin(ft_strjoin(env_var[0], "="), ft_strjoin(env_var[1], var[1]));
 	else
