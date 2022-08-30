@@ -6,7 +6,7 @@
 #    By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/28 23:13:31 by sel-kham          #+#    #+#              #
-#    Updated: 2022/08/30 15:44:02 by ozahir           ###   ########.fr        #
+#    Updated: 2022/08/30 15:48:48 by ozahir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INCLUDES_DIR := includes
 SRC_DIR := src
 OBJ_DIR := obj
 GNL_DIR := gnl
-READLINE_DIR := /goinfre/sel-kham/homebrew/opt/readline
+READLINE_DIR := /goinfre/$(USER)/homebrew/opt/readline
 
 ## SUB-DIRECTORIES
 HEADERS_DIR := $(INCLUDES_DIR)/headers
