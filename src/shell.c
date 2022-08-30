@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/29 23:24:28 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 16:05:44 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	shell(char *prompt)
 	char	*line;
 	int		fd[2];
 
-	exit_stat[1] = dup(0);
-	exit_stat[2] = dup(1);
 	signals_handler();
 	while (1)
 	{

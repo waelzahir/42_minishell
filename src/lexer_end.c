@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 21:13:43 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/30 15:42:40 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 16:44:48 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ t_token	*set_token(int type, char *content)
 	token->def = content;
 	return (token);
 }
-
+int	sfilerules(char c)
+{
+	if (c == '\0' || c == '|' || c == ' ')
+		return (1);
+	return (0);
+}
 int	filerules(char c)
 {
 	if (c == '<' || c == '>' || c == '\0' || c == '|' || c == ' ')
@@ -58,7 +63,7 @@ char	*get_red_file(char *str, t_lexer *lexer)
 	if (len > 2 || filerules(lexer->c))
 		return (filerror(0, str, lexer));
 	file = str;
-	while (!filerules(lexer->c))
+	while (!sfilerules(lexer->c))
 	{		
 		file = char_append(file, lexer->c);
 		if (!file)
