@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:46:25 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/30 15:41:50 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 17:02:50 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	**join_cmd(t_token **tokens)
 
 	i = -1;
 	stack = init_stack();
+	if (!tokens[0])
+		return (NULL);
 	if (!stack)
 		return (NULL);
 	join = NULL;
@@ -93,9 +95,10 @@ char	**join_tokens(t_token **token)
 			push_stack(clean, token[i]);
 		i++;
 	}
-	val = join_cmd((t_token **)clean->stack);
-	if (!val)
-		return (free_simple_stack(clean, NULL), NULL);
+	if (clean->size)
+		val = join_cmd((t_token **)clean->stack);
+	else
+		return (free(clean), NULL);
 	free(clean->stack);
 	free(clean);
 	return (val);

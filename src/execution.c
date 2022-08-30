@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/30 14:46:27 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 17:08:43 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,16 @@ int    execute(t_token **token, int node, int *fd, int in)
     char    **command;
     extern char **environ;
     char    *path;
-  int pid;
+    int pid;
 
 
     expander(token);
-    command = join_tokens(token);
-    if (is_path(command[0]) == 0)
-        path = &command[0][0];
-    else
-        path = get_path(command[0]);
     pid = ft_fork();
     if (pid == 0)
     {
-        if (access(path, X_OK) == -1)
-            return (perror("shell"), exit(127), -1);
+          
+         
+        
         if (node != 0)
         {
             dup2(fd[1], 1);
@@ -71,9 +67,18 @@ int    execute(t_token **token, int node, int *fd, int in)
             dup2(in, 0);
             close(in);
         }
-        if ( redirect(get_redirection(token)) == 1)
+        if (redirect(get_redirection(token)) == 1)
             exit(127);
-        execve(path, command, environ);
+        command = join_tokens(token);
+        if (!command)
+            exit(127);
+             if (is_path(command[0]) == 0)
+        path = &command[0][0];
+    else
+        path = get_path(command[0]);
+    if (!path || access(path, X_OK) == -1)
+            return (perror("shell"), exit(127), -1);
+    execve(path, command, environ);
         perror("execve");
         exit(127);
     }
