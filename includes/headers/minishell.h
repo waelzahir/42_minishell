@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/29 23:03:07 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 19:02:22 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*binary_path(char	*cmd, char	**paths);
 char	*get_path(char	*cmd);
 void    path_included(char **command, char **redirection, int *fd);
 int		ft_fork();
+int		is_builtin(char *cmd);
+int		exec_built(char **cmd);
 // Signals handlers
 void	signals_handler();
 
