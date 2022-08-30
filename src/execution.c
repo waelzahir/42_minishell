@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/30 17:08:43 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/30 19:18:30 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,36 @@
 
 
  
-int is_built(char   **cmd, char **redirection, int  *fd)
+int is_builtin(char   *cmd)
+{
+    size_t  len;
+
+    len = ft_strlen(cmd);
+    if (len == ft_strlen("echo") && ft_strncmp(cmd, "echo", len) == 0)
+        return (0);
+    else if (len == ft_strlen("cd") && ft_strncmp(cmd, "cd", len) == 0)
+        return (0);
+    else if (len == ft_strlen("pwd") && ft_strncmp(cmd, "pwd", len) == 0)
+        return (0);
+    else if (len== ft_strlen("export") && ft_strncmp(cmd, "export", len) == 0)
+        return (0);
+    else if (len == ft_strlen("unset") && ft_strncmp(cmd, "unset", len) == 0)
+        return (0);
+    else if (len== ft_strlen("env") && ft_strncmp(cmd, "env", len) == 0)
+        return (0);
+    else if (len == ft_strlen("exit") && ft_strncmp(cmd, "exit", len) == 0)
+        return (0);
+     return (1);
+}
+
+int exec_built(char **cmd)
 {
     size_t  len;
     int     ret;
+    // char    **cmd;
 
     len = ft_strlen(cmd[0]);
-    ret = 1;
-    redirection = NULL;
+    ret = -1;
     if (len == ft_strlen("echo") && ft_strncmp(cmd[0], "echo", len) == 0)
         ret = ft_echo(cmd);
     else if (len == ft_strlen("cd") && ft_strncmp(cmd[0], "cd", len) == 0)
@@ -36,8 +58,6 @@ int is_built(char   **cmd, char **redirection, int  *fd)
         ret = ft_env();
     else if (len == ft_strlen("exit") && ft_strncmp(cmd[0], "exit", len) == 0)
         exit(0); //TODO: Handle exit builtin
-    else if (fd)
-        return (-1);
      return (ret);
 }
 
@@ -53,9 +73,6 @@ int    execute(t_token **token, int node, int *fd, int in)
     pid = ft_fork();
     if (pid == 0)
     {
-          
-         
-        
         if (node != 0)
         {
             dup2(fd[1], 1);
@@ -78,6 +95,8 @@ int    execute(t_token **token, int node, int *fd, int in)
         path = get_path(command[0]);
     if (!path || access(path, X_OK) == -1)
             return (perror("shell"), exit(127), -1);
+    if (!is_builtin(command[0]))
+        exit_stat[3] = exec_built(command);
     execve(path, command, environ);
         perror("execve");
         exit(127);
