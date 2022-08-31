@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/30 19:02:22 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:17:49 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ void	signals_handler();
 char    **get_redirection(t_token **token);
 int redirect(char   **files);
 char    *clean_string(char  *s);
+void	remember_redi(int i);
 
 //hered-c
 char	*here_doc(char	*str);
 int	apply_herdoc(char	*file);
-
+void    exe_launcher(t_btree *root, int mode, int *fd);
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/31 01:16:29 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:17:23 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,6 @@ void	remember_redi(int i)
 	}
 }
 
-void	execute_single_cmd(t_token **token, t_btree *root, int type, int *fd)
-{
-	char	**cmd;
-	char	*path;
-
-	expander(token);
-	remember_redi(0);
-	if (redirect(get_redirection(token)) == 1)
-        exit(127);
-	cmd = join_tokens(token);
-	if (!cmd)
-		return ;
-	if (!is_builtin(cmd[0]))
-	{
-		exit_stat[3] = exec_built(cmd);
-		remember_redi(1);
-		return ;
-	}
-	else
-		executor(root, type, fd);
-	remember_redi(1);
-}
-
 void	shell(char *prompt)
 {
 	t_btree	*root;
@@ -104,12 +81,7 @@ void	shell(char *prompt)
 				root = parser(line);
 				binary_tree_new(NULL, 0, 1);
 				if (root)
-				{
-					if (root->num == CMD)
-						execute_single_cmd(root->content, root, ROOT, fd);
-					else
-						executor(root, ROOT, fd);
-				}
+					exe_launcher(root, ROOT, fd);
 				waiting();
 			}
 			free(line);

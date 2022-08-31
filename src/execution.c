@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/30 19:18:30 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:25:10 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 int is_builtin(char   *cmd)
 {
     size_t  len;
-
+    if (!cmd)
+        return (1);
     len = ft_strlen(cmd);
     if (len == ft_strlen("echo") && ft_strncmp(cmd, "echo", len) == 0)
         return (0);
@@ -61,6 +62,20 @@ int exec_built(char **cmd)
      return (ret);
 }
 
+void    pipe_helper(int node, int *fd, int in)
+{
+    if (node != 0)
+    {
+        dup2(fd[1], 1);
+        close(fd[1]);
+        close(fd[0]);
+    }
+    if (in != -1)
+    {
+        dup2(in, 0);
+        close(in);
+    }
+}
 int    execute(t_token **token, int node, int *fd, int in)
 {
     char    **command;
@@ -73,17 +88,7 @@ int    execute(t_token **token, int node, int *fd, int in)
     pid = ft_fork();
     if (pid == 0)
     {
-        if (node != 0)
-        {
-            dup2(fd[1], 1);
-            close(fd[1]);
-            close(fd[0]);
-        }
-        if (in != -1)
-        {
-            dup2(in, 0);
-            close(in);
-        }
+        pipe_helper(node, fd, in);
         if (redirect(get_redirection(token)) == 1)
             exit(127);
         command = join_tokens(token);
@@ -96,7 +101,10 @@ int    execute(t_token **token, int node, int *fd, int in)
     if (!path || access(path, X_OK) == -1)
             return (perror("shell"), exit(127), -1);
     if (!is_builtin(command[0]))
+    {
         exit_stat[3] = exec_built(command);
+        exit(0);
+    }
     execve(path, command, environ);
         perror("execve");
         exit(127);
@@ -127,4 +135,61 @@ void    executor(t_btree *root, int node, int *fd)
         input = fd[0];
         return ;
     }
+}
+void    execute_thesimplest(int pid, t_token  **token, char **cmd)
+{
+    extern  char    **environ;
+    char            *path;
+    
+    if (pid ==0)
+    {
+        if (redirect(get_redirection(token)) == 1)
+            exit(127);
+        if (is_path(cmd[0]) == 0)
+            path = &cmd[0][0];
+        else
+            path = get_path(cmd[0]);
+        if (!path || access(path, X_OK) == -1)
+        {
+            perror("shell");
+            exit(127);
+        }
+        execve(path, cmd, environ);
+        exit(127);
+    }
+}
+void    single_exec(t_token     **token)
+{
+    char    **cmd;
+    int     pid;
+
+    expander(token);
+    cmd = join_tokens(token);
+    if (!cmd)
+        return ;
+    if (is_builtin(cmd[0]) == 0)
+    {
+        remember_redi(0);
+        if (redirect(get_redirection(token)) == 1)
+        {
+            remember_redi(1);
+            return ;
+        }
+        exec_built(cmd);
+        remember_redi(1);
+        return ;
+    }
+    pid = ft_fork();
+    execute_thesimplest(pid, token, cmd);
+    waitpid(pid, &exit_stat[0], 0);
+}
+
+void    exe_launcher(t_btree *root, int mode, int *fd)
+{
+    if (root->num == CMD)
+    {
+        single_exec(root->content);        
+    }
+    else
+        executor(root, ROOT, fd);
 }

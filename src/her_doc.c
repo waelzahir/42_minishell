@@ -6,7 +6,7 @@
 /*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/31 16:50:08 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/31 18:25:48 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ char	*here_doc(char	*str)
 	filename = get_n_file();
 	if (!filename)
 		return (free(str), NULL);
-	printf("break [%s]\n", filename);
 	pid[1] = open(filename, O_CREAT | O_WRONLY, 0777);
 	if (pid[1] < 0)
 		return (perror("here doc"), NULL);
