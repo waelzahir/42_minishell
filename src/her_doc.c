@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   her_doc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/30 20:44:18 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/31 02:22:04 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,6 @@ char	*h_clean(char	*s)
     return string;
 }
 
-void	herdoc_sig_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		ft_putstr_fd("\n", 1);
-		exit(0);
-	}
-}
-
 char	*here_doc(char	*str)
 {
 	char	*brk;
@@ -79,10 +70,9 @@ char	*here_doc(char	*str)
 		return (free(str),free(brk), NULL);
 	if (fork() == 0)
 	{
-		signal(SIGINT, &herdoc_sig_handler);
 		while (1)
 		{
-			ft_putstr_fd("here_doc>", 1);
+			ft_putstr_fd("here_doc> ", 1);
 			line = get_next_line(0);
 			if (!line || (ft_strlen(line) - 1 == len && ft_strncmp(line, h_clean(str + 2), len) == 0))
 				break ;
@@ -103,6 +93,7 @@ char	*here_doc(char	*str)
 	free(str);
 	return (brk);
 }
+
 int	apply_herdoc(char	*file)
 {
 	int	fd;
