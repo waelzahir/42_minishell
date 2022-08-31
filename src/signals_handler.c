@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:45:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/31 01:17:55 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/31 21:35:18 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,12 @@ static void	signals_router(int signal, siginfo_t *siginfo, void *content)
 {
 	content = NULL;
 	siginfo = NULL;
-	if (signal == SIGQUIT)
+	if (signal == SIGINT)
 	{
-		// rl_on_new_line();
-		// rl_redisplay();
-		// ft_putstr_fd("  \b\b", 1);
-	}
-	else if (signal == SIGINT)
-	{
+		rl_replace_line("", 0);
 		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_redisplay();
-		// ft_putstr_fd("  \b\b\n", 1);
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
 	}
 }
 
