@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   her_doc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/31 02:22:04 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:50:08 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,48 +50,82 @@ char	*h_clean(char	*s)
         string = s + 1;
     else
         return (s);
-    while (string[i])
-        i++;
-    return string;
+	while (string[i] && (string[i] != 34 || string [i] != 39))
+		i++;
+	string[i - 1] = 0;
+	return string;
 }
-
-char	*here_doc(char	*str)
+char	*get_n_file()
 {
-	char	*brk;
+	char	*file;
+	int		i;
+	file = get_random_name();
+	if (!file)
+		return (NULL);
+	while (access(file, F_OK) == 0 && i != 5)
+	{
+		free(file);
+		file = get_random_name();
+		if (!file)
+			return (NULL);
+		i++;
+	}
+	if (i == 5)
+	{
+		free(file);
+		return (NULL);
+	}
+	return (file);
+}
+int	get_here_docf(int	*pid, char	*brkline, int	exp)
+{
 	char	*line;
 	int		len;
-	int 	fd;
 
-
-	len = ft_strlen(clean_string(str + 2));
-	brk = get_random_name();
-	fd = open(brk, O_CREAT | O_WRONLY, 0777);
-	if (fd < 0)
-		return (free(str),free(brk), NULL);
-	if (fork() == 0)
+	len = ft_strlen(brkline);
+	while(1 && pid[0] == 0)
 	{
-		while (1)
-		{
-			ft_putstr_fd("here_doc> ", 1);
-			line = get_next_line(0);
-			if (!line || (ft_strlen(line) - 1 == len && ft_strncmp(line, h_clean(str + 2), len) == 0))
-				break ;
-			line[ft_strlen(line) - 1] = 0;
-			if (str[0] !=  34 && str[0] != 39)
-				line = expand(line);
-			ft_putstr_fd(line, fd);
-			ft_putstr_fd("\n", fd);
-			free(line);
-		}
-		close(fd);
+		line = readline("here_doc>");
 		if (!line)
-			ft_putstr_fd("\n", 1);
-		exit(0);
+			return (close(pid[1]), exit(0), 0);
+		if (ft_strlen(line) == len && ft_strncmp(line, brkline, len) == 0)
+			return (free(line), close(pid[1]), exit(0), 0);
+		if (exp == 0)
+			line = expand(line);
+		ft_putstr_fd(line, pid[1]);
+		ft_putstr_fd("\n", pid[1]);
+		free(line);
 	}
-	wait(NULL);
-	close(fd);
+	return (0);
+}
+char	*here_doc(char	*str)
+{
+	char	*filename;
+	char	*breakline;
+	int		pid[3];
+	int		expand;
+
+	expand = 0;
+	if (str[2] == 34 || str[2] == 39)
+		{
+			breakline = h_clean(str + 2); 
+			expand = 1;
+		} 
+	else
+		breakline = str + 2;
+	filename = get_n_file();
+	if (!filename)
+		return (free(str), NULL);
+	printf("break [%s]\n", filename);
+	pid[1] = open(filename, O_CREAT | O_WRONLY, 0777);
+	if (pid[1] < 0)
+		return (perror("here doc"), NULL);
+	pid[0] = ft_fork();
+	get_here_docf(pid, breakline, expand);
+	waitpid(pid[0], 0, 0);
+	close(pid[1]);
 	free(str);
-	return (brk);
+	return (filename);
 }
 
 int	apply_herdoc(char	*file)
@@ -99,7 +133,6 @@ int	apply_herdoc(char	*file)
 	int	fd;
 
 	fd = open(file, O_RDONLY, 0777);
-
 	if (fd < 0 || dup2(fd, 0) == -1)
     {
             perror("redirection");
