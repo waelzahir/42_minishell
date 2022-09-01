@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/31 18:17:49 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/31 22:15:28 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		is_builtin(char *cmd);
 int		exec_built(char **cmd);
 // Signals handlers
 void	signals_handler();
+void	deflt_signal(void);
+void	ignore_signal(void);
 
 // Redirections
 char    **get_redirection(t_token **token);
