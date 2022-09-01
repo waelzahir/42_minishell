@@ -30,10 +30,9 @@ char	*get_prompt(void)
 int	main(void)
 {
 	char		*prompt;
-	extern char	**environ;
 
 	prompt = get_prompt();
-	environ = init_env();
+	init_env();
 	exit_stat[3] = 1;
 	if (!prompt)
 		return (printf("failed to set prompt value\n"), 1);

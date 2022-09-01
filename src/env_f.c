@@ -21,18 +21,19 @@ char	**init_env(void)
 	char		**new_env;
 	int			i;
 
-	i = -1;
-	while (environ[++i])
-		;
-	// new_env = (char **) garbage_collector(sizeof(char *) * i, ALLOCATE);
-	new_env = malloc(sizeof(char *) * i);
+	if (!environ)
+		return ;
+	if (!environ[0])
+		return ;
+	i = size_counter(environ);
+	new_env = malloc(sizeof(char *) * (i + 1));
 	if (!new_env)
 		exit(EXIT_FAILURE);
 	i = -1;
 	while (environ[++i])
-		new_env[i] = ft_strdup(environ[i]);
+		new_env[i] = environ[i];
 	new_env[i] = NULL;
-	return (new_env);
+	environ = new_env;
 }
 
 char	**arg_to_hash(char *arg)
@@ -56,97 +57,102 @@ char	**arg_to_hash(char *arg)
 	return (hash);
 }
 
-char	**is_env_var(char *arg)
-{
-	extern char **environ;
-	char		**hash;
-	int			i;
-
-	i = -1;
-	hash = NULL;
-	while (environ[++i])
-	{
-		if (!ft_strncmp(arg, environ[i], ft_strlen(arg))
-			&& environ[i][ft_strlen(arg)] == '=')
-			{
-				hash = arg_to_hash(environ[i]);
-				break ;
-			}
-	}
-	return (hash);
-}
-
-char	**new_env_var(char **var)
+void	add_env_var(char *id, char *value)
 {
 	extern char	**environ;
 	char		**new_env;
+	char		**tmp;
 	int			i;
 
 	i = size_counter(environ);
-	// new_env = (char **) garbage_collector(sizeof(char *) * (i + 1), ALLOCATE);
-	new_env = malloc(sizeof(char *) * (i + 1));
+	new_env = malloc(sizeof(char *) * (i + 2));
 	if (!new_env)
 		exit(EXIT_FAILURE);
 	i = -1;
 	while (environ[++i])
 		new_env[i] = environ[i];
-	new_env[i] = ft_strjoin(ft_strjoin(var[0], "="), var[1]);
+	new_env[i] = ft__strjoin(ft_strjoin(id, "="), val);
 	if (!new_env[i])
 		exit(EXIT_FAILURE);
 	new_env[i + 1] = NULL;
-	return (new_env);
+	if (environ[0])
+		free(environ)
+	environ = new_env;
 }
 
-char	**edit_env_var(char **var)
+char	*get_env_var(char *id)
 {
 	extern char	**environ;
-	char		**new_env;
-	char		**env_var;
+	int			len;
 	int			i;
 
+	if (!environ)
+		return ;
+	if (!environ[0])
+		return ;
+	len = ft_strlen(id);
 	i = -1;
 	while (environ[++i])
-		;
-	new_env = malloc(sizeof(char *) * i);
-	if (!new_env)
-		exit(EXIT_FAILURE);
-	env_var = is_env_var(var[0]);
-	if (env_var)
-		unset(env_var[0]);
-	i = -1;
-	while (environ[++i])
-		new_env[i] = environ[i];
-	if (env_var)
-		new_env[i] = ft_strjoin(ft_strjoin(env_var[0], "="), ft_strjoin(env_var[1], var[1]));
-	else
-		new_env[i] = ft_strjoin(ft_strjoin(var[0], "="), var[1]);
-	if (!new_env[i])
-		exit(EXIT_FAILURE);
-	new_env[i + 1] = NULL;
-	return (new_env);
+	{
+		if (!ft_strncmp(is, environ, len)
+			&& (environ[i][len + 1] == '=' || environ[i][len + 1] == '\0'))
+			return (environ[i]);
+	}
+	return (NULL);
 }
 
-char	**replace_env_var(char **var)
+void	delete_env_var(char *id)
+{
+	extern	char	**environ;
+	t_stack	*stack;
+	t_stack	*temp;
+	char	*poin;
+
+	stack = ft_calloc(1, sizeof(t_stack));
+	temp = ft_calloc(1, sizeof(t_stack));
+	stack->stack = (void **) environ;
+	stack->size = size_counter(environ);
+	while (stack->size)
+	{
+		poin = pop_stack(stack);
+		if (!ft_strncmp(id, poin, ft_strlen(id)) \
+			&& (poin[ft_strlen(id)] == '=' || poin[ft_strlen(id)] == '\0'))
+		{
+			free(poin);
+			break ;
+		}
+		else
+			push_stack(temp, poin);
+	}
+	while (temp->size != 0)
+		push_stack(stack, pop_stack(temp));
+	environ = (char **) stack->stack;
+	free(stack);
+	free(temp);
+}
+
+void	edit_env_var(char *id, char *value)
+{
+	delete_env_var(id);
+	add_env_var(id, value);
+}
+
+void	append_env_var(char *id, char *value)
 {
 	extern char	**environ;
-	char		**new_env;
-	char		**env_var;
-	int			i;
+	char		*tmp;
+	int			len;
 
-	i = -1;
+	len = size_counter(id);
 	while (environ[++i])
-		;
-	new_env = malloc(sizeof(char *) * i);
-	if (!new_env)
-		exit(EXIT_FAILURE);
-	env_var = is_env_var(var[0]);
-	if (env_var)
-		unset(env_var[0]);
-	i = -1;
-	while (environ[++i])
-		new_env[i] = environ[i];
-	new_env[i] = ft_strjoin(ft_strjoin(var[0], "="), var[1]);
-	if (!new_env[i])
-		exit(EXIT_FAILURE);
-	return (new_env);
+	{
+		if (!ft_strncmp(is, environ, len)
+			&& (environ[i][len + 1] == '=' || environ[i][len + 1] == '\0'))
+		{
+			tmp = environ[i];
+			environ[i] = ft_strjoin(tmp, val);
+			free(tmp);
+			return ;
+		}
+	}
 }
