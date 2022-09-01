@@ -135,7 +135,7 @@ char	*here_doc(char	*str)
 	if (pid[0])
 		ignore_signal();
 	get_here_docf(pid, breakline, expand);
-	waitpid(pid[0], 0, 0);
+	waitpid(pid[0], &exit_stat[0], 0);
 	// ft_putstr_fd("here_doc>  \n", 2);
 	rl_catch_signals = 0;
 	signals_handler();

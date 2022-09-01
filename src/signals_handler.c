@@ -21,7 +21,7 @@ void	herdoc_int(int sig)
 		rl_replace_line("", 0);
 		// rl_redisplay();
 		
-		exit(127);
+		exit(130);
 	}
 }
 
