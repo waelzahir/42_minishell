@@ -175,7 +175,7 @@ void    single_exec(t_token     **token)
             remember_redi(1);
             return ;
         }
-        exec_built(cmd);
+        exit_stat[3] = exec_built(cmd);
         remember_redi(1);
         return ;
     }
