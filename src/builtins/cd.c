@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 01:16:48 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/30 04:25:32 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:15:03 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*get_cwd(int size)
 	return (cwd);
 }
 
-char	**update_pwd(char *id, char *val)
+char	**update_pwd(const char *id, char *val)
 {
 	char		**hash;
 	
@@ -50,31 +50,34 @@ char	**update_pwd(char *id, char *val)
 
 int	ft_cd(char **args)
 {
-	char	*home_path;
-	char	*pwd;
-	char	*oldpwd;
+	char		*home_path;
+	char		*pwd;
+	char		*oldpwd;
+	extern char	**environ;
 
 	if (!args)
 		return (1);
-	pwd = get_cwd(1024);
+	oldpwd = get_cwd(1024);
 	if (!args[1])
 	{
 		home_path = getenv("HOME");
 		if (!home_path)
-		{
-			perror("Home");
-			return (1);
-		}
+			return (perror("Home"), 1);
 		if (!chdir(home_path))
 		{
-			oldpwd = get_cwd(1024);
-			return (0);
+			pwd = get_cwd(1024);
+			environ = edit_env_var(update_pwd("PWD", pwd));
+			environ = edit_env_var(update_pwd("OLDPWD", oldpwd));
+			return (free(pwd), free(oldpwd), 0);
 		}
-		perror("HOME: ");
-		return (1);
+		return (free(oldpwd), perror("HOME: "), 1);
 	}
 	if (!chdir(args[1]))
-		return (0);
-	perror("Directory");
-	return (1);
+	{
+		pwd = get_cwd(1024);
+		environ = edit_env_var(update_pwd("PWD", pwd));
+		environ = edit_env_var(update_pwd("OLDPWD", oldpwd));
+		return (free(pwd), free(oldpwd), 0);
+	}
+	return (free(oldpwd), perror("Directory"), 1);
 }

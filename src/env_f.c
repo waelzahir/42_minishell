@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/30 04:22:19 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:23:18 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,4 +124,25 @@ char	**edit_env_var(char **var)
 		exit(EXIT_FAILURE);
 	new_env[i + 1] = NULL;
 	return (new_env);
+}
+
+char	**replace_env_var(char **var)
+{
+	extern char	**environ;
+	char		**new_env;
+	char		**env_var;
+	int			i;
+
+	i = -1;
+	while (environ[++i])
+		;
+	new_env = malloc(sizeof(char *) * i);
+	if (!new_env)
+		exit(EXIT_FAILURE);
+	env_var = is_env_var(var[0]);
+	if (env_var)
+		unset(env_var[0]);
+	i = -1;
+	while (environ[++i])
+		new_env[i] = environ[i];
 }
