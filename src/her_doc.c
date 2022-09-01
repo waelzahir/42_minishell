@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   her_doc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/31 18:25:48 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/09/01 01:57:11 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,33 +77,44 @@ char	*get_n_file()
 	}
 	return (file);
 }
+
 int	get_here_docf(int	*pid, char	*brkline, int	exp)
 {
 	char	*line;
 	int		len;
 
 	len = ft_strlen(brkline);
+	if (!pid[0])
+		deflt_signal();
 	while(1 && pid[0] == 0)
 	{
-		line = readline("here_doc>");
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(1);
 		if (!line)
 			return (close(pid[1]), exit(0), 0);
-		if (ft_strlen(line) == len && ft_strncmp(line, brkline, len) == 0)
+		if (ft_strlen(line) - 1 == len && ft_strncmp(line, brkline, len) == 0)
+		{
 			return (free(line), close(pid[1]), exit(0), 0);
+			
+		}
 		if (exp == 0)
+		{
 			line = expand(line);
+			
+		}
 		ft_putstr_fd(line, pid[1]);
-		ft_putstr_fd("\n", pid[1]);
 		free(line);
 	}
 	return (0);
 }
+
 char	*here_doc(char	*str)
 {
 	char	*filename;
 	char	*breakline;
 	int		pid[3];
 	int		expand;
+
 
 	expand = 0;
 	if (str[2] == 34 || str[2] == 39)
@@ -119,9 +130,16 @@ char	*here_doc(char	*str)
 	pid[1] = open(filename, O_CREAT | O_WRONLY, 0777);
 	if (pid[1] < 0)
 		return (perror("here doc"), NULL);
+	// rl_catch_signals = 1;
 	pid[0] = ft_fork();
+	if (pid[0])
+		ignore_signal();
 	get_here_docf(pid, breakline, expand);
 	waitpid(pid[0], 0, 0);
+	// ft_putstr_fd("here_doc>  \n", 2);
+	rl_catch_signals = 0;
+	signals_handler();
+	// ft_putstr_fd("\b\b  ", 1);
 	close(pid[1]);
 	free(str);
 	return (filename);
