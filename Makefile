@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/28 23:13:31 by sel-kham          #+#    #+#              #
-#    Updated: 2022/09/01 17:12:15 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/09/01 17:41:49 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ BUILTINS_DIR := $(SRC_DIR)/builtins
 GNL_DIR := $(INCLUDES_DIR)/gnl
 
 # FLAGS
-CFLAGS :=  -Wall -Wextra -Werror
+CFLAGS :=  -Wall -Wextra -Werror -g
 RFLAGS := -lreadline
 LFLAGS := -L $(READLINE_DIR)/lib
 IFLAGS := -I $(READLINE_DIR)/include

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/31 22:15:28 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:44:11 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	exit_stat[4];
 
 
 char	*get_prompt(void);
-char	**init_env();
 void     shell(char *prompt);
 void    signals(void);
 void    executor(t_btree *root, int node, int *fd);

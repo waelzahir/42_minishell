@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/01 17:09:14 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:42:11 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*h_clean(char	*s)
         string = s + 1;
     else
         return (s);
-	while (string[i] && (string[i] != 34 || string [i] != 39))
+	while (string[i] && (string[i] != 34 && string [i] != 39))
 		i++;
 	string[i - 1] = 0;
 	return string;
