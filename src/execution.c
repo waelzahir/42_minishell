@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/31 18:25:10 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/08/31 22:28:45 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void    execute_thesimplest(int pid, t_token  **token, char **cmd)
     extern  char    **environ;
     char            *path;
     
-    if (pid ==0)
+    if (pid == 0)
     {
         if (redirect(get_redirection(token)) == 1)
             exit(127);
