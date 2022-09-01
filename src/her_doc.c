@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/01 01:57:11 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:09:14 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	*get_n_file()
 {
 	char	*file;
 	int		i;
+
+	i = 0;
 	file = get_random_name();
 	if (!file)
 		return (NULL);
@@ -81,7 +83,7 @@ char	*get_n_file()
 int	get_here_docf(int	*pid, char	*brkline, int	exp)
 {
 	char	*line;
-	int		len;
+	size_t len;
 
 	len = ft_strlen(brkline);
 	if (!pid[0])
@@ -89,7 +91,7 @@ int	get_here_docf(int	*pid, char	*brkline, int	exp)
 	while(1 && pid[0] == 0)
 	{
 		ft_putstr_fd("> ", 1);
-		line = get_next_line(1);
+		line = get_next_line(0);
 		if (!line)
 			return (close(pid[1]), exit(0), 0);
 		if (ft_strlen(line) - 1 == len && ft_strncmp(line, brkline, len) == 0)
@@ -100,7 +102,6 @@ int	get_here_docf(int	*pid, char	*brkline, int	exp)
 		if (exp == 0)
 		{
 			line = expand(line);
-			
 		}
 		ft_putstr_fd(line, pid[1]);
 		free(line);
@@ -127,6 +128,7 @@ char	*here_doc(char	*str)
 	filename = get_n_file();
 	if (!filename)
 		return (free(str), NULL);
+		printf("%s\n", filename);
 	pid[1] = open(filename, O_CREAT | O_WRONLY, 0777);
 	if (pid[1] < 0)
 		return (perror("here doc"), NULL);

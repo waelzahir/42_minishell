@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/31 22:28:45 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/01 16:50:30 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ void    exe_launcher(t_btree *root, int mode, int *fd)
 {
     if (root->num == CMD)
     {
+        mode = 0;
         single_exec(root->content);        
     }
     else
