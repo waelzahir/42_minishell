@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/01 16:50:30 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 20:00:49 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int exec_built(char **cmd)
     else if (len== ft_strlen("env") && ft_strncmp(cmd[0], "env", len) == 0)
         ret = ft_env();
     else if (len == ft_strlen("exit") && ft_strncmp(cmd[0], "exit", len) == 0)
-        exit(0); //TODO: Handle exit builtin
+        ft_exit(cmd); //TODO: Handle exit builtin
      return (ret);
 }
 

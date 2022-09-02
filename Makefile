@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/28 23:13:31 by sel-kham          #+#    #+#              #
-#    Updated: 2022/09/01 17:41:49 by sel-kham         ###   ########.fr        #
+#    Updated: 2022/09/02 20:07:39 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ HEADERS := builtins.h datatypes.h expander.h lexer.h minishell.h parser.h stack.
 HEADERS := $(addprefix $(HEADERS_DIR)/, $(HEADERS)) $(GNL_DIR)/get_next_line.h
 
 # SOURCES
-BUILTINS := cd.c echo.c env.c export.c pwd.c unset.c
+BUILTINS := cd.c echo.c env.c export.c pwd.c unset.c exit.c
 BUILTINS := $(addprefix $(BUILTINS_DIR)/, $(BUILTINS))
 
 GNL := get_next_line.c get_next_line_utils.c

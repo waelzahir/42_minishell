@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:57:44 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/02 05:41:15 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 20:01:04 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		ft_export(char **args);
 int		ft_env(void);
 int		ft_pwd(int size);
 int		ft_cd(char **args);
-int	ft_echo(char **args);
+int		ft_echo(char **args);
+void	ft_exit(char **arg);
 // Helpers functions for builtins
 int		check_identefier(char *id);
 char	**remove_pointer(char *arg, char **pointer);
