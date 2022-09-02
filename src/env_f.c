@@ -53,7 +53,7 @@ char	**arg_to_hash(char *arg)
 		hash[1] = NULL;
 	else
 		hash[1] = ft_substr(arg, i + 1, ft_strlen(arg));
-	hash[2] = ft_calloc(1, 2);
+	hash[2] = ft_calloc(1, 3);
 	hash[3] = NULL;
 	if (!hash[0])
 		exit(EXIT_FAILURE);
@@ -62,6 +62,8 @@ char	**arg_to_hash(char *arg)
 		hash[0][i - 1] = 0;
 		hash[2][0] = '+';
 	}
+	if (arg[i] == '=' )
+		hash[2][1] = '=';
 	return (hash);
 }
 

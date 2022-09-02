@@ -65,6 +65,8 @@ int	export(char *arg)
 	env_var = get_env_var(hash[0]);
 	if (!env_var)
 		return (new_var(hash), 0);
+	if (!hash[1] && hash[2][1] == '=')
+		return (edit_env_var(hash[0], ""), 0);
 	if (!hash[1])
 		return ( 0);
 	if (hash[2][0] == '+')
