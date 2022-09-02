@@ -94,17 +94,18 @@ int    execute(t_token **token, int node, int *fd, int in)
         command = join_tokens(token);
         if (!command)
             exit(127);
-             if (is_path(command[0]) == 0)
-        path = &command[0][0];
-    else
-        path = get_path(command[0]);
-    if (!path || access(path, X_OK) == -1)
-            return (perror("shell"), exit(127), -1);
-    if (!is_builtin(command[0]))
+     if (!is_builtin(command[0]))
     {
         exit_stat[3] = exec_built(command);
         exit(0);
     }
+    if (is_path(command[0]) == 0)
+    path = &command[0][0];
+    else
+    path = get_path(command[0]);
+    if (!path || access(path, X_OK) == -1)
+            return (perror("shell"), exit(127), -1);
+   
     execve(path, command, environ);
         perror("execve");
         exit(127);
