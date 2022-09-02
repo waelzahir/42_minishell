@@ -32,11 +32,29 @@ int	check_identefier(char *id)
 	return (0);
 }
 
+void	new_var(char **hash)
+{
+	if (hash[2][0] == '+')
+		hash[0][ft_strlen(hash[0]) - 1] = 0;
+	if (!hash[1])
+		add_env_var(hash[0], NULL);
+	else
+		add_env_var(hash[0], hash[1]);
+}
+
+void	free_hash(char **hash)
+{
+	free(hash[0]);
+	if (hash[1])
+		free(hash[1]);
+	free(hash[2]);
+	free(hash);
+}
+
 int	export(char *arg)
 {
-	char		**hash;
-	char		**env_hash;
-	extern char	**environ;
+	char	*env_var;
+	char	**hash;
 
 	if (!check_identefier(arg))
 	{
@@ -44,26 +62,17 @@ int	export(char *arg)
 		return (1);
 	}
 	hash = arg_to_hash(arg);
-	env_hash = is_env_var(hash[0]);
-	if (hash[0][ft_strlen(hash[0]) - 1] == '+')
+	env_var = get_env_var(hash[0]);
+	if (!env_var)
+		return (new_var(hash), 0);
+	if (!hash[1])
+		return ( 0);
+	if (hash[2][0] == '+')
 	{
-		hash[0][ft_strlen(hash[0]) - 1] = 0;
-		environ = edit_env_var(hash);
-		// free_2d_table(hash);
-		// free_2d_table(env_hash);
-		return (0);
+		append_env_var(hash[0], hash[1]);
 	}
-	if (!env_hash)
-	{
-		environ = new_env_var(hash);
-		// free_2d_table(hash);
-		// free_2d_table(env_hash);
-		return (0);
-	}
-	unset(env_hash[0]);
-	environ = new_env_var(hash);
-	// free_2d_table(hash);
-	// free_2d_table(env_hash);
+	else
+		edit_env_var(hash[0], hash[1]);
 	return (0);
 }
 
@@ -80,10 +89,7 @@ int	ft_export(char **args)
 		return (1);
 	}
 	if (!args[1])
-	{
-		print_sorted_array(environ);
-		return (0);
-	}
+		return (print_sorted_array(environ), 0);
 	i = 0;
 	while (args[++i])
 		if (export(args[i]))

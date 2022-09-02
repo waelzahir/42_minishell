@@ -15,7 +15,7 @@
 /*
  * Init envirement by OLDPWD PWD SHLVL in case env passed NULL by env -i
  */
-char	**init_env(void)
+void	init_env(void)
 {
 	extern char	**environ;
 	char		**new_env;
@@ -31,7 +31,7 @@ char	**init_env(void)
 		exit(EXIT_FAILURE);
 	i = -1;
 	while (environ[++i])
-		new_env[i] = environ[i];
+		new_env[i] = ft_strdup(environ[i]);
 	new_env[i] = NULL;
 	environ = new_env;
 }
@@ -42,18 +42,26 @@ char	**arg_to_hash(char *arg)
 	char	**hash;
 	
 	i = -1;
-	// hash = (char **) garbage_collector(sizeof(char *) * 3, ALLOCATE);
-	hash = (char **) malloc(sizeof(char *) * 3);
+	hash = (char **) malloc(sizeof(char *) * 4);
 	if (!hash)
 		exit (EXIT_FAILURE);
 	while (arg[++i])
 		if (arg[i] == '=')
 			break ;
 	hash[0] = ft_substr(arg, 0, i);
-	hash[1] = ft_substr(arg, i + 1, ft_strlen(arg));
-	hash[2] = NULL;
-	if (!hash[0] || !hash[1])
+	if (!arg[i + 1])
+		hash[1] = NULL;
+	else
+		hash[1] = ft_substr(arg, i + 1, ft_strlen(arg));
+	hash[2] = ft_calloc(1, 2);
+	hash[3] = NULL;
+	if (!hash[0])
 		exit(EXIT_FAILURE);
+	if (hash[0][ft_strlen(hash[0]) - 1] == '+')
+	{
+		hash[0][i - 1] = 0;
+		hash[2][0] = '+';
+	}
 	return (hash);
 }
 
@@ -61,7 +69,6 @@ void	add_env_var(char *id, char *value)
 {
 	extern char	**environ;
 	char		**new_env;
-	char		**tmp;
 	int			i;
 
 	i = size_counter(environ);
@@ -71,12 +78,17 @@ void	add_env_var(char *id, char *value)
 	i = -1;
 	while (environ[++i])
 		new_env[i] = environ[i];
-	new_env[i] = ft__strjoin(ft_strjoin(id, "="), val);
+	if (!value)
+		new_env[i] = ft_strdup(id);
+	else
+	{
+		new_env[i] = ft__strjoin(ft_strjoin(id, "="), value);
+	}
 	if (!new_env[i])
 		exit(EXIT_FAILURE);
 	new_env[i + 1] = NULL;
 	if (environ[0])
-		free(environ)
+		free(environ);
 	environ = new_env;
 }
 
@@ -87,15 +99,15 @@ char	*get_env_var(char *id)
 	int			i;
 
 	if (!environ)
-		return ;
+		return (NULL);
 	if (!environ[0])
-		return ;
+		return (NULL);
 	len = ft_strlen(id);
 	i = -1;
 	while (environ[++i])
 	{
-		if (!ft_strncmp(is, environ, len)
-			&& (environ[i][len + 1] == '=' || environ[i][len + 1] == '\0'))
+		if (!ft_strncmp(id, environ[i], len)
+			&& (environ[i][len] == '=' || environ[i][len] == '\0'))
 			return (environ[i]);
 	}
 	return (NULL);
@@ -142,15 +154,20 @@ void	append_env_var(char *id, char *value)
 	extern char	**environ;
 	char		*tmp;
 	int			len;
+	int			i;
 
-	len = size_counter(id);
+	len = ft_strlen(id);
+	i = -1;
 	while (environ[++i])
 	{
-		if (!ft_strncmp(is, environ, len)
-			&& (environ[i][len + 1] == '=' || environ[i][len + 1] == '\0'))
+		if (!ft_strncmp(id, environ[i], len)
+			&& (environ[i][len] == '=' || environ[i][len] == '\0'))
 		{
 			tmp = environ[i];
-			environ[i] = ft_strjoin(tmp, val);
+			if (environ[i][len] == '\0')
+				environ[i] = ft__strjoin(ft_strjoin(tmp, "="), value);
+			else
+				environ[i] = ft_strjoin(tmp, value);
 			free(tmp);
 			return ;
 		}

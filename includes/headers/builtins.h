@@ -33,11 +33,13 @@ char	**arg_to_hash(char *arg);
 char	**is_env_var(char *arg);
 void	free_2d_table(char **table);
 char	**new_env_var(char **var);
-char	**edit_env_var(char **var);
 char	**replace_env_var(char **var);
 void	print_sorted_array(char **argv);
 void	*garbage_collector(int size, int choice);
-char	**init_env();
-
+void	init_env();
+void	edit_env_var(char *id, char *val);
+void	add_env_var(char *id, char *value);
+void	append_env_var(char *id, char *value);
+char	*get_env_var(char *id);
 
 #endif
