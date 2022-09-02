@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:33:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/29 00:33:43 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 22:25:44 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ static void    print(char *g[], int a)
 	i = -1;
 	while (++i < a)
 	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(g[i], 1);
-		write(1, "\n", 1);
+		if (g[i][0])
+		{
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd(g[i], 1);
+			write(1, "\n", 1);
+		}
 	}
 }
 

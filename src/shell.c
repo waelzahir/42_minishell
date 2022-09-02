@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/02 19:33:33 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 22:23:56 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,15 @@ void	shell(char *prompt)
 {
 	t_btree	*root;
 	char	*line;
+	extern char	**environ;
 	int		fd[2];
 
 	rl_catch_signals = 0;
 	signals_handler();
 	while (1)
 	{
+		if (!*environ)
+			add_env_var("\0", NULL);
 		line = readline(prompt);
 		if (line && line[0] != '\0')
 		{
