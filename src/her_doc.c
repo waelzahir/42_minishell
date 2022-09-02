@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/01 18:23:40 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 19:35:16 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,16 @@ char	*get_n_file()
 	return (file);
 }
 
+void	handl(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_putstr_fd("\b\b  ", 2);
+		ft_putstr_fd("\n", 1);
+		exit(130);
+	}
+}
+
 int	get_here_docf(int	*pid, char	*brkline, int	exp)
 {
 	char	*line;
@@ -87,12 +97,14 @@ int	get_here_docf(int	*pid, char	*brkline, int	exp)
 
 	len = ft_strlen(brkline);
 	if (!pid[0])
-		deflt_signal();
+		signal(SIGINT, handl);
 	while(1 && pid[0] == 0)
 	{
-		line = readline("> ");
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(0);
 		if (!line)
 			return (close(pid[1]), exit(0), 0);
+		line[ft_strlen(line) - 1] = '\0';
 		if (ft_strlen(line)  == len && ft_strncmp(line, brkline, len) == 0)
 		{
 			return (free(line), close(pid[1]), exit(0), 0);
@@ -104,7 +116,6 @@ int	get_here_docf(int	*pid, char	*brkline, int	exp)
 		}
 		ft_putstr_fd(line, pid[1]);
 		ft_putstr_fd("\n", pid[1]);
-
 		free(line);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/01 17:44:11 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:57:03 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 int	exit_stat[4];
 
 
+int 	get_ret_val(void);
 
 char	*get_prompt(void);
 void     shell(char *prompt);

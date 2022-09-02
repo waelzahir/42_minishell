@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/31 18:17:23 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/09/02 19:33:33 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ int	closing_check(char *str, int *fd)
 		return (printf("error: unclosed quotes\n"), 1);
 	return (0);
 }
-
+int 	get_ret_val(void)
+{
+	if (WIFEXITED(exit_stat[0]))
+		return (WEXITSTATUS(exit_stat[0]));
+	return 0;
+}
 void	waiting(void)
 {
 
@@ -80,6 +85,12 @@ void	shell(char *prompt)
 			{
 				root = parser(line);
 				binary_tree_new(NULL, 0, 1);
+					if (get_ret_val() == 130)
+					{
+						exit_stat[0] = 0;
+						continue ;
+					}
+	
 				if (root)
 					exe_launcher(root, ROOT, fd);
 				waiting();
