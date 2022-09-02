@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:56:27 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/02 05:44:55 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 20:59:17 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	ft_unset(char **args)
 
 	i = 0;
 	ret = 0;
+	if (!environ)
+		return (1);
 	if (!environ[0])
 	{
 		ft_putstr_fd("Unset: Invalid file.\n", 2);
