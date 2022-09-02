@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:56:27 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/28 23:53:57 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 05:44:55 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,11 @@ char	**remove_pointer(char *arg, char **pointer)
 
 void	unset(char *arg)
 {
-	int			i;
-	extern char	**environ;
+	char	*env;
 
-	i = -1;
-	while (environ[++i])
-		if (!ft_strncmp(arg, environ[i], ft_strlen(arg)) \
-			&& environ[i][ft_strlen(arg)] == '=')
-			environ = remove_pointer(arg, environ);
+	env = get_env_var(arg);
+	if (env)
+		delete_env_var(arg);
 }
 
 int	ft_unset(char **args)

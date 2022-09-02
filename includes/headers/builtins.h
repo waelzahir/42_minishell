@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:57:44 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/01 17:57:54 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 05:41:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	edit_env_var(char *id, char *val);
 void	add_env_var(char *id, char *value);
 void	append_env_var(char *id, char *value);
 char	*get_env_var(char *id);
+void	delete_env_var(char *id);
 
 #endif
