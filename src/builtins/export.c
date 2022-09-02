@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:40 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/28 23:53:45 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/02 19:47:29 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_identefier(char *id)
 void	new_var(char **hash)
 {
 	if (hash[2][0] == '+')
-		hash[0][ft_strlen(hash[0]) - 1] = 0;
+		hash[0][ft_strlen(hash[0])] = 0;
 	if (!hash[1])
 		add_env_var(hash[0], NULL);
 	else
