@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/01 18:03:00 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 16:45:10 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_env(void)
 		new_env[i] = ft_strdup(environ[i]);
 	new_env[i] = NULL;
 	environ = new_env;
+	free(new_env);
 }
 
 char	**arg_to_hash(char *arg)

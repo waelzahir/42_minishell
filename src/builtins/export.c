@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:40 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/02 19:47:29 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:35:20 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,16 @@ int	export(char *arg)
 	hash = arg_to_hash(arg);
 	env_var = get_env_var(hash[0]);
 	if (!env_var)
-		return (new_var(hash), 0);
+		return (new_var(hash), free_hash(hash), 0);
 	if (!hash[1] && hash[2][1] == '=')
-		return (edit_env_var(hash[0], ""), 0);
+		return (edit_env_var(hash[0], ""), free_hash(hash), 0);
 	if (!hash[1])
-		return ( 0);
+		return (free_hash(hash), 0);
 	if (hash[2][0] == '+')
-	{
 		append_env_var(hash[0], hash[1]);
-	}
 	else
 		edit_env_var(hash[0], hash[1]);
+	free_hash(hash);
 	return (0);
 }
 

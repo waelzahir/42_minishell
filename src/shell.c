@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/02 22:23:56 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:40:33 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	shell(char *prompt)
 			if (closing_check(line, fd) == 0)
 			{
 				root = parser(line);
-				binary_tree_new(NULL, 0, 1);
+				binary_tree_new(NULL, 0, 1, NULL);
 					if (get_ret_val() == 130)
 					{
 						exit_stat[0] = 0;
@@ -97,6 +97,7 @@ void	shell(char *prompt)
 				if (root)
 					exe_launcher(root, ROOT, fd);
 				waiting();
+				binary_tree_free(&root);
 			}
 			free(line);
 		}

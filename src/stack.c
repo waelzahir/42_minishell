@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:45:09 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/29 00:24:51 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:32:46 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	free_simple_stack(t_stack	*simple, char	*text)
 		free(token->def);
 		free(token);
 	}
-	// free(stack);
+	free(simple);
 }
 
 void	free_nsimple_stack(t_stack	*cmd)

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:17:03 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/29 00:29:46 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 16:44:38 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*get_prompt(void)
 int	main(void)
 {
 	char		*prompt;
+	extern char	**environ;
 
 	prompt = get_prompt();
 	init_env();
@@ -38,5 +39,7 @@ int	main(void)
 		return (printf("failed to set prompt value\n"), 1);
 	shell(prompt);
 	free(prompt);
+	clear_history();
+	free_2d_table(environ);
 	return (0);
 }

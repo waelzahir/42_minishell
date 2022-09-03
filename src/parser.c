@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:02:52 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/29 15:35:05 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/09/03 16:56:13 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	fill_stacks(t_stack *stack_cmd, t_stack *stack_op, t_lexer *lexer)
 	stack->size = 0;
 	if (stack_cmd->size <= stack_op->size)
 		return (free_simple_stack(stack, "|"), 1);
+	if (stack_op->size == 0)
+		free(stack_op);
 	return (free_simple_stack(stack, NULL), 0);
 }
 

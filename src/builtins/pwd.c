@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 15:49:25 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/08/29 00:40:22 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:29:51 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	ft_pwd(int size)
 		return (0);
 	}
 	printf("%s\n", cwd);
+	free(cwd);
 	return (0);
 }

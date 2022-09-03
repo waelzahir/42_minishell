@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/02 20:00:49 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:31:02 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ int    execute(t_token **token, int node, int *fd, int in)
         perror("execve");
         exit(127);
     }
-    close(in);
+    if (in != -1)
+        close(in);
     close(fd[1]);
      return (pid);
 }
@@ -142,6 +143,7 @@ void    execute_thesimplest(int pid, t_token  **token, char **cmd)
     extern  char    **environ;
     char            *path;
     
+    path = NULL;
     if (pid == 0)
     {
         if (redirect(get_redirection(token)) == 1)
@@ -158,6 +160,7 @@ void    execute_thesimplest(int pid, t_token  **token, char **cmd)
         execve(path, cmd, environ);
         exit(127);
     }
+    free_2d_table(cmd);
 }
 void    single_exec(t_token     **token)
 {
@@ -178,11 +181,13 @@ void    single_exec(t_token     **token)
         }
         exit_stat[3] = exec_built(cmd);
         remember_redi(1);
+        free_2d_table(cmd);
         return ;
     }
     pid = ft_fork();
     execute_thesimplest(pid, token, cmd);
     waitpid(pid, &exit_stat[0], 0);
+    
 }
 
 void    exe_launcher(t_btree *root, int mode, int *fd)

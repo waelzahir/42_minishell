@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/02 18:57:03 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:53:12 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	remember_redi(int i);
 char	*here_doc(char	*str);
 int	apply_herdoc(char	*file);
 void    exe_launcher(t_btree *root, int mode, int *fd);
-
+void	tokens_free(t_token	**token);
 
 
 #endif
