@@ -12,55 +12,6 @@
 
 #include "../includes/headers/minishell.h"
 
-int	is_builtin(char *cmd)
-{
-	size_t	len;
-
-	if (!cmd)
-		return (1);
-	len = ft_strlen(cmd);
-	if (len == ft_strlen("echo") && ft_strncmp(cmd, "echo", len) == 0)
-		return (0);
-	else if (len == ft_strlen("cd") && ft_strncmp(cmd, "cd", len) == 0)
-		return (0);
-	else if (len == ft_strlen("pwd") && ft_strncmp(cmd, "pwd", len) == 0)
-		return (0);
-	else if (len == ft_strlen("export") && ft_strncmp(cmd, "export", len) == 0)
-		return (0);
-	else if (len == ft_strlen("unset") && ft_strncmp(cmd, "unset", len) == 0)
-		return (0);
-	else if (len == ft_strlen("env") && ft_strncmp(cmd, "env", len) == 0)
-		return (0);
-	else if (len == ft_strlen("exit") && ft_strncmp(cmd, "exit", len) == 0)
-		return (0);
-	return (1);
-}
-
-int	exec_built(char **cmd)
-{
-	size_t	len;
-	int		ret;
-
-	len = ft_strlen(cmd[0]);
-	ret = -1;
-	if (len == ft_strlen("echo") && ft_strncmp(cmd[0], "echo", len) == 0)
-		ret = ft_echo(cmd);
-	else if (len == ft_strlen("cd") && ft_strncmp(cmd[0], "cd", len) == 0)
-		ret = ft_cd(cmd);
-	else if (len == ft_strlen("pwd") && ft_strncmp(cmd[0], "pwd", len) == 0)
-		ret = ft_pwd(1024);
-	else if (len == ft_strlen("export") \
-			&& ft_strncmp(cmd[0], "export", len) == 0)
-		ret = ft_export(cmd);
-	else if (len == ft_strlen("unset") && ft_strncmp(cmd[0], "unset", len) == 0)
-		ret = ft_unset(cmd);
-	else if (len == ft_strlen("env") && ft_strncmp(cmd[0], "env", len) == 0)
-		ret = ft_env();
-	else if (len == ft_strlen("exit") && ft_strncmp(cmd[0], "exit", len) == 0)
-		ft_exit(cmd);
-	return (ret);
-}
-
 void	pipe_helper(int node, int *fd, int in)
 {
 	if (node != 0)
@@ -88,30 +39,20 @@ int	execute(t_token **token, int node, int *fd, int in)
 	if (pid == 0)
 	{
 		pipe_helper(node, fd, in);
-		if (redirect(get_redirection(token)) == 1)
-			exit(127);
 		command = join_tokens(token);
-		if (!command)
+		if (!command || redirect(get_redirection(token)) == 1)
 			exit(127);
 		if (!is_builtin(command[0]))
 		{
-			exit_stat[3] = exec_built(command);
+			g_exit_stat[3] = exec_built(command);
 			exit(0);
 		}
-		if (is_path(command[0]) == 0)
-			path = &command[0][0];
-		else
-			path = get_path(command[0]);
-		if (!path || access(path, X_OK) == -1)
-			return (perror("shell"), exit(127), -1);
+		path = set_path(command[0]);
 		execve(path, command, environ);
 		perror("execve");
 		exit(127);
 	}
-	if (in != -1)
-		close(in);
-	close(fd[1]);
-	return (pid);
+	return (return_function(pid, in, fd[1]));
 }
 
 void	executor(t_btree *root, int node, int *fd)
@@ -131,7 +72,7 @@ void	executor(t_btree *root, int node, int *fd)
 			pipe(fd);
 		pid = execute(root->content, root->index, fd, input);
 		if (root->index == 0)
-			waitpid(pid, &exit_stat[0], 0);
+			waitpid(pid, &g_exit_stat[0], 0);
 		input = fd[0];
 		return ;
 	}
@@ -179,23 +120,12 @@ void	single_exec(t_token **token)
 			remember_redi(1);
 			return ;
 		}
-		exit_stat[3] = exec_built(cmd);
+		g_exit_stat[3] = exec_built(cmd);
 		remember_redi(1);
 		free_2d_table(cmd);
 		return ;
 	}
 	pid = ft_fork();
 	execute_thesimplest(pid, token, cmd);
-	waitpid(pid, &exit_stat[0], 0);
-}
-
-void	exe_launcher(t_btree *root, int mode, int *fd)
-{
-	if (root->num == CMD)
-	{
-		mode = 0;
-		single_exec(root->content);
-	}
-	else
-		executor(root, ROOT, fd);
+	waitpid(pid, &g_exit_stat[0], 0);
 }

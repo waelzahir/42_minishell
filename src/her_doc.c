@@ -12,38 +12,6 @@
 
 #include "../includes/headers/minishell.h"
 
-int	get_random_number(void)
-{
-	int		fd;
-	char	random[4];
-	int		num;
-
-	fd = open("/dev/urandom", O_RDONLY, 0777);
-	if (fd < 0)
-		return (-1);
-	if (read(fd, random, 3) == -1)
-		return (close(fd), -1);
-	num = random[0] * random[1] * random[2];
-	num = num * 10 + 1000;
-	close(fd);
-	return (num);
-}
-
-char	*get_random_name(void)
-{
-	char	*path;
-	char	*final;
-	char	*random;
-
-	path = "/tmp/shell_oaoa_";
-	random = ft_itoa(get_random_number());
-	final = ft_strjoin(path, random);
-	if (!final)
-		return (free(random), NULL);
-	free(random);
-	return (final);
-}
-
 char	*h_clean(char *s)
 {
 	char	*string;
@@ -119,13 +87,7 @@ char	*here_doc(char	*str)
 	int		expand;
 
 	expand = 0;
-	if (str[2] == 34 || str[2] == 39)
-	{
-		breakline = h_clean(str + 2);
-		expand = 1;
-	}
-	else
-		breakline = str + 2;
+	breakline = get_break_line(str, &expand);
 	filename = get_n_file();
 	if (!filename)
 		return (free(str), NULL);
@@ -136,7 +98,7 @@ char	*here_doc(char	*str)
 	if (pid[0])
 		ignore_signal();
 	get_here_docf(pid, breakline, expand);
-	waitpid(pid[0], &exit_stat[0], 0);
+	waitpid(pid[0], &g_exit_stat[0], 0);
 	rl_catch_signals = 0;
 	signals_handler();
 	close(pid[1]);

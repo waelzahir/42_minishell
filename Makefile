@@ -46,8 +46,8 @@ BUILTINS := $(addprefix $(BUILTINS_DIR)/, $(BUILTINS))
 GNL := get_next_line.c get_next_line_utils.c
 GNL := $(addprefix $(GNL_DIR)/, $(GNL))
 
-SRC := binary_tree.c execution.c lexer_advance.c lexer_init.c path.c shell.c token_join.c env_f.c env_f2.c expander.c lexer_end.c parser.c redirection.c stack.c \
-		str_handler.c helpers.c signals_handler.c $(BUILTINS) $(GNL) her_doc.c
+SRC := binary_tree.c execution.c lexer_end_h.c lexer_advance.c lexer_init.c path.c shell.c token_join.c env_f.c env_f2.c expander.c lexer_end.c parser.c redirection.c stack.c \
+		str_handler.c helpers.c signals_handler.c $(BUILTINS) $(GNL) her_doc.c execution_helper.c her_doc_helper.c
 SRC := $(addprefix $(SRC_DIR)/, $(SRC))
 
 OBJ := $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))

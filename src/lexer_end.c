@@ -26,20 +26,6 @@ t_token	*set_token(int type, char *content)
 	return (token);
 }
 
-int	sfilerules(char c)
-{
-	if (c == '\0' || c == '|' || c == ' ')
-		return (1);
-	return (0);
-}
-
-int	filerules(char c)
-{
-	if (c == '<' || c == '>' || c == '\0' || c == '|' || c == ' ')
-		return (1);
-	return (0);
-}
-
 char	*filerror(int i, char *str, t_lexer *lexer)
 {
 	if (!i && ft_strlen(str) > 2)

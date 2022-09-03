@@ -1,0 +1,10 @@
+Makefile
+includes
+main.c
+minishell
+minishell.dSYM
+obj
+p
+red.sh
+src
+testcases

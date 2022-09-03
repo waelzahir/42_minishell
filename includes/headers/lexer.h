@@ -28,5 +28,7 @@ char	*get_pipe(t_lexer *lexer);
 t_token	*set_token(int type, char *content);
 t_token	*lexer_get_token(t_lexer *lexer);
 char	*get_red(t_lexer *lexer, char type);
+int		sfilerules(char c);
+int		filerules(char c);
 
 #endif

@@ -28,10 +28,9 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-int	exit_stat[4];
+int	g_exit_stat[4];
 
 int		get_ret_val(void);
-
 char	*get_prompt(void);
 void	shell(char *prompt);
 void	signals(void);
@@ -47,6 +46,15 @@ char	*get_path(char	*cmd);
 int		ft_fork(void);
 int		is_builtin(char *cmd);
 int		exec_built(char **cmd);
+void	single_exec(t_token **token);
+char	*set_path(char *cmd);
+void	shell_routine(char	*line, int *fd);
+int		closing_check(char *str, int *fd);
+char	*get_break_line(char	*str, int *expand);
+char	*get_random_name(void);
+int		get_random_number(void);
+char	*h_clean(char *s);
+int		return_function(int pid, int in, int fd);
 // Signals handlers
 void	signals_handler(void);
 void	deflt_signal(void);
