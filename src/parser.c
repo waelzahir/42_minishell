@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:02:52 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 18:58:41 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 20:48:59 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ t_btree	*parser(char *str)
 		return (NULL);
 	cmd_stack = init_stack();
 	if (!cmd_stack)
-	{
-		free(lexer);
-		return (NULL);
-	}
+		return (free(lexer), NULL);
 	op_stack = init_stack();
 	if (!op_stack)
 	{

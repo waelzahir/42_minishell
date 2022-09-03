@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:29:15 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/30 20:27:17 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/09/03 20:18:07 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*expand(char *s)
 		str = get_string(lexer, environ);
 		if (!str)
 			return (free(lexer), NULL);
-		ret = ft__strjoin(ret, str); // gnl get_next_line ft _strjoin
+		ret = ft__strjoin(ret, str);
 		if (!ret)
 			return (NULL);
 		free(str);

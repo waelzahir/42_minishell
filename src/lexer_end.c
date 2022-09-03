@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_end.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 21:13:43 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/30 16:44:48 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/09/03 20:47:49 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ t_token	*set_token(int type, char *content)
 	token->def = content;
 	return (token);
 }
+
 int	sfilerules(char c)
 {
 	if (c == '\0' || c == '|' || c == ' ')
 		return (1);
 	return (0);
 }
+
 int	filerules(char c)
 {
 	if (c == '<' || c == '>' || c == '\0' || c == '|' || c == ' ')

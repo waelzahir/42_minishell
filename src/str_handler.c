@@ -6,15 +6,15 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:33:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/02 22:25:44 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 20:03:03 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
 
-static void    print(char *g[], int a)
+static void	print(char *g[], int a)
 {
-	int    i;
+	int	i;
 
 	i = -1;
 	while (++i < a)
@@ -64,4 +64,35 @@ void	print_sorted_array(char **argv)
 		}
 	}
 	print(argv, size);
+}
+
+char	**arg_to_hash(char *arg)
+{
+	int		i;
+	char	**hash;
+
+	i = -1;
+	hash = (char **) malloc(sizeof(char *) * 4);
+	if (!hash)
+		exit (EXIT_FAILURE);
+	while (arg[++i])
+		if (arg[i] == '=')
+			break ;
+	hash[0] = ft_substr(arg, 0, i);
+	if (!arg[i + 1])
+		hash[1] = NULL;
+	else
+		hash[1] = ft_substr(arg, i + 1, ft_strlen(arg));
+	hash[2] = ft_calloc(1, 3);
+	hash[3] = NULL;
+	if (!hash[0])
+		exit(EXIT_FAILURE);
+	if (hash[0][ft_strlen(hash[0]) - 1] == '+')
+	{
+		hash[0][i - 1] = 0;
+		hash[2][0] = '+';
+	}
+	if (arg[i] == '=' )
+		hash[2][1] = '=';
+	return (hash);
 }

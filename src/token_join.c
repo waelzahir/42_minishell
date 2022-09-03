@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:46:25 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 17:27:32 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:08:14 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ char	**join_cmd(t_token **tokens)
 
 	i = -1;
 	stack = init_stack();
-	if (!tokens[0])
-		return (NULL);
-	if (!stack)
+	if (!stack && !tokens[0])
 		return (NULL);
 	join = NULL;
 	while (tokens[++i])
@@ -70,13 +68,12 @@ char	**join_cmd(t_token **tokens)
 			join = NULL;
 		}
 		else
-		join = collector(join, tokens[i]->def);
+			join = collector(join, tokens[i]->def);
 	}
 	if (join)
 		push_stack(stack, join);
 	cmd = (char **)stack->stack;
-	free(stack);
-	return (cmd);
+	return (free(stack), cmd);
 }
 
 char	**join_tokens(t_token **token)

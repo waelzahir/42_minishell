@@ -6,17 +6,17 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:54:31 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/02 22:48:24 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:17:59 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/headers/minishell.h"
 
-int	ft_env()
+int	ft_env(void)
 {
 	extern char	**environ;
-	int	i;
-	
+	int			i;
+
 	i = 0;
 	if (!environ[0])
 		return (0);

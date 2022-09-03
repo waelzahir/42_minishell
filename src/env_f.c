@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/03 19:02:23 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 20:04:47 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,7 @@
 /*
  * Init envirement by OLDPWD PWD SHLVL in case env passed NULL by env -i
  */
-void        memo_p(char **en, int in)
-{
-	static	char	 **input;
 
-	if (in == 1)
-	{
-		free(input);
-		return ;
-	}
-	input = en;
-}
 void	init_env(void)
 {
 	extern char	**environ;
@@ -46,37 +36,6 @@ void	init_env(void)
 	new_env[i] = NULL;
 	environ = new_env;
 	memo_p(new_env, 0);
-}
-
-char	**arg_to_hash(char *arg)
-{
-	int		i;
-	char	**hash;
-	
-	i = -1;
-	hash = (char **) malloc(sizeof(char *) * 4);
-	if (!hash)
-		exit (EXIT_FAILURE);
-	while (arg[++i])
-		if (arg[i] == '=')
-			break ;
-	hash[0] = ft_substr(arg, 0, i);
-	if (!arg[i + 1])
-		hash[1] = NULL;
-	else
-		hash[1] = ft_substr(arg, i + 1, ft_strlen(arg));
-	hash[2] = ft_calloc(1, 3);
-	hash[3] = NULL;
-	if (!hash[0])
-		exit(EXIT_FAILURE);
-	if (hash[0][ft_strlen(hash[0]) - 1] == '+')
-	{
-		hash[0][i - 1] = 0;
-		hash[2][0] = '+';
-	}
-	if (arg[i] == '=' )
-		hash[2][1] = '=';
-	return (hash);
 }
 
 void	add_env_var(char *id, char *value)
@@ -125,36 +84,6 @@ char	*get_env_var(char *id)
 			return (environ[i]);
 	}
 	return (NULL);
-}
-
-void	delete_env_var(char *id)
-{
-	extern	char	**environ;
-	t_stack	*stack;
-	t_stack	*temp;
-	char	*poin;
-
-	stack = ft_calloc(1, sizeof(t_stack));
-	temp = ft_calloc(1, sizeof(t_stack));
-	stack->stack = (void **) environ;
-	stack->size = size_counter(environ);
-	while (stack->size)
-	{
-		poin = pop_stack(stack);
-		if (!ft_strncmp(id, poin, ft_strlen(id)) \
-			&& (poin[ft_strlen(id)] == '=' || poin[ft_strlen(id)] == '\0'))
-		{
-			free(poin);
-			break ;
-		}
-		else
-			push_stack(temp, poin);
-	}
-	while (temp->size != 0)
-		push_stack(stack, pop_stack(temp));
-	environ = (char **) stack->stack;
-	free(stack);
-	free(temp);
 }
 
 void	edit_env_var(char *id, char *value)

@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozahir <ozahir@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:08:14 by ozahir            #+#    #+#             */
-/*   Updated: 2022/08/28 22:41:22 by ozahir           ###   ########.fr       */
+/*   Updated: 2022/09/03 20:51:05 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
 
-int    is_path(char    *s)
+int	is_path(char	*s)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (s[i])
-    {
-        if (s[i] == '/')
-            return (0);
-            i++;
-    }
-    return (1);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '/')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 char	*path_join(char const *s1, char const *s2, int c)
@@ -52,6 +52,7 @@ char	*path_join(char const *s1, char const *s2, int c)
 	ss[ln1 + ln2] = 0;
 	return (ss);
 }
+
 char	*binary_path(char	*cmd, char	**paths)
 {
 	int		i;
@@ -71,16 +72,15 @@ char	*binary_path(char	*cmd, char	**paths)
 	return (NULL);
 }
 
-
 char	*get_path(char	*cmd)
 {
 	char	*path;
 	char	**d_binaries;
-    char    *paths;
-    
-    paths = getenv("PATH");
-    if (!paths)
-        return (NULL);
+	char	*paths;
+
+	paths = getenv("PATH");
+	if (!paths)
+		return (NULL);
 	d_binaries = ft_split(paths, ':');
 	if (!d_binaries)
 		return (NULL);
@@ -88,21 +88,4 @@ char	*get_path(char	*cmd)
 	if (!path)
 		return (NULL);
 	return (path);
-}
-
-void    path_included(char **command, char **redirection, int *fd)
-{
-    extern char **environ;
-
-    redirection = NULL;
-        if (fd)
-           {
-            close(fd[0]);
-            dup2(fd[1], STDOUT_FILENO);
-            close(fd[1]);
-           }
-        execve(command[0], command, environ);
-        perror("execve :");
-        exit(1);
-    
 }

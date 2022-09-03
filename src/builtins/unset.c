@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 03:56:27 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/02 20:59:17 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:20:33 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,6 @@ int	size_counter(char **pointer)
 	while (pointer[i])
 		i++;
 	return (i);
-}
-
-char	**remove_pointer(char *arg, char **pointer)
-{
-	t_stack	*stack;
-	t_stack	*temp;
-	char	*poin;
-
-	stack = ft_calloc(1, sizeof(t_stack));
-	temp = ft_calloc(1, sizeof(t_stack));
-	stack->stack = (void **) pointer;
-	stack->size = size_counter(pointer);
-	while (1)
-	{
-		poin = pop_stack(stack);
-		if (!ft_strncmp(arg, poin, ft_strlen(arg)) \
-			&& poin[ft_strlen(arg)] == '=')
-		{
-			// free(poin);
-			break ;
-		}
-		else
-			push_stack(temp, poin);
-	}
-	while (temp->size != 0)
-		push_stack(stack, pop_stack(temp));
-	return ((char **) stack->stack);
 }
 
 void	unset(char *arg)

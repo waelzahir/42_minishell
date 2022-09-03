@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 19:57:24 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/02 20:08:49 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:19:16 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static int	is_number(char *s)
 {
 	int	i;
 
- 	i = -1;
+	i = -1;
 	while (s[++i])
-  		if (!ft_isdigit(s[i]))
-		  return (1);
+		if (!ft_isdigit(s[i]))
+			return (1);
 	return (0);
 }
 
@@ -36,6 +36,6 @@ void	ft_exit(char **arg)
 		s = ft_atoi(arg[1]);
 		exit(s);
 	}
- 	ft_putstr_fd("Numeric argument required\n", 2);
+	ft_putstr_fd("Numeric argument required\n", 2);
 	exit(255);
 }

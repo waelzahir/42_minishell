@@ -6,12 +6,12 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:57:44 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/02 20:01:04 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:23:46 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIINS_H
-# define BUILTIINS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
 # define EXP_APPEND_MODE 0
 # define EXP_ASSIGN_MODE 1
@@ -28,16 +28,11 @@ int		ft_echo(char **args);
 void	ft_exit(char **arg);
 // Helpers functions for builtins
 int		check_identefier(char *id);
-char	**remove_pointer(char *arg, char **pointer);
 int		size_counter(char **pointer);
 char	**arg_to_hash(char *arg);
-char	**is_env_var(char *arg);
 void	free_2d_table(char **table);
-char	**new_env_var(char **var);
-char	**replace_env_var(char **var);
 void	print_sorted_array(char **argv);
-void	*garbage_collector(int size, int choice);
-void	init_env();
+void	init_env(void);
 void	edit_env_var(char *id, char *val);
 void	add_env_var(char *id, char *value);
 void	append_env_var(char *id, char *value);

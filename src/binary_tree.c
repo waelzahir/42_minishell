@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:05:21 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 16:54:55 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 20:00:47 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	binary_tree_add_l_child(t_btree **root, t_btree *l_child)
 void	binary_tree_free(t_btree **root)
 {
 	t_token	*token;
+
 	if (!root)
 		return ;
 	if (!*root)
@@ -68,13 +69,10 @@ void	binary_tree_free(t_btree **root)
 	binary_tree_free(&((*root)->l_child));
 	binary_tree_free(&((*root)->r_child));
 	if ((*root)->num == CMD)
-	{
-		
 		tokens_free((*root)->content);
-	}
 	if ((*root)->num == OPERATION)
 	{
-		token = (t_token *) (*root)->content;
+		token = (t_token *)(*root)->content;
 		free(token->def);
 		free(token);
 	}

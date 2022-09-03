@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 17:40:33 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:00:33 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,22 @@ int	closing_check(char *str, int *fd)
 		return (printf("error: unclosed quotes\n"), 1);
 	return (0);
 }
-int 	get_ret_val(void)
+
+int	get_ret_val(void)
 {
 	if (WIFEXITED(exit_stat[0]))
 		return (WEXITSTATUS(exit_stat[0]));
-	return 0;
+	return (0);
 }
+
 void	waiting(void)
 {
-
 	while (wait(NULL) > 0)
 		;
 	if (WIFEXITED(exit_stat[0]))
 		exit_stat[3] = WEXITSTATUS(exit_stat[0]);
 }
+
 void	remember_redi(int i)
 {
 	if (i == 0)
@@ -69,10 +71,10 @@ void	remember_redi(int i)
 
 void	shell(char *prompt)
 {
-	t_btree	*root;
-	char	*line;
+	t_btree		*root;
+	char		*line;
 	extern char	**environ;
-	int		fd[2];
+	int			fd[2];
 
 	rl_catch_signals = 0;
 	signals_handler();
@@ -88,12 +90,11 @@ void	shell(char *prompt)
 			{
 				root = parser(line);
 				binary_tree_new(NULL, 0, 1, NULL);
-					if (get_ret_val() == 130)
-					{
-						exit_stat[0] = 0;
-						continue ;
-					}
-	
+				if (get_ret_val() == 130)
+				{
+					exit_stat[0] = 0;
+					continue ;
+				}	
 				if (root)
 					exe_launcher(root, ROOT, fd);
 				waiting();

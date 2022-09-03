@@ -6,16 +6,18 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:40:46 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/02 19:35:16 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:04:54 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
-int		get_random_number()
+
+int	get_random_number(void)
 {
-	int fd;
+	int		fd;
 	char	random[4];
-	int 	num;
+	int		num;
+
 	fd = open("/dev/urandom", O_RDONLY, 0777);
 	if (fd < 0)
 		return (-1);
@@ -26,12 +28,13 @@ int		get_random_number()
 	close(fd);
 	return (num);
 }
-char	*get_random_name()
+
+char	*get_random_name(void)
 {
 	char	*path;
 	char	*final;
-	char		*random;
-	
+	char	*random;
+
 	path = "/tmp/shell_oaoa_";
 	random = ft_itoa(get_random_number());
 	final = ft_strjoin(path, random);
@@ -40,22 +43,24 @@ char	*get_random_name()
 	free(random);
 	return (final);
 }
-char	*h_clean(char	*s)
+
+char	*h_clean(char *s)
 {
-	char    *string;
-    int i;
-    
-    i = 0;
-    if (s[0] == 34 || s[0] == 39)
-        string = s + 1;
-    else
-        return (s);
+	char	*string;
+	int		i;
+
+	i = 0;
+	if (s[0] == 34 || s[0] == 39)
+		string = s + 1;
+	else
+		return (s);
 	while (string[i])
 		i++;
 	string[i - 1] = 0;
-	return string;
+	return (string);
 }
-char	*get_n_file()
+
+char	*get_n_file(void)
 {
 	char	*file;
 	int		i;
@@ -80,40 +85,25 @@ char	*get_n_file()
 	return (file);
 }
 
-void	handl(int sig)
-{
-	if (sig == SIGINT)
-	{
-		ft_putstr_fd("\b\b  ", 2);
-		ft_putstr_fd("\n", 1);
-		exit(130);
-	}
-}
-
-int	get_here_docf(int	*pid, char	*brkline, int	exp)
+int	get_here_docf(int *pid, char *brkline, int exp)
 {
 	char	*line;
-	size_t len;
+	size_t	len;
 
 	len = ft_strlen(brkline);
 	if (!pid[0])
 		signal(SIGINT, handl);
-	while(1 && pid[0] == 0)
+	while (1 && pid[0] == 0)
 	{
 		ft_putstr_fd("> ", 1);
 		line = get_next_line(0);
 		if (!line)
 			return (close(pid[1]), exit(0), 0);
 		line[ft_strlen(line) - 1] = '\0';
-		if (ft_strlen(line)  == len && ft_strncmp(line, brkline, len) == 0)
-		{
+		if (ft_strlen(line) == len && ft_strncmp(line, brkline, len) == 0)
 			return (free(line), close(pid[1]), exit(0), 0);
-			
-		}
 		if (exp == 0)
-		{
 			line = expand(line);
-		}
 		ft_putstr_fd(line, pid[1]);
 		ft_putstr_fd("\n", pid[1]);
 		free(line);
@@ -128,13 +118,12 @@ char	*here_doc(char	*str)
 	int		pid[3];
 	int		expand;
 
-
 	expand = 0;
 	if (str[2] == 34 || str[2] == 39)
-		{
-			breakline = h_clean(str + 2); 
-			expand = 1;
-		} 
+	{
+		breakline = h_clean(str + 2);
+		expand = 1;
+	}
 	else
 		breakline = str + 2;
 	filename = get_n_file();
@@ -143,16 +132,13 @@ char	*here_doc(char	*str)
 	pid[1] = open(filename, O_CREAT | O_WRONLY, 0777);
 	if (pid[1] < 0)
 		return (perror("here doc"), NULL);
-	// rl_catch_signals = 1;
 	pid[0] = ft_fork();
 	if (pid[0])
 		ignore_signal();
 	get_here_docf(pid, breakline, expand);
 	waitpid(pid[0], &exit_stat[0], 0);
-	// ft_putstr_fd("here_doc>  \n", 2);
 	rl_catch_signals = 0;
 	signals_handler();
-	// ft_putstr_fd("\b\b  ", 1);
 	close(pid[1]);
 	free(str);
 	return (filename);
@@ -164,11 +150,10 @@ int	apply_herdoc(char	*file)
 
 	fd = open(file, O_RDONLY, 0777);
 	if (fd < 0 || dup2(fd, 0) == -1)
-    {
-            perror("redirection");
-            return (1);
-    }
+	{
+		perror("redirection");
+		return (1);
+	}
 	close(fd);
 	return (0);
-	
 }
