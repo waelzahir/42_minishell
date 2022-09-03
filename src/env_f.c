@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/03 18:51:34 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 19:02:23 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 /*
  * Init envirement by OLDPWD PWD SHLVL in case env passed NULL by env -i
  */
+void        memo_p(char **en, int in)
+{
+	static	char	 **input;
+
+	if (in == 1)
+	{
+		free(input);
+		return ;
+	}
+	input = en;
+}
 void	init_env(void)
 {
 	extern char	**environ;
@@ -34,6 +45,7 @@ void	init_env(void)
 		new_env[i] = ft_strdup(environ[i]);
 	new_env[i] = NULL;
 	environ = new_env;
+	memo_p(new_env, 0);
 }
 
 char	**arg_to_hash(char *arg)

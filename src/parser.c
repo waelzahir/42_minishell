@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:02:52 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 16:56:13 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 18:58:41 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ int	fill_stacks(t_stack *stack_cmd, t_stack *stack_op, t_lexer *lexer)
 	stack->size = 0;
 	if (stack_cmd->size <= stack_op->size)
 		return (free_simple_stack(stack, "|"), 1);
-	if (stack_op->size == 0)
-		free(stack_op);
 	return (free_simple_stack(stack, NULL), 0);
 }
 
@@ -82,6 +80,7 @@ t_btree	*parser(char *str)
 	t_stack	*cmd_stack;
 	t_stack	*op_stack;
 	t_lexer	*lexer;
+	t_btree	*root;
 
 	lexer = init_lexer(str);
 	if (!lexer)
@@ -101,5 +100,8 @@ t_btree	*parser(char *str)
 	}
 	if (fill_stacks(cmd_stack, op_stack, lexer) == 1)
 		return (free(lexer), free_stacks(cmd_stack, op_stack), NULL);
-	return (free(lexer), binary_tree_create(cmd_stack, op_stack));
+	root = binary_tree_create(cmd_stack, op_stack);
+	if (root->num == CMD)
+		free(op_stack);
+	return (free(lexer), root);
 }
