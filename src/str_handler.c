@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:33:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/03 20:03:03 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/03 22:58:34 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,30 @@ void	print_sorted_array(char **argv)
 	print(argv, size);
 }
 
+static int	get_equal(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i++])
+	{
+		if (arg[i] == '=')
+		{
+			return (i);
+		}
+	}
+	return (1);
+}
+
 char	**arg_to_hash(char *arg)
 {
 	int		i;
 	char	**hash;
 
-	i = -1;
 	hash = (char **) malloc(sizeof(char *) * 4);
 	if (!hash)
 		exit (EXIT_FAILURE);
-	while (arg[++i])
-		if (arg[i] == '=')
-			break ;
+	i = get_equal(arg);
 	hash[0] = ft_substr(arg, 0, i);
 	if (!arg[i + 1])
 		hash[1] = NULL;
