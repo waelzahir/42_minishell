@@ -129,5 +129,6 @@ int	single_exec(t_token **token)
 	pid = ft_fork();
 	execute_thesimplest(pid, token, cmd);
 	waitpid(pid, &g_exit_stat[0], 0);
+	remember_redi(1);
 	return (1);
 }
