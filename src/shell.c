@@ -23,7 +23,7 @@ void	waiting(void)
 {
 	while (wait(NULL) > 0)
 		;
-		rl_catch_signals = 0;
+	rl_catch_signals = 0;
 	signals_handler();
 	if (g_exit_stat[0] == -99)
 		return ;

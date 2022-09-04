@@ -35,7 +35,6 @@ int	execute(t_token **token, int node, int *fd, int in)
 	int			pid;
 
 	expander(token);
-	ignore_signal();
 	pid = ft_fork();
 	if (pid == 0)
 	{
@@ -73,7 +72,10 @@ void	executor(t_btree *root, int node, int *fd)
 			pipe(fd);
 		pid = execute(root->content, root->index, fd, input);
 		if (root->index == 0)
+		{
+			ignore_signal();
 			waitpid(pid, &g_exit_stat[0], 0);
+		}
 		input = fd[0];
 		return ;
 	}
@@ -85,8 +87,6 @@ void	execute_thesimplest(int pid, t_token **token, char **cmd)
 	char		*path;
 
 	path = NULL;
-	if (pid)
-		ignore_signal();
 	if (pid == 0)
 	{		
 		if (redirect(get_redirection(token)) == 1)
@@ -128,6 +128,7 @@ int	single_exec(t_token **token)
 	}
 	pid = ft_fork();
 	execute_thesimplest(pid, token, cmd);
+	ignore_signal();
 	waitpid(pid, &g_exit_stat[0], 0);
 	remember_redi(1);
 	return (1);

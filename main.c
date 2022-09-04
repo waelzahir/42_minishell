@@ -47,9 +47,9 @@ char	*get_prompt(void)
 
 	user = getenv("USER");
 	if (!user)
-		prompt = ft_strdup("trial@shell % ");
+		prompt = ft_strdup("trial@spaghetti % ");
 	else
-		prompt = ft_strjoin(user, "@shell % ");
+		prompt = ft_strjoin(user, "@spaghetti % ");
 	if (!prompt)
 		return (NULL);
 	return (prompt);
