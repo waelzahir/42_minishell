@@ -30,7 +30,7 @@ BUILTINS_DIR := $(SRC_DIR)/builtins
 GNL_DIR := $(INCLUDES_DIR)/gnl
 
 # FLAGS
-CFLAGS :=  -Wall -Wextra -Werror
+CFLAGS :=  -Wall -Wextra -Werror -g
 RFLAGS := -lreadline
 LFLAGS := -L $(READLINE_DIR)/lib
 IFLAGS := -I $(READLINE_DIR)/include

@@ -15,16 +15,22 @@
 char	*expantion(char *str, char **environ)
 {
 	int	i;
+	char	*sr;
 
 	i = 0;
+	sr = NULL;
 	while (environ[i])
 	{
 		if (ft_strlen(str) < ft_strlen(environ[i])
 			&& !ft_strncmp(str, environ[i], ft_strlen(str))
 			&& environ[i][ft_strlen(str)] == '=')
-			return (ft_strdup(&environ[i][ft_strlen(str)] + 1));
+			{
+				sr = ft_strdup(&environ[i][ft_strlen(str)] + 1);
+				return (free(str), sr);
+			}
 			i++;
 	}
+	free(str);
 	return (ft_calloc(1, 1));
 }
 
