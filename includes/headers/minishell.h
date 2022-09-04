@@ -46,7 +46,7 @@ char	*get_path(char	*cmd);
 int		ft_fork(void);
 int		is_builtin(char *cmd);
 int		exec_built(char **cmd);
-void	single_exec(t_token **token);
+int	single_exec(t_token **token);
 char	*set_path(char *cmd);
 void	shell_routine(char	*line, int *fd);
 int		closing_check(char *str, int *fd);

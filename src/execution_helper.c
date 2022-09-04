@@ -57,7 +57,7 @@ int	exec_built(char **cmd)
 	else if (len == ft_strlen("env") && ft_strncmp(cmd[0], "env", len) == 0)
 		ret = ft_env();
 	else if (len == ft_strlen("exit") && ft_strncmp(cmd[0], "exit", len) == 0)
-		ft_exit(cmd);
+		ret = ft_exit(cmd);
 	return (ret);
 }
 

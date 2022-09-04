@@ -23,7 +23,7 @@ static int	is_number(char *s)
 	return (0);
 }
 
-void	ft_exit(char **arg)
+int	ft_exit(char **arg)
 {
 	int	s;
 
@@ -31,6 +31,11 @@ void	ft_exit(char **arg)
 		exit(0);
 	if (!arg[1])
 		exit(0);
+	if (arg[2])
+	{
+		ft_putstr_fd("too many arguments\n", 2);
+		return (1);
+	}
 	if (!is_number(arg[1]))
 	{
 		s = ft_atoi(arg[1]);
@@ -38,4 +43,5 @@ void	ft_exit(char **arg)
 	}
 	ft_putstr_fd("Numeric argument required\n", 2);
 	exit(255);
+	return (0);
 }

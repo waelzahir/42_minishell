@@ -25,7 +25,7 @@ int		ft_env(void);
 int		ft_pwd(int size);
 int		ft_cd(char **args);
 int		ft_echo(char **args);
-void	ft_exit(char **arg);
+int		ft_exit(char **arg);
 // Helpers functions for builtins
 int		check_identefier(char *id);
 int		size_counter(char **pointer);

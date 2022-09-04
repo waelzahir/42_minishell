@@ -103,29 +103,28 @@ void	execute_thesimplest(int pid, t_token **token, char **cmd)
 	free_2d_table(cmd);
 }
 
-void	single_exec(t_token **token)
+int	single_exec(t_token **token)
 {
 	char	**cmd;
 	int		pid;
 
 	expander(token);
 	cmd = join_tokens(token);
+	remember_redi(0);
+	if (redirect(get_redirection(token)) == 1)
+				return (remember_redi(1), 1);
 	if (!cmd)
-		return ;
+		return (remember_redi(1), 1);
 	if (is_builtin(cmd[0]) == 0)
 	{
-		remember_redi(0);
-		if (redirect(get_redirection(token)) == 1)
-		{
-			remember_redi(1);
-			return ;
-		}
 		g_exit_stat[3] = exec_built(cmd);
+		g_exit_stat[0] = -99;
 		remember_redi(1);
 		free_2d_table(cmd);
-		return ;
+		return (1);
 	}
 	pid = ft_fork();
 	execute_thesimplest(pid, token, cmd);
 	waitpid(pid, &g_exit_stat[0], 0);
+	return (1);
 }

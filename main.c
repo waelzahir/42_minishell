@@ -62,7 +62,7 @@ int	main(void)
 
 	prompt = get_prompt();
 	init_env();
-	g_exit_stat[3] = 1;
+	g_exit_stat[3] = 0;
 	if (!prompt)
 		return (printf("failed to set prompt value\n"), 1);
 	shell(prompt);
