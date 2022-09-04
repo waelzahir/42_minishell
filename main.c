@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:17:03 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 19:04:39 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/04 01:49:24 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ int	main(void)
 	free(prompt);
 	clear_history();
 	free_2d_table(environ);
-	memo_p(NULL, 1);
 	return (0);
 }
