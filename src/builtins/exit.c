@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 19:57:24 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/03 21:19:16 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/04 20:54:45 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ static int	is_number(char *s)
 
 	i = -1;
 	while (s[++i])
+	{
+		if (s[0] == '-' || s[0] == '+')
+            i++;
 		if (!ft_isdigit(s[i]))
 			return (1);
+	}
 	return (0);
 }
 
