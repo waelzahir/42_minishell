@@ -6,12 +6,11 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:45:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/03 21:03:34 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:56:23 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/minishell.h"
-
 
 void	handl(int sig)
 {

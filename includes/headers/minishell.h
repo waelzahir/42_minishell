@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/03 21:40:41 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:58:46 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*get_path(char	*cmd);
 int		ft_fork(void);
 int		is_builtin(char *cmd);
 int		exec_built(char **cmd);
-int	single_exec(t_token **token);
+int		single_exec(t_token **token);
 char	*set_path(char *cmd);
 void	shell_routine(char	*line, int *fd);
 int		closing_check(char *str, int *fd);

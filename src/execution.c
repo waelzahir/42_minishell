@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 20:17:27 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:58:30 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ int	execute(t_token **token, int node, int *fd, int in)
 	int			pid;
 
 	expander(token);
+	ignore_signal();
 	pid = ft_fork();
-	if (pid)
-		ignore_signal();
 	if (pid == 0)
 	{
 		pipe_helper(node, fd, in);
@@ -54,7 +53,6 @@ int	execute(t_token **token, int node, int *fd, int in)
 		perror("execve");
 		exit(127);
 	}
-
 	return (return_function(pid, in, fd[1]));
 }
 
@@ -90,7 +88,8 @@ void	execute_thesimplest(int pid, t_token **token, char **cmd)
 	if (pid)
 		ignore_signal();
 	if (pid == 0)
-	{		if (redirect(get_redirection(token)) == 1)
+	{		
+		if (redirect(get_redirection(token)) == 1)
 			exit(127);
 		if (is_path(cmd[0]) == 0)
 			path = &cmd[0][0];
@@ -116,7 +115,7 @@ int	single_exec(t_token **token)
 	cmd = join_tokens(token);
 	remember_redi(0);
 	if (redirect(get_redirection(token)) == 1)
-				return (remember_redi(1), 1);
+		return (remember_redi(1), 1);
 	if (!cmd)
 		return (remember_redi(1), 1);
 	if (is_builtin(cmd[0]) == 0)

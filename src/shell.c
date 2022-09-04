@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 21:00:33 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:56:14 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	waiting(void)
 		return ;
 	if (WIFEXITED(g_exit_stat[0]))
 		g_exit_stat[3] = WEXITSTATUS(g_exit_stat[0]);
-
 }
 
 void	remember_redi(int i)
