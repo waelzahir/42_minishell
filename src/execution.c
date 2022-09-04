@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 21:10:29 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/04 16:58:30 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/04 20:59:43 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	execute(t_token **token, int node, int *fd, int in)
 		if (!is_builtin(command[0]))
 		{
 			g_exit_stat[3] = exec_built(command);
-			exit(0);
+			exit(g_exit_stat[3]);
 		}
 		path = set_path(command[0]);
 		execve(path, command, environ);

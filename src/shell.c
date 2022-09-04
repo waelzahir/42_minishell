@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/04 16:56:14 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/04 21:02:41 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@ void	waiting(void)
 		;
 	rl_catch_signals = 0;
 	signals_handler();
+	
 	if (g_exit_stat[0] == -99)
 		return ;
+	if (WIFSIGNALED(g_exit_stat[0]))
+	{
+		g_exit_stat[3] = 130;
+		return ;
+	}
 	if (WIFEXITED(g_exit_stat[0]))
 		g_exit_stat[3] = WEXITSTATUS(g_exit_stat[0]);
 }
@@ -78,12 +84,6 @@ void	shell_routine(char	*line, int *fd)
 	{
 		root = parser(line);
 		binary_tree_new(NULL, 0, 1, NULL);
-		if (get_ret_val() == 130)
-		{
-			g_exit_stat[3] = 130;
-			g_exit_stat[0] = 0;
-			return ;
-		}	
 		if (root)
 			exe_launcher(root, ROOT, fd);
 		waiting();
