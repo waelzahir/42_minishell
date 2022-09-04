@@ -31,6 +31,7 @@ void	waiting(void)
 	if (WIFSIGNALED(g_exit_stat[0]))
 	{
 		g_exit_stat[3] = 130;
+		ft_putstr_fd("\n", 1);
 		return ;
 	}
 	if (WIFEXITED(g_exit_stat[0]))
