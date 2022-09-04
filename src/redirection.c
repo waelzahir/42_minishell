@@ -103,9 +103,9 @@ int	redirect(char **files)
 			stat = apply_herdoc(files[i]);
 		i++;
 		if (stat == 1)
-			return (1);
+			return (free(files), 1);
 	}
-	return (0);
+	return (free(files), 0);
 }
 
 char	**get_redirection(t_token **token)
@@ -121,7 +121,7 @@ char	**get_redirection(t_token **token)
 	while (token[i])
 	{
 		if (token[i]->type == redirec)
-			push_stack(red, ft_strdup(token[i]->def));
+			push_stack(red, token[i]->def);
 		i++;
 	}
 	if (red->size == 0)
