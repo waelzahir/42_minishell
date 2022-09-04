@@ -66,6 +66,7 @@ void	exe_launcher(t_btree *root, int mode, int *fd)
 	if (root->num == CMD)
 	{
 		mode = 0;
+		
 		single_exec(root->content);
 	}
 	else

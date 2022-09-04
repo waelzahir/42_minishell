@@ -36,6 +36,8 @@ int	execute(t_token **token, int node, int *fd, int in)
 
 	expander(token);
 	pid = ft_fork();
+	if (pid)
+		ignore_signal();
 	if (pid == 0)
 	{
 		pipe_helper(node, fd, in);
@@ -52,6 +54,7 @@ int	execute(t_token **token, int node, int *fd, int in)
 		perror("execve");
 		exit(127);
 	}
+
 	return (return_function(pid, in, fd[1]));
 }
 
@@ -84,9 +87,10 @@ void	execute_thesimplest(int pid, t_token **token, char **cmd)
 	char		*path;
 
 	path = NULL;
+	if (pid)
+		ignore_signal();
 	if (pid == 0)
-	{
-		if (redirect(get_redirection(token)) == 1)
+	{		if (redirect(get_redirection(token)) == 1)
 			exit(127);
 		if (is_path(cmd[0]) == 0)
 			path = &cmd[0][0];

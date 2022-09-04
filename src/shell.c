@@ -23,10 +23,13 @@ void	waiting(void)
 {
 	while (wait(NULL) > 0)
 		;
+		rl_catch_signals = 0;
+	signals_handler();
 	if (g_exit_stat[0] == -99)
 		return ;
 	if (WIFEXITED(g_exit_stat[0]))
 		g_exit_stat[3] = WEXITSTATUS(g_exit_stat[0]);
+
 }
 
 void	remember_redi(int i)

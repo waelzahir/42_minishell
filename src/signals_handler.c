@@ -12,6 +12,7 @@
 
 #include "../includes/headers/minishell.h"
 
+
 void	handl(int sig)
 {
 	if (sig == SIGINT)

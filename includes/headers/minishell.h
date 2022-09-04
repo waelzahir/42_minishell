@@ -60,6 +60,7 @@ void	signals_handler(void);
 void	deflt_signal(void);
 void	ignore_signal(void);
 void	handl(int sig);
+void	handl2(int sig);
 
 // Redirections
 char	**get_redirection(t_token **token);
