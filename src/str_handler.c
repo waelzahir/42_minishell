@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:33:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/03 22:58:34 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/04 20:50:23 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	get_equal(char *arg)
 			return (i);
 		}
 	}
-	return (1);
+	return (-1);
 }
 
 char	**arg_to_hash(char *arg)
@@ -90,6 +90,8 @@ char	**arg_to_hash(char *arg)
 	if (!hash)
 		exit (EXIT_FAILURE);
 	i = get_equal(arg);
+	if (i == -1)
+		i = ft_strlen(arg);
 	hash[0] = ft_substr(arg, 0, i);
 	if (!arg[i + 1])
 		hash[1] = NULL;
