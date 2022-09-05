@@ -34,7 +34,7 @@ int	ft_exit(char **arg)
 	if (!arg)
 		exit(0);
 	if (!arg[1])
-		exit(0);
+		exit(g_exit_stat[3]);
 	if (arg[2])
 	{
 		ft_putstr_fd("too many arguments\n", 2);
