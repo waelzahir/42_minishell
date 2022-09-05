@@ -71,7 +71,7 @@ void	free_simple_stack(t_stack	*simple, char	*text)
 	t_token	*token;
 
 	if (text)
-		printf("Syntax error near '%s'", text);
+		printf("Syntax error near '%s'\n", text);
 	while (simple->size)
 	{
 		token = pop_stack(simple);

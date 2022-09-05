@@ -51,9 +51,14 @@ char	*get_red_file(char *str, t_lexer *lexer)
 	if (len > 2 || filerules(lexer->c))
 		return (filerror(0, str, lexer));
 	file = str;
-	while (!sfilerules(lexer->c))
-	{		
-		file = char_append(file, lexer->c);
+	while (!filerules(lexer->c))
+	{	
+		if (lexer->c == 39)
+			file = ft__strjoin(file, get_argq(lexer));
+		if (lexer->c == 34)
+			file = ft__strjoin(file, get_argd(lexer));
+		else
+			file = char_append(file, lexer->c);
 		if (!file)
 			return (NULL);
 		lexer_advance(lexer);
