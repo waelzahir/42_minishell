@@ -46,16 +46,20 @@ char	*get_red_file(char *str, t_lexer *lexer)
 {
 	char	*file;
 	size_t	len;
+	int i;
 
 	len = ft_strlen(str);
 	if (len > 2 || filerules(lexer->c))
 		return (filerror(0, str, lexer));
 	file = str;
+	i = 0;
+	if (lexer->c != 39 && lexer->c != 34)
+		i = 1;
 	while (!filerules(lexer->c))
 	{	
-		if (lexer->c == 39)
+		if (i == 1 && lexer->c == 39)
 			file = ft__strjoin(file, get_argq(lexer));
-		if (lexer->c == 34)
+		if (i == 1 && lexer->c == 34)
 			file = ft__strjoin(file, get_argd(lexer));
 		else
 			file = char_append(file, lexer->c);
