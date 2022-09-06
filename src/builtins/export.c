@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:21:40 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/03 17:35:20 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/06 03:03:21 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,9 @@ int	export(char *arg)
 	char	*env_var;
 	char	**hash;
 
+	hash = NULL;
 	if (!check_identefier(arg))
-	{
-		ft_putstr_fd("export: invalid identifer\n", 2);
-		return (1);
-	}
+		return (ft_putstr_fd("export: invalid identifer\n", 2), 1);
 	hash = arg_to_hash(arg);
 	env_var = get_env_var(hash[0]);
 	if (!env_var)
@@ -70,8 +68,8 @@ int	export(char *arg)
 	if (!hash[1])
 		return (free_hash(hash), 0);
 	if (hash[2][0] == '+')
-		append_env_var(hash[0], hash[1]);
-	else
+		return (append_env_var(hash[0], hash[1]), free_hash(hash), 0);
+	if (hash[0] && hash[1] && hash[2][1])
 		edit_env_var(hash[0], hash[1]);
 	free_hash(hash);
 	return (0);
