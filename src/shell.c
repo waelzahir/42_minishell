@@ -25,12 +25,11 @@ void	waiting(void)
 		;
 	rl_catch_signals = 0;
 	signals_handler();
-	
 	if (g_exit_stat[0] == -99)
 		return ;
 	if (WIFSIGNALED(g_exit_stat[0]))
 	{
-		g_exit_stat[3] = 130;
+		g_exit_stat[3] = 128 + WTERMSIG(g_exit_stat[0]);
 		ft_putstr_fd("\n", 1);
 		return ;
 	}

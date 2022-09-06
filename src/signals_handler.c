@@ -28,6 +28,7 @@ void	ignore_signal(void)
 
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
 }
 
 static void	signals_router(int signal, siginfo_t *siginfo, void *content)
