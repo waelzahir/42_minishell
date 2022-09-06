@@ -21,6 +21,9 @@ int	get_ret_val(void)
 
 void	waiting(void)
 {
+	int j;
+
+	j = 0;
 	while (wait(NULL) > 0)
 		;
 	rl_catch_signals = 0;
@@ -29,6 +32,12 @@ void	waiting(void)
 		return ;
 	if (WIFSIGNALED(g_exit_stat[0]))
 	{
+		j = WTERMSIG(g_exit_stat[0]);
+		if (j  > 2)
+			{
+				ft_putstr_fd("Quit: ", 1);
+				ft_putnbr_fd(j, 1
+			}
 		g_exit_stat[3] = 128 + WTERMSIG(g_exit_stat[0]);
 		ft_putstr_fd("\n", 1);
 		return ;
