@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:29:15 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 20:18:07 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:43:35 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*expantion(char *str, char **environ)
 {
-	int	i;
+	int		i;
 	char	*sr;
 
 	i = 0;
@@ -24,10 +24,10 @@ char	*expantion(char *str, char **environ)
 		if (ft_strlen(str) < ft_strlen(environ[i])
 			&& !ft_strncmp(str, environ[i], ft_strlen(str))
 			&& environ[i][ft_strlen(str)] == '=')
-			{
-				sr = ft_strdup(&environ[i][ft_strlen(str)] + 1);
-				return (free(str), sr);
-			}
+		{
+			sr = ft_strdup(&environ[i][ft_strlen(str)] + 1);
+			return (free(str), sr);
+		}
 			i++;
 	}
 	free(str);

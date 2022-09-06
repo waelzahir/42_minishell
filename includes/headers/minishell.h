@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 23:49:17 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/04 16:58:46 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:52:30 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int		apply_herdoc(char	*file);
 void	exe_launcher(t_btree *root, int mode, int *fd);
 void	tokens_free(t_token	**token);
 void	memo_p(char **en, int in);
+char	**alloc_hash(int size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:34:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/03 20:19:01 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:52:12 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,14 @@ void	free_2d_table(char **tab)
 	while (tab[++i])
 		free(tab[i]);
 	free(tab);
+}
+
+char	**alloc_hash(int size)
+{
+	char	**hash;
+
+	hash = (char **) malloc(size);
+	if (!hash)
+		exit (EXIT_FAILURE);
+	return (hash);
 }

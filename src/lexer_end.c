@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 21:13:43 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/03 20:47:49 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:47:32 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,16 @@ char	*get_red_file(char *str, t_lexer *lexer)
 {
 	char	*file;
 	size_t	len;
-	int i;
+	int		i;
 
 	len = ft_strlen(str);
 	if (len > 2 || filerules(lexer->c))
 		return (filerror(0, str, lexer));
 	file = str;
 	i = 0;
-	if (lexer->c != 39 && lexer->c != 34)
-		i = 1;
 	while (!filerules(lexer->c))
 	{	
-		if (i == 1 && lexer->c == 39)
-			file = ft__strjoin(file, get_argq(lexer));
-		if (i == 1 && lexer->c == 34)
-			file = ft__strjoin(file, get_argd(lexer));
-		else
-			file = char_append(file, lexer->c);
+		file = char_append(file, lexer->c);
 		if (!file)
 			return (NULL);
 		lexer_advance(lexer);

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:33:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2022/09/04 20:50:23 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:52:07 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ char	**arg_to_hash(char *arg)
 	int		i;
 	char	**hash;
 
-	hash = (char **) malloc(sizeof(char *) * 4);
-	if (!hash)
-		exit (EXIT_FAILURE);
+	hash = alloc_hash(sizeof(char *) * 4);
 	i = get_equal(arg);
 	if (i == -1)
 		i = ft_strlen(arg);

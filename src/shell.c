@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:34 by ozahir            #+#    #+#             */
-/*   Updated: 2022/09/04 21:02:41 by sel-kham         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:49:37 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_ret_val(void)
 
 void	waiting(void)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (wait(NULL) > 0)
@@ -33,11 +33,11 @@ void	waiting(void)
 	if (WIFSIGNALED(g_exit_stat[0]))
 	{
 		j = WTERMSIG(g_exit_stat[0]);
-		if (j  > 2)
-			{
-				ft_putstr_fd("Quit: ", 1);
-				ft_putnbr_fd(j, 1
-			}
+		if (j > 2)
+		{
+			ft_putstr_fd("Quit: ", 1);
+			ft_putnbr_fd(j, 1);
+		}
 		g_exit_stat[3] = 128 + WTERMSIG(g_exit_stat[0]);
 		ft_putstr_fd("\n", 1);
 		return ;
