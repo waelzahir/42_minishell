@@ -80,23 +80,3 @@ void	free_simple_stack(t_stack	*simple, char	*text)
 	}
 	free(simple);
 }
-
-void	free_nsimple_stack(t_stack	*cmd)
-{
-	t_token	**token;
-	int		i;
-
-	i = 0;
-	while (cmd->size)
-	{
-		token = pop_stack(cmd);
-		while (token[i])
-		{
-			free((*token)->def);
-			free(token);
-			i++;
-		}
-		i = 0;
-	}
-	free(cmd);
-}

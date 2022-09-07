@@ -19,5 +19,5 @@ void	*pop_stack(t_stack *stack);
 void	free_stacked_stack(t_stack *stack);
 void	free_simple_stack(t_stack *stack, char *text);
 void	free_stacks(t_stack *stack, t_stack *opstack);
-
+void	free_nsimple_stack(t_stack	*cmd);
 #endif

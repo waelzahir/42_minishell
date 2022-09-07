@@ -30,14 +30,17 @@ char	*filerror(int i, char *str, t_lexer *lexer)
 {
 	if (!i && ft_strlen(str) > 2)
 	{
+		free(str);
 		printf("syntax error near '%c'\n", str[0]);
 		return (NULL);
 	}
 	if (!i && ft_strlen(str) > 2 && lexer->c == '\0')
 	{
+		free(str);
 		printf("syntax error near '\\n'\n");
 		return (NULL);
 	}
+	free(str);
 	printf("syntax error near '%c'\n", str[ft_strlen(str) - 1]);
 	return (NULL);
 }

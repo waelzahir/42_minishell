@@ -43,8 +43,24 @@ void	fill_lesser(t_stack	*stack_op, t_stack *stack_cmd,
 
 void	free_stacks(t_stack	*cmd, t_stack	*op)
 {
+	t_token	**token;
+	int		i;
+
+	i = 0;
 	free_simple_stack(op, NULL);
-	free_simple_stack(cmd, NULL);
+	while (cmd->size)
+	{
+		token = pop_stack(cmd);
+		while (token[i])
+		{
+			free(token[i]->def);
+			free(token[i]);
+			i++;
+		}
+		free(token);
+		i = 0;
+	}
+	free(cmd);
 }
 
 int	fill_stacks(t_stack *stack_cmd, t_stack *stack_op, t_lexer *lexer)
@@ -65,7 +81,8 @@ int	fill_stacks(t_stack *stack_cmd, t_stack *stack_op, t_lexer *lexer)
 		else if (token->type == pip && stack->size)
 			fill_lesser(stack_op, stack_cmd, token, stack);
 		else
-			return (free_simple_stack(stack, "|"), 1);
+			return (free(token->def), free(token),
+				free_simple_stack(stack, "|"), 1);
 	}
 	if (stack->size)
 		push_stack(stack_cmd, stack->stack);
