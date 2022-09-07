@@ -33,6 +33,7 @@ char	*collector(char *s1, char *s2)
 	if (s1 && s2)
 	{
 		ret = ft_strjoin(s1, s2);
+		free(s1);
 		return (ret);
 	}
 	if (!s1 && s2)

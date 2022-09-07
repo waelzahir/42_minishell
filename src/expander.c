@@ -92,7 +92,7 @@ char	*expand(char *s)
 	ret = NULL;
 	str = NULL;
 	if (s[0] == '\0')
-		return (ft_calloc(1, 1));
+		return (s);
 	lexer = init_lexer(s);
 	if (!lexer)
 		return (NULL);
