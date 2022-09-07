@@ -43,7 +43,7 @@ char	*get_var(t_lexer *lexer, char **environ)
 	if (lexer->c == '$')
 		return (lexer_advance(lexer), ft_strdup("ma3arefch "));
 	if (lexer->c == '?')
-		return (lexer_advance(lexer), ft_strdup(ft_itoa(g_exit_stat[3])));
+		return (lexer_advance(lexer), ft_itoa(g_exit_stat[3]));
 	if (lexer->c == '\0')
 		return (char_str('$'));
 	str = char_str(lexer->c);
